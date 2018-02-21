@@ -20,12 +20,16 @@
             android:name=".StudentProfile"
             android:label="@string/title_activity_student_profile"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".FacultyProfile"
             android:label="@string/title_activity_faculty_profile"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".StudentOpportunitiesView" />
+        <activity android:name=".StudentApplicationsView" />
+        <activity android:name=".StudentApplicationSelect" />
+        <activity android:name=".StudentOpportunitySelect"></activity>
     </application>
 
 </manifest>
