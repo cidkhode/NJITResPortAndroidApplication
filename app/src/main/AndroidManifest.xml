@@ -17,9 +17,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.resport.cid.njitresportandroidapplication.StudentProfile"
+            android:name=".StudentProfile"
             android:label="@string/title_activity_student_profile"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".FacultyProfile"
+            android:label="@string/title_activity_faculty_profile"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

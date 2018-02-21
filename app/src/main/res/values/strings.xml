@@ -10,6 +10,19 @@
     <string name="action_settings">Settings</string>
     <string name="name">Name</string>
     <string name="edit_save">Edit / Save</string>
+    <string name="title_activity_faculty_profile">FacultyProfile</string>
+    <string name="faculty_last_name">Faculty Last Name</string>
+    <string name="faculty_email">Faculty Email</string>
+    <string name="faculty_field_of_expertise">Faculty Field of Expertise</string>
+    <string name="faculty_first_name">Faculty First Name</string>
+    <string name="faculty_years_at_njit">Faculty Years at NJIT</string>
+    <string name="student_first_name">Student First Name</string>
+    <string name="student_last_name">Student Last Name</string>
+    <string name="student_id">Student ID</string>
+    <string name="student_email">Student Email</string>
+    <string name="student_major">Student Major</string>
+    <string name="student_gpa">Student GPA</string>
+
     <string-array name="class_rankings">
         <item>Select Class Standing...</item>
         <item>[B] Senior 91-130 C</item>
@@ -17,6 +30,7 @@
         <item>[B] Sophomore 29-56 C</item>
         <item>[B] Freshman 0-28 C</item>
     </string-array>
+
     <string-array name="student_colleges">
         <item>Select College...</item>
         <item>Albert Dorman Honors College</item>
@@ -26,4 +40,58 @@
         <item>Newark College of Engineering</item>
         <item>Ying Wu College of Computing</item>
     </string-array>
+
+    <string-array name="faculty_colleges">
+        <item>Select College...</item>
+        <item>Albert Dorman Honors College</item>
+        <item>College of Architecture and Design</item>
+        <item>College of Science and Liberal Arts</item>
+        <item>Martin Tuchman School of Management</item>
+        <item>Newark College of Engineering</item>
+        <item>Ying Wu College of Computing</item>
+    </string-array>
+
+    <string-array name="buildings">
+        <item>Select Building...</item>
+        <item>Campbell Hall</item>
+        <item>Campus Center</item>
+        <item>Robert Van Houten Library (CAB)</item>
+        <item>Central King Building</item>
+        <item>Colton Hall</item>
+        <item>Council for Higher Ed.</item>
+        <item>Cullimore Hall</item>
+        <item>Cypress Residence Hall</item>
+        <item>Dorman Honors Residence Hall</item>
+        <item>Eberhardt Hall</item>
+        <item>Electrical and Computer Engineering Center</item>
+        <item>Enterprise Development Center 2</item>
+        <item>Enterprise Development Center 3</item>
+        <item>Faculty Memorial Hall</item>
+        <item>Facilities Service Building</item>
+        <item>Fenster Hall</item>
+        <item>Fleischer Athletic Center</item>
+        <item>Greek Way 05-07</item>
+        <item>Greek Way 09-11</item>
+        <item>Greek Way 13-15</item>
+        <item>Greek Way 17-19</item>
+        <item>Greek Way 21-23</item>
+        <item>Guttenberg Information Technology Center</item>
+        <item>Kupfrian Hall</item>
+        <item>Laurel Residence Hall</item>
+        <item>Laurel Residence Hall Extension</item>
+        <item>Life Sciences and Engineering Center</item>
+        <item>Mechanical Engineering Center</item>
+        <item>Microelectronics Center</item>
+        <item>Naimoli Family Athletic Center</item>
+        <item>Oak Residence Hall</item>
+        <item>Parking Deck/Student Mall</item>
+        <item>Redwood Residence Hall</item>
+        <item>Science and Technology Park Garage</item>
+        <item>Specht Building</item>
+        <item>Tiernan Hall</item>
+        <item>Wellness and Events Center</item>
+        <item>Weston Hall</item>
+        <item>York Center</item>
+    </string-array>
+
 </resources>
