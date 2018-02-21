@@ -34,7 +34,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:text="Name" />
+                android:hint="Name" />
 
             <EditText
                 android:id="@+id/editText4"
@@ -48,7 +48,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:text="Name" />
+                android:hint="Name" />
 
             <EditText
                 android:id="@+id/editText5"
@@ -62,7 +62,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:text="Name" />
+                android:hint="Name" />
 
             <EditText
                 android:id="@+id/editText6"
@@ -76,7 +76,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:text="Name" />
+                android:hint="Name" />
 
             <EditText
                 android:id="@+id/editText7"
@@ -90,7 +90,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:text="Name" />
+                android:hint="Name" />
 
             <EditText
                 android:id="@+id/editText8"
@@ -104,7 +104,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:text="Name" />
+                android:hint="Name" />
 
             <Spinner
                 android:id="@+id/spinner"
