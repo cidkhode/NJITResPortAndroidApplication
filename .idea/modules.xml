@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NJITResPortAndroidApplication.iml" filepath="$PROJECT_DIR$/NJITResPortAndroidApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NJITResPort.iml" filepath="$PROJECT_DIR$/NJITResPort.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

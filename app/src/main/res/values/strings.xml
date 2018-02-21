@@ -4,4 +4,26 @@
     <string name="todo">TODO</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="title_activity_student_profile">Student Profile</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="edit_save">Edit / Save</string>
+    <string-array name="class_rankings">
+        <item>Select Class Standing...</item>
+        <item>[B] Senior 91-130 C</item>
+        <item>[B] Junior 57-90 C</item>
+        <item>[B] Sophomore 29-56 C</item>
+        <item>[B] Freshman 0-28 C</item>
+    </string-array>
+    <string-array name="student_colleges">
+        <item>Select College...</item>
+        <item>Albert Dorman Honors College</item>
+        <item>College of Architecture and Design</item>
+        <item>College of Science and Liberal Arts</item>
+        <item>Martin Tuchman School of Management</item>
+        <item>Newark College of Engineering</item>
+        <item>Ying Wu College of Computing</item>
+    </string-array>
 </resources>
