@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goStudentApplicationsView(View view)
     {
-        Intent intent = new Intent(MainActivity.this, StudentApplicationsView.class);
+        Intent intent = new Intent(MainActivity.this, StudentApplicationsBrowse.class);
         startActivity(intent);
     }
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goStudentOpportunitiesView(View view)
     {
-        Intent intent = new Intent(MainActivity.this, StudentOpportunitiesView.class);
+        Intent intent = new Intent(MainActivity.this, StudentOpportunitiesBrowse.class);
         startActivity(intent);
     }
 

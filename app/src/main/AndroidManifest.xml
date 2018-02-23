@@ -26,8 +26,8 @@
             android:label="@string/title_activity_faculty_profile"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".StudentOpportunitiesView" />
-        <activity android:name=".StudentApplicationsView" />
+        <activity android:name=".StudentOpportunitiesBrowse" />
+        <activity android:name=".StudentApplicationsBrowse" />
         <activity android:name=".StudentApplicationSelect" />
         <activity android:name=".StudentOpportunitySelect"></activity>
     </application>

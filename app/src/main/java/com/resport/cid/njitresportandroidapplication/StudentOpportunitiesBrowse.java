@@ -6,16 +6,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class StudentOpportunitiesView extends AppCompatActivity {
+public class StudentOpportunitiesBrowse extends AppCompatActivity {
 
     ArrayList<Opportunity> opps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_opportunities_view);
+        setContentView(R.layout.activity_student_opportunities_browse);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.studentOppsBrowseListView);
 
         opps = new ArrayList<>();
         opps.add(new Opportunity("Research Opportunity in Machine Learning", "College of Computing Sciences","Research Assistant",

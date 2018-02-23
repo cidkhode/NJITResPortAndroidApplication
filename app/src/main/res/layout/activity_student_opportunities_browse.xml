@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.resport.cid.njitresportandroidapplication.StudentOpportunitiesView">
+    tools:context="com.resport.cid.njitresportandroidapplication.StudentOpportunitiesBrowse">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/studentOppsBrowsetextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Research Opportunities"
@@ -20,7 +20,7 @@
         android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/studentOppsBrowseEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -30,11 +30,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/studentOppsBrowsetextView"
         app:layout_constraintVertical_bias="0.02" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/studentOppsBrowseEditText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -44,11 +44,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintTop_toBottomOf="@+id/studentOppsBrowseEditText"
         app:layout_constraintVertical_bias="0.02" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/studentOppsBrowseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="63dp"
@@ -59,11 +59,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/studentOppsBrowseEditText2"
         app:layout_constraintVertical_bias="0.02" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/studentOppsBrowseButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="63dp"
@@ -74,17 +74,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/studentOppsBrowseEditText2"
         app:layout_constraintVertical_bias="0.02" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/studentOppsBrowseListView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/studentOppsBrowseButton" />
 
 </android.support.constraint.ConstraintLayout>
 

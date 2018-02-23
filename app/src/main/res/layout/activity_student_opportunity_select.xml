@@ -7,7 +7,7 @@
     tools:context="com.resport.cid.njitresportandroidapplication.StudentOpportunitySelect">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/studentOppSelectTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Selected Research Opportunity"
@@ -20,7 +20,7 @@
         android:textColor="#000000" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/studentOppSelectTextView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -46,11 +46,11 @@ Faculty UCID: profx"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/studentOppSelectTextView"
         app:layout_constraintVertical_bias="0.25" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/studentOppSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#cc2127"
@@ -60,7 +60,7 @@ Faculty UCID: profx"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/studentOppSelectTextView2"
         app:layout_constraintVertical_bias="0.50" />
 
 
