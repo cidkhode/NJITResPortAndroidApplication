@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip">
+
+    <TextView
+        android:id="@+id/opportunityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Research Opportunity Title"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/opportunityDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/opportunityTitle"
+        android:text="Description of research opportunity."
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/opportunityProf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/opportunityDesc"
+        android:text="Prof. Example - YWCC"
+        android:textSize="14sp"
+        android:textColor="#000000"/>
+
+
+</RelativeLayout>

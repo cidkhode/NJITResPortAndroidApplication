@@ -25,9 +25,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goStudentApplicationSelect(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, StudentApplicationSelect.class);
+        startActivity(intent);
+    }
+
+    public void goStudentApplicationsView(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, StudentApplicationsBrowse.class);
+        startActivity(intent);
+    }
+
+    public void goStudentOpportunitySelect(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, StudentOpportunitySelect.class);
+        startActivity(intent);
+    }
+
+    public void goStudentOpportunitiesView(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, StudentOpportunitiesBrowse.class);
+        startActivity(intent);
+    }
+  
     public void goToContactUs(View view)
     {
         Intent intent = new Intent(MainActivity.this, ContactUs.class);
         startActivity(intent);
     }
+
 }
