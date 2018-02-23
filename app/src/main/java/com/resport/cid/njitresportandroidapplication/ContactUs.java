@@ -14,13 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class FacultyProfile extends AppCompatActivity
+public class ContactUs extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faculty_profile);
+        setContentView(R.layout.activity_contact_us);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,7 +47,7 @@ public class FacultyProfile extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.faculty_profile, menu);
+        getMenuInflater().inflate(R.menu.contact_us, menu);
         return true;
     }
 
@@ -73,16 +73,16 @@ public class FacultyProfile extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.fac_profile) {
-
+            Intent intent = new Intent(ContactUs.this, FacultyProfile.class);
+            startActivity(intent);
         } else if (id == R.id.fac_create) {
 
         } else if (id == R.id.fac_applicants) {
 
         } else if (id == R.id.fac_contact) {
-            Intent intent = new Intent(FacultyProfile.this, ContactUs.class);
-            startActivity(intent);
+
         } else if (id == R.id.fac_logout) {
-            Intent intent = new Intent(FacultyProfile.this, MainActivity.class);
+            Intent intent = new Intent(ContactUs.this, MainActivity.class);
             startActivity(intent);
         }
 
