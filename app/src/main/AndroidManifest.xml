@@ -20,30 +20,32 @@
             android:name=".StudentProfile"
             android:label="@string/title_activity_student_profile"
             android:theme="@style/AppTheme"
-
             android:windowSoftInputMode="stateHidden" />
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
-
+        android:windowSoftInputMode="stateHidden"
+        android:screenOrientation="portrait"/>
         <activity
             android:name=".FacultyProfile"
             android:label="@string/title_activity_faculty_profile"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-        
         <activity android:name=".StudentOpportunitiesBrowse" />
         <activity android:name=".StudentApplicationsBrowse" />
         <activity android:name=".StudentApplicationSelect" />
-        <activity android:name=".StudentOpportunitySelect"></activity>
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".StudentOpportunitySelect" />
+        android:windowSoftInputMode="stateHidden"
+        android:screenOrientation="portrait"/>
         <activity
             android:name=".ContactUs"
             android:label="@string/title_activity_contact_us"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
-
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ContactUsStudent"
+            android:label="@string/title_activity_contact_us_student"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

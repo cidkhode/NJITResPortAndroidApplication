@@ -14,13 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class StudentProfile extends AppCompatActivity
+public class ContactUsStudent extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_profile);
+        setContentView(R.layout.activity_contact_us_student);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,7 +47,7 @@ public class StudentProfile extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.student_profile, menu);
+        getMenuInflater().inflate(R.menu.contact_us_student, menu);
         return true;
     }
 
@@ -73,16 +73,16 @@ public class StudentProfile extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.stu_profile) {
-            // Handle the camera action
+            Intent intent = new Intent(ContactUsStudent.this, StudentProfile.class);
+            startActivity(intent);
         } else if (id == R.id.stu_browse) {
 
         } else if (id == R.id.stu_status) {
 
         } else if (id == R.id.stu_contact) {
-            Intent intent = new Intent(StudentProfile.this, ContactUsStudent.class);
-            startActivity(intent);
+
         } else if (id == R.id.stu_logout) {
-            Intent intent = new Intent(StudentProfile.this, MainActivity.class);
+            Intent intent = new Intent(ContactUsStudent.this, MainActivity.class);
             startActivity(intent);
         }
 
