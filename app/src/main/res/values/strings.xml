@@ -51,6 +51,24 @@
         <item>Ying Wu College of Computing</item>
     </string-array>
 
+    <string-array name="opportunity_colleges">
+        <item>Select College...</item>
+        <item>Albert Dorman Honors College</item>
+        <item>College of Architecture and Design</item>
+        <item>College of Science and Liberal Arts</item>
+        <item>Martin Tuchman School of Management</item>
+        <item>Newark College of Engineering</item>
+        <item>Ying Wu College of Computing</item>
+    </string-array>
+
+    <string-array name="opportunity_categories">
+        <item>Select Category...</item>
+        <item>Paid and No Credit</item>
+        <item>Paid and For Credit</item>
+        <item>Unpaid and No Credit</item>
+        <item>Unpaid and For Credit</item>
+    </string-array>
+
     <string-array name="buildings">
         <item>Select Building...</item>
         <item>Campbell Hall</item>
@@ -98,5 +116,6 @@
     <string name="if_you_have_any_questions_concerns_comments_ideas_or_need_any_help_just_type_up_your_message_and_send_it_over_to_us_we_d_be_happy_to_help">If you have any questions, concerns, comments, ideas, or need any help, just type up your message and send it over to us! We\'d be happy to help.</string>
     <string name="contactify">Contactify</string>
     <string name="title_activity_contact_us_student">Contact Us</string>
+    <string name="title_activity_create_opportunity">CreateOpportunity</string>
 
 </resources>

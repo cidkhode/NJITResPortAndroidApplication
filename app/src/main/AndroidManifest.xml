@@ -45,7 +45,12 @@
             android:label="@string/title_activity_contact_us_student"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CreateOpportunity"
+            android:label="@string/title_activity_create_opportunity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

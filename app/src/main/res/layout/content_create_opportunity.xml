@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGray"
+    android:fillViewport="true"
+    tools:context=".CreateOpportunity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/createOpportunityOppName"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="93dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp"
+            android:hint="Opportunity Name"
+            android:textColorHint="@color/colorPrimaryDark"/>
+
+        <Spinner
+            android:id="@+id/createOpportunityOppCollege"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/createOpportunityOppName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:entries="@array/opportunity_colleges"
+            android:paddingHorizontal="10dp" />
+
+        <EditText
+            android:id="@+id/createOpportunityJobTitle"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/createOpportunityOppCollege"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:hint="Job Title"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/createOpportunityNumberOfStudents"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/createOpportunityJobTitle"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:hint="Number of Students"
+            android:inputType="number"
+            android:paddingHorizontal="10dp"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/createOpportunityExpectedHoursPerWeek"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/createOpportunityNumberOfStudents"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:hint="Expected Hours Per Week"
+            android:inputType="number"
+            android:paddingHorizontal="10dp"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <Spinner
+            android:id="@+id/createOpportunityCategory"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/createOpportunityExpectedHoursPerWeek"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:entries="@array/opportunity_categories"
+            android:paddingHorizontal="10dp" />
+
+        <EditText
+            android:id="@+id/createOpportunityDescription"
+            android:layout_width="230dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/createOpportunityExpectedHoursPerWeek"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:hint="Details / Requirements"
+            android:inputType="number"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:gravity="top"/>
+
+        <Button
+            android:id="@+id/createOpportunitySubmitButton"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/createOpportunityDescription"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:text="Button"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+</ScrollView>

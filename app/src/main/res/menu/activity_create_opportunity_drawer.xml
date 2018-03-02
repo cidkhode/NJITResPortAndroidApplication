@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fac_profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Profile" />
+        <item
+            android:id="@+id/fac_create"
+            android:icon="@drawable/ic_create_black_24dp"
+            android:title="Create" />
+        <item
+            android:id="@+id/fac_applicants"
+            android:icon="@drawable/ic_people_outline_black_24dp"
+            android:title="Status" />
+        <item
+            android:id="@+id/fac_contact"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:title="Contact Us" />
+    </group>
+
+    <item android:title="Other">
+        <menu>
+            <item
+                android:id="@+id/fac_logout"
+                android:icon="@drawable/ic_time_to_leave_black_24dp"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>
