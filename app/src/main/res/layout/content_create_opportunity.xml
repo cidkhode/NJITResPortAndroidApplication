@@ -23,8 +23,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingHorizontal="10dp"
-            android:hint="Opportunity Name"
-            android:textColorHint="@color/colorPrimaryDark"/>
+            android:hint="@string/opportunity_name" />
 
         <Spinner
             android:id="@+id/createOpportunityOppCollege"
@@ -46,10 +45,9 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"
             android:ems="10"
-            android:hint="Job Title"
+            android:hint="@string/job_title"
             android:inputType="textPersonName"
-            android:paddingHorizontal="10dp"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:paddingHorizontal="10dp" />
 
         <EditText
             android:id="@+id/createOpportunityNumberOfStudents"
@@ -60,10 +58,9 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"
             android:ems="10"
-            android:hint="Number of Students"
+            android:hint="@string/number_of_students"
             android:inputType="number"
-            android:paddingHorizontal="10dp"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:paddingHorizontal="10dp" />
 
         <EditText
             android:id="@+id/createOpportunityExpectedHoursPerWeek"
@@ -74,10 +71,9 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"
             android:ems="10"
-            android:hint="Expected Hours Per Week"
+            android:hint="@string/expected_hours_per_week"
             android:inputType="number"
-            android:paddingHorizontal="10dp"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:paddingHorizontal="10dp" />
 
         <Spinner
             android:id="@+id/createOpportunityCategory"
@@ -99,23 +95,20 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"
             android:ems="10"
-            android:hint="Details / Requirements"
+            android:hint="@string/details_requirements"
             android:inputType="number"
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp"
-            android:textColorHint="@color/colorPrimaryDark"
             android:gravity="top"/>
 
         <Button
             android:id="@+id/createOpportunitySubmitButton"
             android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="54dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/createOpportunityDescription"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:text="Button"
+            android:text="@string/create"
             android:background="@color/colorPrimary"
             android:textColor="@color/white" />
 
