@@ -126,5 +126,9 @@
     <string name="title_activity_faculty_view_applicant">facultyViewApplicant</string>
     <string name="title_activity_faculty_view_app_opp_list">FacultyViewAppOppList</string>
     <string name="title_activity_faculty_view_app_list">FacultyViewAppList</string>
+    <string name="title_activity_student_opportunities_list">StudentOpportunitiesList</string>
+    <string name="title_activity_student_opportunity_view">StudentOpportunityView</string>
+    <string name="title_activity_student_applications_list">StudentApplicationsList</string>
+    <string name="title_activity_student_application_view">StudentApplicationView</string>
 
 </resources>

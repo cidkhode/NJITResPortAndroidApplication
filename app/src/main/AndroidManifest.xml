@@ -28,12 +28,13 @@
             android:label="@string/title_activity_faculty_profile"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".StudentOpportunitiesBrowse" />
-        <activity android:name=".StudentApplicationsBrowse" />
-        <activity android:name=".StudentApplicationSelect" />
-        <activity android:name=".StudentOpportunitySelect" />
+        <![CDATA[
+
+
         android:windowSoftInputMode="stateHidden"
         android:screenOrientation="portrait"/>
+
+        ]]>
         <activity
             android:name=".ContactUs"
             android:label="@string/title_activity_contact_us"
@@ -62,6 +63,22 @@
         <activity
             android:name=".FacultyViewListOfOpp"
             android:label="@string/title_activity_faculty_view_app_list"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".StudentOpportunitiesList"
+            android:label="@string/title_activity_student_opportunities_list"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".StudentOpportunityView"
+            android:label="@string/title_activity_student_opportunity_view"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".StudentApplicationsList"
+            android:label="@string/title_activity_student_applications_list"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".StudentApplicationView"
+            android:label="@string/title_activity_student_application_view"
             android:theme="@style/AppTheme"></activity>
     </application>
 

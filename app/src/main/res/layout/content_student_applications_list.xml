@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGray"
+    android:fillViewport="true"
+    tools:context=".StudentApplicationsList">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/studentApplicationsListFacultyUCIDEditText"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Faculty UCID"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp" />
+
+        <EditText
+            android:id="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/studentApplicationsListFacultyUCIDEditText"
+            android:layout_alignStart="@+id/studentApplicationsListFacultyUCIDEditText"
+            android:layout_below="@+id/studentApplicationsListFacultyUCIDEditText"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/student_last_name"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp" />
+
+        <Button
+            android:id="@+id/studentApplicationListFilterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_alignStart="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_below="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:text="FILTER"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/studentApplicationListClearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_alignRight="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_below="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:text="CLEAR"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/studentApplicationListClearButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp" />
+
+    </RelativeLayout>
+
+</ScrollView>
