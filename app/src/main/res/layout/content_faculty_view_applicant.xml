@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundGray"
+    android:padding="6dip">
+
+    <TextView
+        android:id="@+id/facultyTitleViewParticularApplicant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="View Applicants"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/facultyViewParticularApplicant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/facultyTitleViewParticularApplicant"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="133dp"
+        android:background="@color/white"
+        android:includeFontPadding="false"
+        android:text="Name: John Smith
+Email: js007@njit.edu
+Major: Computer Science
+GPA: 3.973
+Class Ranking: Junior
+College: Ying Wu College
+        of Computing"
+        android:textSize="24dp" />
+
+    <Button
+        android:id="@+id/facultyViewResume"
+        android:layout_width="150dp"
+        android:layout_height="54dp"
+        android:layout_alignEnd="@+id/facultyViewParticularApplicant"
+        android:layout_alignLeft="@+id/facultyViewParticularApplicant"
+        android:layout_alignRight="@+id/facultyViewParticularApplicant"
+        android:layout_alignStart="@+id/facultyViewParticularApplicant"
+        android:layout_below="@+id/facultyViewParticularApplicant"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_corner_button"
+        android:text="View Resume"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/facultyAccept"
+        android:layout_width="120dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/facultyViewResume"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="54dp"
+        android:background="@drawable/rounded_corner_button"
+        android:text="Accept"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        tools:ignore="RtlCompat" />
+
+    <Button
+        android:id="@+id/facultyDecline"
+        android:layout_width="120dp"
+        android:layout_height="54dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/facultyViewResume"
+        android:layout_marginRight="54dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_corner_button"
+        android:text="Decline"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/facultyContactStudent"
+        android:layout_width="150dp"
+        android:layout_height="54dp"
+        android:layout_alignEnd="@+id/facultyViewResume"
+        android:layout_alignLeft="@+id/facultyViewResume"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/facultyViewResume"
+        android:layout_alignStart="@+id/facultyViewResume"
+        android:background="@drawable/rounded_corner_button"
+        android:text="Contact Student"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+
+
+
+</RelativeLayout>

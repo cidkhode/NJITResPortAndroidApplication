@@ -123,5 +123,8 @@
     <string name="expected_hours_per_week">Expected Hours Per Week</string>
     <string name="number_of_students">Number of Students</string>
     <string name="job_title">Job Title</string>
+    <string name="title_activity_faculty_view_applicant">facultyViewApplicant</string>
+    <string name="title_activity_faculty_view_app_opp_list">FacultyViewAppOppList</string>
+    <string name="title_activity_faculty_view_app_list">FacultyViewAppList</string>
 
 </resources>

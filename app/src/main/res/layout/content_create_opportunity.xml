@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/createOpportunityOppName"
+            android:id="@+id/viewApplicant"
             android:layout_width="230dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
@@ -29,7 +29,7 @@
             android:id="@+id/createOpportunityOppCollege"
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/createOpportunityOppName"
+            android:layout_below="@+id/viewApplicant"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"

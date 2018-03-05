@@ -51,6 +51,18 @@
             android:label="@string/title_activity_create_opportunity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".facultyViewApplicant"
+            android:label="@string/title_activity_faculty_view_applicant"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FacultyViewAppForParticularOpp"
+            android:label="@string/title_activity_faculty_view_app_opp_list"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FacultyViewListOfOpp"
+            android:label="@string/title_activity_faculty_view_app_list"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
