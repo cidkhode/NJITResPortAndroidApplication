@@ -14,6 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class StudentProfile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,11 +40,19 @@ public class StudentProfile extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        Intent intent = this.getIntent();
+        if (intent != null) {
+            String extra = intent.getExtras().getString("Source");
+            if (extra.equals("from MainActivity")) {
+                moveTaskToBack(true);
+            }
         } else {
-            super.onBackPressed();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -62,8 +74,20 @@ public class StudentProfile extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clearToken() {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+        PrintWriter clearer = null;
+        try {
+            clearer = new PrintWriter(tokenFile);
+            clearer.write("");
+            clearer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -82,6 +106,7 @@ public class StudentProfile extends AppCompatActivity
             Intent intent = new Intent(StudentProfile.this, ContactUsStudent.class);
             startActivity(intent);
         } else if (id == R.id.stu_logout) {
+            clearToken();
             Intent intent = new Intent(StudentProfile.this, MainActivity.class);
             startActivity(intent);
         }
@@ -90,4 +115,6 @@ public class StudentProfile extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
