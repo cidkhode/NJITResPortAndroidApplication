@@ -38,23 +38,6 @@ public class StudentProfile extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = this.getIntent();
-        if (intent != null) {
-            String extra = intent.getExtras().getString("Source");
-            if (extra.equals("from MainActivity")) {
-                moveTaskToBack(true);
-            }
-        } else {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            } else {
-                super.onBackPressed();
-            }
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,6 +91,7 @@ public class StudentProfile extends AppCompatActivity
         } else if (id == R.id.stu_logout) {
             clearToken();
             Intent intent = new Intent(StudentProfile.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 

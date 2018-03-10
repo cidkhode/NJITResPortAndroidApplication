@@ -39,26 +39,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tempText = (TextView) findViewById(R.id.textView5);
-
-        if (readToken().equals("ERROR!") || readToken().equals("")){
-            tempText.setText("no token found. please login");
-        }
-        else {
-            Intent intent = new Intent(MainActivity.this, StudentProfile.class);
-            tempText.setText("token found: " + readToken());
-            intent.putExtra("Source", "from MainActivity");
-            startActivity(intent);
-        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         ucidLogin = (EditText) findViewById(R.id.editText);
         passwordLogin = (EditText) findViewById(R.id.editText2);
+        tempText = (TextView) findViewById(R.id.textView5);
 
+
+        if (readToken().equals("ERROR!") || readToken().equals("")){
+            tempText.setText("Please enter your credentials.");
+        }
+        else {
+            Intent intent = new Intent(MainActivity.this, StudentProfile.class);
+            intent.putExtra("Source", "from MainActivity");
+            finish();
+            startActivity(intent);
+        }
     }
-    public void writeToken(String token)
-    {
+
+    public void writeToken(String token) {
         File path = getApplicationContext().getFilesDir();
         File tokenFile = new File(path, "token.txt");
         FileOutputStream writer = null;
@@ -162,55 +162,32 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-
     void login(View view){
         MainActivity example = new MainActivity();
         String user = ucidLogin.getText().toString();
         String pass = passwordLogin.getText().toString();
         String lol = example.post(user,pass);
-        if(tempText.getText().equals("token found. press login to clear the token.")) {
-            clearToken();
-            tempText.setText("token cleared");
-        }
-        else {
-            tempText.setText(findRole(lol));
+        if (!lol.equals("ERROR!")) {
             if (findRole(lol).equals("student")) {
                 writeToken(lol);
-                tempText.setText("token found for a student " + lol);
                 Intent intent = new Intent(MainActivity.this, StudentProfile.class);
                 intent.putExtra("Source", "from MainActivity");
+                finish();
                 startActivity(intent);
-            } else {
-                tempText.setText("def");
+            }
+            else if (findRole(lol).equals("faculty")){
+                writeToken(lol);
+                Intent intent = new Intent(MainActivity.this, FacultyProfile.class);
+                intent.putExtra("Source", "from MainActivity");
+                finish();
+                startActivity(intent);
+            }
+            else {
+                tempText.setText("Invalid credentials. DEBUG");
             }
         }
+        else {
+            tempText.setText("Invalid credentials.");
+        }
     }
-
-    public void goToStudentProfile(View view)
-    {
-        Intent intent = new Intent(MainActivity.this, StudentProfile.class);
-        startActivity(intent);
-    }
-
-    public void goToFacultyProfile(View view)
-    {
-        Intent intent = new Intent(MainActivity.this, FacultyProfile.class);
-        startActivity(intent);
-    }
-
-    public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-        startActivity(intent);
-        finish();
-        System.exit(0);
-    }
-
-    public void goToContactUs(View view)
-    {
-        Intent intent = new Intent(MainActivity.this, ContactUs.class);
-        startActivity(intent);
-    }
-
 }
