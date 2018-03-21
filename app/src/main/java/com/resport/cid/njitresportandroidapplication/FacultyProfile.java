@@ -250,11 +250,11 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 email = dataJSON.getString("email");
                 faculty_email.setText(email);
                 college = dataJSON.getInt("college");
-                faculty_college.setSelection(college);      //may be college-1 or college-2, depending on starting index
-                office = dataJSON.getString("office");
-                faculty_office.setText(office);
+                faculty_college.setSelection(college+1);      //may be college-1 or college-2, depending on starting index
                 fieldOfStudy = dataJSON.getString("fieldOfStudy");
                 faculty_field.setText(fieldOfStudy);
+                office = dataJSON.getString("office");
+                faculty_office.setText(office);
                 experience = dataJSON.getString("experience");
                 faculty_years.setText(experience);
 
