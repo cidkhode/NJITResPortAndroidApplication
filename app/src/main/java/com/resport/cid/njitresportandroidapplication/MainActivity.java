@@ -5,24 +5,16 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-
 import okhttp3.FormBody;
-import okhttp3.Headers;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -32,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     EditText ucidLogin;
     EditText passwordLogin;
-    TextView tempText;
     OkHttpClient client = new OkHttpClient();
 
     @Override
@@ -44,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         ucidLogin = (EditText) findViewById(R.id.editText);
         passwordLogin = (EditText) findViewById(R.id.editText2);
-        tempText = (TextView) findViewById(R.id.textView5);
 
 
         if (readToken().equals("ERROR!") || readToken().equals("")){
-            tempText.setText("Please enter your credentials.");
         }
         else {
             Intent intent = new Intent(MainActivity.this, StudentProfile.class);
@@ -76,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             responseJSON = new JSONObject(response);
             String data;
-            if(responseJSON.length() ==4)
+            if(responseJSON.length()==4)
             {
                 data = responseJSON.getString("data");
                 JSONObject dataJSON = new JSONObject(data);
@@ -91,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-    public String readToken()
-    {
+    public String readToken() {
         File path = getApplicationContext().getFilesDir();
         File tokenFile = new File(path, "token.txt");
 
@@ -111,20 +99,7 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-    public void clearToken() {
-        File path = getApplicationContext().getFilesDir();
-        File tokenFile = new File(path, "token.txt");
-        PrintWriter clearer = null;
-        try {
-            clearer = new PrintWriter(tokenFile);
-            clearer.write("");
-            clearer.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    String post(String user, String pass)  {
+   public String post(String user, String pass)  {
         String temp = "test";
         RequestBody formBody = new FormBody.Builder()
                 .add("user", user)
@@ -162,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-    void login(View view){
+    void login(){
         MainActivity example = new MainActivity();
         String user = ucidLogin.getText().toString();
         String pass = passwordLogin.getText().toString();
@@ -172,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 writeToken(lol);
                 Intent intent = new Intent(MainActivity.this, StudentProfile.class);
                 intent.putExtra("Source", "from MainActivity");
+                intent.putExtra("Token", lol);
                 finish();
                 startActivity(intent);
             }
@@ -183,11 +159,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else {
-                tempText.setText("Invalid credentials. DEBUG");
+                Toast.makeText(getApplicationContext(), "Please enter valid credentials!", Toast.LENGTH_LONG).show();
             }
         }
         else {
-            tempText.setText("Invalid credentials.");
+            Toast.makeText(getApplicationContext(), "Please enter valid credentials!", Toast.LENGTH_LONG).show();
         }
     }
 }
