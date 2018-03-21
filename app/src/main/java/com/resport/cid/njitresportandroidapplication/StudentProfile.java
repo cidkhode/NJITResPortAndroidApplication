@@ -2,8 +2,6 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.CheckBox;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,8 +25,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import okhttp3.FormBody;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class StudentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +43,12 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     int classType = 0;
     int college = 0;
     boolean honors = false;
+    String major1="";
+    String gpa1="";
+    String class1="";
+    String college1="";
+    String honors1="";
+
     static EditText student_fname;
     static EditText student_lname;
     static EditText student_email;
@@ -48,6 +56,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     static EditText student_gpa;
     static Spinner student_class;
     static Spinner student_college;
+    static CheckBox student_honors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +73,14 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        student_fname = (EditText) findViewById(R.id.editText3);
-        student_lname = (EditText) findViewById(R.id.editText4);
-        student_email = (EditText) findViewById(R.id.editText5);
-        student_major = (EditText) findViewById(R.id.editText6);
-        student_gpa = (EditText) findViewById(R.id.editText7);
-        student_class = (Spinner) findViewById(R.id.spinner);
-        student_college = (Spinner) findViewById(R.id.spinner2);
+        student_fname = (EditText) findViewById(R.id.studentFirstName);
+        student_lname = (EditText) findViewById(R.id.studentLastName);
+        student_email = (EditText) findViewById(R.id.studentEmail);
+        student_major = (EditText) findViewById(R.id.studentMajor);
+        student_gpa = (EditText) findViewById(R.id.studentGPA);
+        student_class = (Spinner) findViewById(R.id.studentClassStanding);
+        student_college = (Spinner) findViewById(R.id.studentCollege);
+        student_honors = (CheckBox) findViewById(R.id.studentHonors);
 
         student_fname.setEnabled(false);
         student_lname.setEnabled(false);
@@ -87,6 +97,8 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_gpa.setSelection(student_gpa.getText().length());
 
         loadProfile();
+
+
     }
 
     public void updateProfile(View view) {
@@ -99,6 +111,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_gpa.setEnabled(true);
             student_class.setEnabled(true);
             student_college.setEnabled(true);
+            student_honors.setEnabled(true);
 
             student_fname.setSelection(student_fname.getText().length());
             student_lname.setSelection(student_lname.getText().length());
@@ -113,9 +126,23 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_gpa.setBackgroundResource(R.drawable.rounded_textbox);
             student_class.setBackgroundResource(R.drawable.rounded_textbox);
             student_college.setBackgroundResource(R.drawable.rounded_textbox);
-        }
+
+
+}
         else
         {
+            major1 = student_major.getText().toString();
+            gpa1 = student_gpa.getText().toString();
+            class1 = student_class.getSelectedItem().toString();
+            college1 = student_college.getSelectedItem().toString();
+            if(student_honors.isChecked())
+            {
+                honors=true;
+                honors1 = Boolean.toString(honors);
+            }
+            else
+                honors1 = Boolean.toString(honors);
+
             editMode = false;
             student_fname.setEnabled(false);
             student_lname.setEnabled(false);
@@ -124,6 +151,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_gpa.setEnabled(false);
             student_class.setEnabled(false);
             student_college.setEnabled(false);
+            student_honors.setEnabled(false);
             student_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
             student_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
             student_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
@@ -131,6 +159,33 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded);
             student_class.setBackgroundResource(R.drawable.rounded_textbox_faded);
             student_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+
+            saveProfile(gpa1,major1,class1,college1, honors1);
+            loadProfile();
+        }
+    }
+
+    public void saveProfile(String gpa1, String major1, String class1, String college1, String honors1)
+    {
+        String temp = readToken();
+        RequestBody formBody = new FormBody.Builder()
+                .add("gpa", "gpa1")
+                .add("major", major1)
+                .add("class", class1)
+                .add("college", college1)
+                .add("honors", honors1)
+                .build();
+        try {
+            Request request = new Request.Builder()
+                    .url("https://web.njit.edu/~db329/resport/api/v1/user")
+                    .header("Authorization", "Bearer"+temp)
+                    .post(formBody)
+                    .build();
+            Response response = null;
+            response = client.newCall(request).execute();
+            student_gpa.setText(response.toString());//just to see the output from api if successful
+        } catch (IOException exception) {
+
         }
     }
 
@@ -253,6 +308,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 college = dataJSON.getInt("college");
                 student_college.setSelection(college);
                 honors = dataJSON.getBoolean("honors");
+                if(honors == true){
+                    student_honors.setChecked(student_honors.isChecked());
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

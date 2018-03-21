@@ -13,7 +13,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/studentEditSave"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -25,10 +25,10 @@
                 android:onClick="updateProfile"/>
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/studentFirstName"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/button2"
+                android:layout_below="@+id/studentEditSave"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/rounded_textbox_faded"
@@ -38,12 +38,12 @@
                 android:paddingHorizontal="10dp" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/studentLastName"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/editText3"
-                android:layout_alignStart="@+id/editText3"
-                android:layout_below="@+id/editText3"
+                android:layout_alignLeft="@+id/studentFirstName"
+                android:layout_alignStart="@+id/studentFirstName"
+                android:layout_below="@+id/studentFirstName"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
@@ -52,12 +52,12 @@
                 android:paddingHorizontal="10dp" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/studentEmail"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/editText4"
-                android:layout_alignStart="@+id/editText4"
-                android:layout_below="@+id/editText4"
+                android:layout_alignLeft="@+id/studentLastName"
+                android:layout_alignStart="@+id/studentLastName"
+                android:layout_below="@+id/studentLastName"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
@@ -66,12 +66,12 @@
                 android:paddingHorizontal="10dp" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/studentMajor"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/editText5"
-                android:layout_alignStart="@+id/editText5"
-                android:layout_below="@+id/editText5"
+                android:layout_alignLeft="@+id/studentEmail"
+                android:layout_alignStart="@+id/studentEmail"
+                android:layout_below="@+id/studentEmail"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
@@ -80,12 +80,12 @@
                 android:paddingHorizontal="10dp" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/studentGPA"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/editText6"
-                android:layout_alignStart="@+id/editText6"
-                android:layout_below="@+id/editText6"
+                android:layout_alignLeft="@+id/studentMajor"
+                android:layout_alignStart="@+id/studentMajor"
+                android:layout_below="@+id/studentMajor"
                 android:layout_marginTop="11dp"
                 android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
@@ -93,23 +93,33 @@
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp" />
 
+            <CheckBox
+                android:id="@+id/studentHonors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/studentGPA"
+                android:layout_alignStart="@+id/studentGPA"
+                android:layout_below="@+id/studentGPA"
+                android:layout_marginTop="17dp"
+                android:text="Honors" />
+
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/studentClassStanding"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/button2"
-                android:layout_alignStart="@+id/button2"
-                android:layout_below="@+id/editText7"
-                android:layout_marginTop="18dp"
+                android:layout_alignLeft="@+id/studentSelectFile"
+                android:layout_alignStart="@+id/studentSelectFile"
+                android:layout_below="@+id/studentHonors"
+                android:layout_marginTop="44dp"
                 android:background="@drawable/rounded_textbox_faded"
                 android:entries="@array/class_rankings" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/studentCollege"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/spinner"
+                android:layout_below="@+id/studentClassStanding"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/rounded_textbox_faded"
@@ -119,13 +129,13 @@
                 android:id="@+id/imageView2"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner2"
+                android:layout_below="@+id/studentCollege"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="18dp"
                 app:srcCompat="@drawable/horizontal_line" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/studentUploadResume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/imageView2"
@@ -137,16 +147,18 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/studentSelectFile"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView2"
+                android:layout_below="@+id/studentUploadResume"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
                 android:background="@color/colorPrimary"
                 android:text="Select File... / Upload"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="20dp"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
+
+
 
         </RelativeLayout>
 
