@@ -244,15 +244,15 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 lname = dataJSON.getString("lname");
                 student_lname.setText(lname);
                 student_email.setText(ucid+"@njit.edu");
-                //major = dataJSON.getInt("major");
-                //student_major.setText(major);
-                //gpa = dataJSON.getDouble("gpa");
-                //student_gpa.setText(Double.toString(gpa));
-                //lassType = dataJSON.getInt("class");
-                //student_class.setSelection(classType);
-                //college = dataJSON.getInt("college");
-                //student_college.setSelection(college);
-                //honors = dataJSON.getBoolean("honors");
+                major = dataJSON.getInt("major");
+                student_major.setText(major);
+                gpa = dataJSON.getDouble("gpa");
+                student_gpa.setText(Double.toString(gpa));
+                classType = dataJSON.getInt("class");
+                student_class.setSelection(classType);
+                college = dataJSON.getInt("college");
+                student_college.setSelection(college);
+                honors = dataJSON.getBoolean("honors");
             }
         } catch (JSONException e) {
             e.printStackTrace();

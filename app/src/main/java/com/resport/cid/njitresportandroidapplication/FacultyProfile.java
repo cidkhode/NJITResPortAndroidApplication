@@ -16,21 +16,35 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class FacultyProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     boolean editMode = false;
     OkHttpClient client = new OkHttpClient();
+    String ucid = "";
+    String fname = "";
+    String lname = "";
+    String email = "";
+    int college = 0;
+    String office = "";
+    String fieldOfStudy = "";
+    String experience = "";
     static EditText faculty_fname;
     static EditText faculty_lname;
     static EditText faculty_email;
     static EditText faculty_field;
     static EditText faculty_years;
-    static Spinner faculty_building;
     static EditText faculty_office;
     static Spinner faculty_college;
 
@@ -55,7 +69,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         faculty_email = (EditText) findViewById(R.id.editText17);
         faculty_field = (EditText) findViewById(R.id.editText18);
         faculty_years = (EditText) findViewById(R.id.editText19);
-        faculty_building = (Spinner) findViewById(R.id.spinner3);
         faculty_office = (EditText) findViewById(R.id.editText21);
         faculty_college = (Spinner) findViewById(R.id.spinner4);
 
@@ -64,7 +77,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         faculty_email.setEnabled(false);
         faculty_field.setEnabled(false);
         faculty_years.setEnabled(false);
-        faculty_building.setEnabled(false);
         faculty_office.setEnabled(false);
         faculty_college.setEnabled(false);
 
@@ -74,6 +86,8 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         faculty_field.setSelection(faculty_field.getText().length());
         faculty_years.setSelection(faculty_years.getText().length());
         faculty_office.setSelection(faculty_office.getText().length());
+
+        loadProfile();
     }
 
     public void updateProfile(View view) {
@@ -84,7 +98,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             faculty_email.setEnabled(true);
             faculty_field.setEnabled(true);
             faculty_years.setEnabled(true);
-            faculty_building.setEnabled(true);
             faculty_office.setEnabled(true);
             faculty_college.setEnabled(true);
 
@@ -100,7 +113,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             faculty_email.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_field.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_years.setBackgroundResource(R.drawable.rounded_textbox);
-            faculty_building.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_office.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_college.setBackgroundResource(R.drawable.rounded_textbox);
 
@@ -113,7 +125,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             faculty_email.setEnabled(false);
             faculty_field.setEnabled(false);
             faculty_years.setEnabled(false);
-            faculty_building.setEnabled(false);
             faculty_office.setEnabled(false);
             faculty_college.setEnabled(false);
 
@@ -122,7 +133,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
             faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded);
             faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_building.setBackgroundResource(R.drawable.rounded_textbox_faded);
             faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
             faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
         }
@@ -188,5 +198,69 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void loadProfile(){
+        String temp = readToken();
+        try {
+            Request request = new Request.Builder()
+                    .url("https://web.njit.edu/~db329/resport/api/v1/user")
+                    .header("Authorization", "Bearer "+temp)
+                    .build();
+            Response response = client.newCall(request).execute();
+            parseInformation(response.body().string());
+        } catch (IOException exception) {
+        }
+    }
+
+    public String readToken()
+    {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+
+        int size = (int) tokenFile.length();
+        byte[] data = new byte[size];
+        FileInputStream reader = null;
+        try {
+            reader = new FileInputStream(tokenFile);
+            reader.read(data);
+            reader.close();
+            String token = new String(data);
+            return token;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "ERROR!";
+    }
+
+    public void parseInformation(String response)  {
+        JSONObject responseJSON = null;
+        try {
+            responseJSON = new JSONObject(response);
+            String data;
+            if(responseJSON.length()==4)
+            {
+                data = responseJSON.getString("data");
+                JSONObject dataJSON = new JSONObject(data);
+                ucid = dataJSON.getString("ucid");
+                fname = dataJSON.getString("fname");
+                faculty_fname.setText(fname);
+                lname = dataJSON.getString("lname");
+                faculty_lname.setText(lname);
+                email = dataJSON.getString("email");
+                faculty_email.setText(email);
+                college = dataJSON.getInt("college");
+                faculty_college.setSelection(college);      //may be college-1 or college-2, depending on starting index
+                office = dataJSON.getString("office");
+                faculty_office.setText(office);
+                fieldOfStudy = dataJSON.getString("fieldOfStudy");
+                faculty_field.setText(fieldOfStudy);
+                experience = dataJSON.getString("experience");
+                faculty_years.setText(experience);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
