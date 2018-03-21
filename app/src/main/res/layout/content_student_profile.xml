@@ -1,165 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGray"
+    android:fillViewport="true"
+    tools:context=".StudentProfile">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundGray"
-        android:fillViewport="true"
-        tools:context=".StudentProfile">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/studentEditSave"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/edit_save"
+            android:textColor="@android:color/white"
+            android:onClick="updateProfile"/>
 
-            <Button
-                android:id="@+id/studentEditSave"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="95dp"
-                android:background="@color/colorPrimary"
-                android:text="@string/edit_save"
-                android:textColor="@android:color/white"
-                android:onClick="updateProfile"/>
+        <EditText
+            android:id="@+id/studentFirstName"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/studentEditSave"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:ems="10"
+            android:hint="@string/student_first_name"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp" />
 
-            <EditText
-                android:id="@+id/studentFirstName"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/studentEditSave"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:hint="@string/student_first_name"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp" />
+        <EditText
+            android:id="@+id/studentLastName"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/studentFirstName"
+            android:layout_alignStart="@+id/studentFirstName"
+            android:layout_below="@+id/studentFirstName"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:ems="10"
+            android:hint="@string/student_last_name"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp" />
 
-            <EditText
-                android:id="@+id/studentLastName"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_alignLeft="@+id/studentFirstName"
-                android:layout_alignStart="@+id/studentFirstName"
-                android:layout_below="@+id/studentFirstName"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:hint="@string/student_last_name"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp" />
+        <EditText
+            android:id="@+id/studentEmail"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/studentLastName"
+            android:layout_alignStart="@+id/studentLastName"
+            android:layout_below="@+id/studentLastName"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:ems="10"
+            android:hint="@string/student_email"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp" />
 
-            <EditText
-                android:id="@+id/studentEmail"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_alignLeft="@+id/studentLastName"
-                android:layout_alignStart="@+id/studentLastName"
-                android:layout_below="@+id/studentLastName"
-                android:layout_marginTop="13dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:hint="@string/student_email"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp" />
-
-            <EditText
-                android:id="@+id/studentMajor"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_alignLeft="@+id/studentEmail"
-                android:layout_alignStart="@+id/studentEmail"
-                android:layout_below="@+id/studentEmail"
-                android:layout_marginTop="13dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:hint="@string/student_major"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp" />
-
-            <EditText
-                android:id="@+id/studentGPA"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_alignLeft="@+id/studentMajor"
-                android:layout_alignStart="@+id/studentMajor"
-                android:layout_below="@+id/studentMajor"
-                android:layout_marginTop="11dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:hint="@string/student_gpa"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp" />
-
-            <CheckBox
-                android:id="@+id/studentHonors"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/studentGPA"
-                android:layout_alignStart="@+id/studentGPA"
-                android:layout_below="@+id/studentGPA"
-                android:layout_marginTop="17dp"
-                android:text="Honors" />
-
-
-            <Spinner
-                android:id="@+id/studentClassStanding"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_alignLeft="@+id/studentSelectFile"
-                android:layout_alignStart="@+id/studentSelectFile"
-                android:layout_below="@+id/studentHonors"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:entries="@array/class_rankings" />
-
-            <Spinner
-                android:id="@+id/studentCollege"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/studentClassStanding"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                android:background="@drawable/rounded_textbox_faded"
-                android:entries="@array/student_colleges" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/studentCollege"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                app:srcCompat="@drawable/horizontal_line" />
-
-            <TextView
-                android:id="@+id/studentUploadResume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/imageView2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="19dp"
-                android:text="Click To Upload Resume"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/studentSelectFile"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/studentUploadResume"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/colorPrimary"
-                android:text="Select File... / Upload"
-                android:textColor="@android:color/white" />
+        <Spinner
+            android:id="@+id/spinner5"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/studentEmail"
+            android:layout_alignStart="@+id/studentEmail"
+            android:layout_below="@+id/studentEmail"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:entries="@array/student_majors" />
 
 
 
-        </RelativeLayout>
+        <EditText
+            android:id="@+id/studentGPA"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/spinner5"
+            android:layout_alignStart="@+id/spinner5"
+            android:layout_below="@+id/spinner5"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:ems="10"
+            android:hint="@string/student_gpa"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="10dp" />
 
-    </ScrollView>
+        <CheckBox
+            android:id="@+id/studentHonors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/studentGPA"
+            android:layout_alignStart="@+id/studentGPA"
+            android:layout_below="@+id/studentGPA"
+            android:layout_marginTop="17dp"
+            android:text="Honors" />
+
+
+        <Spinner
+            android:id="@+id/studentClassStanding"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/studentSelectFile"
+            android:layout_alignStart="@+id/studentSelectFile"
+            android:layout_below="@+id/studentHonors"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:entries="@array/class_rankings" />
+
+        <Spinner
+            android:id="@+id/studentCollege"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/studentClassStanding"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:entries="@array/student_colleges" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/studentCollege"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            app:srcCompat="@drawable/horizontal_line" />
+
+        <TextView
+            android:id="@+id/studentUploadResume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:text="Click To Upload Resume"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/studentSelectFile"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/studentUploadResume"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorPrimary"
+            android:text="Select File... / Upload"
+            android:textColor="@android:color/white" />
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

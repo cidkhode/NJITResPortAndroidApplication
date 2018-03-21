@@ -11,11 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.CheckBox;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +27,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import okhttp3.FormBody;
 import okhttp3.MultipartBody;
@@ -48,18 +52,31 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     String class1="";
     String college1="";
     String honors1="";
+    JSONArray collegeInfo = null;
+    JSONArray majorInfo = null;
+    JSONArray classesInfo = null;
+
+    ArrayList<String> student_colleges = new ArrayList<String>();
+    ArrayList<String> student_majors = new ArrayList<String>();
+    ArrayList<String> student_classes = new ArrayList<String>();
 
     static EditText student_fname;
     static EditText student_lname;
     static EditText student_email;
-    static EditText student_major;
+    static Spinner student_major;
     static EditText student_gpa;
     static Spinner student_class;
     static Spinner student_college;
     static CheckBox student_honors;
 
+    ArrayAdapter<String> adapterColleges;
+    ArrayAdapter<String> adapterMajors;
+    ArrayAdapter<String> adapterClasses;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //CAD Majors
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,7 +93,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_fname = (EditText) findViewById(R.id.studentFirstName);
         student_lname = (EditText) findViewById(R.id.studentLastName);
         student_email = (EditText) findViewById(R.id.studentEmail);
-        student_major = (EditText) findViewById(R.id.studentMajor);
+        student_major = (Spinner) findViewById(R.id.spinner5);
         student_gpa = (EditText) findViewById(R.id.studentGPA);
         student_class = (Spinner) findViewById(R.id.studentClassStanding);
         student_college = (Spinner) findViewById(R.id.studentCollege);
@@ -93,12 +110,101 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_fname.setSelection(student_fname.getText().length());
         student_lname.setSelection(student_lname.getText().length());
         student_email.setSelection(student_email.getText().length());
-        student_major.setSelection(student_major.getText().length());
         student_gpa.setSelection(student_gpa.getText().length());
+        loadInfo();
+
+        adapterColleges = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, student_colleges);
+        adapterColleges.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterMajors = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, student_majors);
+        adapterMajors.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterClasses = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, student_classes);
+        adapterClasses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        student_college.setAdapter(adapterColleges);
+        student_major.setAdapter(adapterMajors);
+        student_class.setAdapter(adapterClasses);
+
+        student_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                try{
+                    int idOfCollege = position+2;
+                    System.out.println(idOfCollege);
+                    int idOfMajor;
+                    student_majors.clear();
+                    for(int i=0;i<majorInfo.length();i++) {
+                        idOfMajor = majorInfo.getJSONObject(i).getInt("college");
+                        if(idOfMajor == idOfCollege)
+                        {
+                            System.out.println("HELLO WORLD");
+                            student_majors.add(majorInfo.getJSONObject(i).getString("major"));
+                        }
+                    }
+                    adapterMajors.notifyDataSetChanged();
+
+                } catch(JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                return;
+            }
+
+        });
 
         loadProfile();
 
+    }
 
+    public void loadInfo()
+    {
+        String temp = readToken();
+        try {
+            Request request = new Request.Builder()
+                    .url("https://web.njit.edu/~db329/resport/api/v1/info")
+                    .header("Authorization", "Bearer " + temp)
+                    .build();
+            Response response = client.newCall(request).execute();
+            parseVariableInformation(response.body().string());
+        } catch (IOException exception) {
+        }
+    }
+
+    public void parseVariableInformation(String response)
+    {
+        JSONObject responseJSON = null;
+        try {
+            responseJSON = new JSONObject(response);
+            String data;
+            if(responseJSON.length()==4)
+            {
+                data = responseJSON.getString("data");
+                JSONObject dataJSON = new JSONObject(data);
+                collegeInfo = dataJSON.getJSONArray("colleges");
+                for(int i=1;i<collegeInfo.length();i++) {
+                    student_colleges.add(collegeInfo.getJSONObject(i).getString("college"));
+                }
+
+                majorInfo = dataJSON.getJSONArray("majors");
+                for(int i=0;i<majorInfo.length();i++) {
+                    student_majors.add(majorInfo.getJSONObject(i).getString("major"));
+                }
+
+                classesInfo = dataJSON.getJSONArray("class");
+                for(int i=0;i<classesInfo.length();i++) {
+                    student_classes.add(classesInfo.getJSONObject(i).getString("class"));
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateProfile(View view) {
@@ -116,7 +222,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_fname.setSelection(student_fname.getText().length());
             student_lname.setSelection(student_lname.getText().length());
             student_email.setSelection(student_email.getText().length());
-            student_major.setSelection(student_major.getText().length());
             student_gpa.setSelection(student_gpa.getText().length());
 
             student_fname.setBackgroundResource(R.drawable.rounded_textbox);
@@ -126,15 +231,26 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_gpa.setBackgroundResource(R.drawable.rounded_textbox);
             student_class.setBackgroundResource(R.drawable.rounded_textbox);
             student_college.setBackgroundResource(R.drawable.rounded_textbox);
+        }
 
-
-}
         else
         {
-            major1 = student_major.getText().toString();
+            String majorText = student_major.getSelectedItem().toString();
+            try {
+                for (int i = 0; i < majorInfo.length(); i++) {
+                    JSONObject jObj = majorInfo.getJSONObject(i);
+                    if(majorText.equals(jObj.getString("major")))
+                    {
+                        major1 = Integer.toString(jObj.getInt("id"));
+                    }
+                }
+            } catch(JSONException e){
+                e.printStackTrace();
+            }
+
             gpa1 = student_gpa.getText().toString();
-            class1 = student_class.getSelectedItem().toString();
-            college1 = student_college.getSelectedItem().toString();
+            class1 = Long.toString(student_class.getSelectedItemId()+1);
+            college1 = Long.toString(student_college.getSelectedItemId() + 2);
             if(student_honors.isChecked())
             {
                 honors=true;
@@ -159,9 +275,10 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded);
             student_class.setBackgroundResource(R.drawable.rounded_textbox_faded);
             student_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
-
+            System.out.println("----------------------------------------------------------");
+            System.out.println(major1 + "                 " + college1);
+            System.out.println("----------------------------------------------------------");
             saveProfile(gpa1,major1,class1,college1, honors1);
-            loadProfile();
         }
     }
 
@@ -169,7 +286,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     {
         String temp = readToken();
         RequestBody formBody = new FormBody.Builder()
-                .add("gpa", "gpa1")
+                .add("gpa", gpa1)
                 .add("major", major1)
                 .add("class", class1)
                 .add("college", college1)
@@ -178,12 +295,12 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         try {
             Request request = new Request.Builder()
                     .url("https://web.njit.edu/~db329/resport/api/v1/user")
-                    .header("Authorization", "Bearer"+temp)
+                    .header("Authorization", "Bearer " + temp)
                     .post(formBody)
                     .build();
             Response response = null;
             response = client.newCall(request).execute();
-            student_gpa.setText(response.toString());//just to see the output from api if successful
+            //student_gpa.setText(response.toString());//just to see the output from api if successful
         } catch (IOException exception) {
 
         }
@@ -258,7 +375,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                     .header("Authorization", "Bearer "+temp)
                     .build();
             Response response = client.newCall(request).execute();
-            //student_fname.setText(response.body().string());
             parseInformation(response.body().string());
         } catch (IOException exception) {
         }
@@ -299,17 +415,33 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 lname = dataJSON.getString("lname");
                 student_lname.setText(lname);
                 student_email.setText(ucid+"@njit.edu");
+                college = dataJSON.getInt("college");
+                student_college.setSelection(college-2);
                 major = dataJSON.getInt("major");
-                student_major.setText(major);
+                int counter = 0;
+                for(int i=0;i<majorInfo.length();i++)
+                {
+                    JSONObject majorObj = majorInfo.getJSONObject(i);
+                    if(majorObj.getInt("college") == college)
+                    {
+                        if(majorObj.getInt("id") == major)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            counter++;
+                        }
+                    }
+                }
+                student_major.setSelection(counter);
                 gpa = dataJSON.getDouble("gpa");
                 student_gpa.setText(Double.toString(gpa));
                 classType = dataJSON.getInt("class");
-                student_class.setSelection(classType);
-                college = dataJSON.getInt("college");
-                student_college.setSelection(college);
+                student_class.setSelection(classType-1 );
                 honors = dataJSON.getBoolean("honors");
                 if(honors == true){
-                    student_honors.setChecked(student_honors.isChecked());
+                    student_honors.setChecked(honors);
                 }
             }
         } catch (JSONException e) {

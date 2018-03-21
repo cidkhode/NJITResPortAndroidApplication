@@ -25,20 +25,14 @@
 
     <string-array name="class_rankings">
         <item>Select Class Standing...</item>
-        <item>[B] Senior 91-130 C</item>
-        <item>[B] Junior 57-90 C</item>
-        <item>[B] Sophomore 29-56 C</item>
-        <item>[B] Freshman 0-28 C</item>
+    </string-array>
+
+    <string-array name="student_majors">
+        <item>Select Major...</item>
     </string-array>
 
     <string-array name="student_colleges">
         <item>Select College...</item>
-        <item>Albert Dorman Honors College</item>
-        <item>College of Architecture and Design</item>
-        <item>College of Science and Liberal Arts</item>
-        <item>Martin Tuchman School of Management</item>
-        <item>Newark College of Engineering</item>
-        <item>Ying Wu College of Computing</item>
     </string-array>
 
     <string-array name="faculty_colleges">
