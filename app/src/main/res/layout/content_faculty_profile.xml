@@ -21,6 +21,7 @@
                 android:layout_marginTop="95dp"
                 android:background="@color/colorPrimary"
                 android:text="@string/edit_save"
+                android:onClick="updateProfile"
                 android:textColor="@android:color/white"/>
 
             <EditText
@@ -30,7 +31,7 @@
                 android:layout_below="@+id/button3"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
@@ -43,7 +44,7 @@
                 android:layout_below="@+id/editText15"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:hint="@string/faculty_last_name"
                 android:inputType="textPersonName"
@@ -56,7 +57,7 @@
                 android:layout_below="@+id/editText16"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:hint="@string/faculty_email"
                 android:inputType="textPersonName"
@@ -69,7 +70,7 @@
                 android:layout_below="@+id/editText17"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:hint="@string/faculty_field_of_expertise"
                 android:inputType="textPersonName"
@@ -82,7 +83,7 @@
                 android:layout_below="@+id/editText18"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:hint="@string/faculty_years_at_njit"
                 android:inputType="textPersonName"
@@ -98,7 +99,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:entries="@array/buildings"/>
 
             <EditText
@@ -110,7 +111,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_toEndOf="@+id/spinner3"
                 android:layout_toRightOf="@+id/spinner3"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:hint="Office #"
                 android:inputType="textPersonName"
@@ -124,7 +125,7 @@
                 android:layout_alignStart="@+id/button3"
                 android:layout_below="@+id/spinner3"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_faded"
                 android:entries="@array/faculty_colleges"/>
 
         </RelativeLayout>

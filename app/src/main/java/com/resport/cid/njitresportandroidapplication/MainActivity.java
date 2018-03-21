@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-    void login(){
+    void login(View view){
         MainActivity example = new MainActivity();
         String user = ucidLogin.getText().toString();
         String pass = passwordLogin.getText().toString();

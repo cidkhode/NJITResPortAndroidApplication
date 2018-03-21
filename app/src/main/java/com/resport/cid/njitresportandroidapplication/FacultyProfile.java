@@ -13,12 +13,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Spinner;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class FacultyProfile extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import okhttp3.OkHttpClient;
+
+public class FacultyProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    boolean editMode = false;
+    OkHttpClient client = new OkHttpClient();
+    static EditText faculty_fname;
+    static EditText faculty_lname;
+    static EditText faculty_email;
+    static EditText faculty_field;
+    static EditText faculty_years;
+    static Spinner faculty_building;
+    static EditText faculty_office;
+    static Spinner faculty_college;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +49,83 @@ public class FacultyProfile extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        faculty_fname = (EditText) findViewById(R.id.editText15);
+        faculty_lname = (EditText) findViewById(R.id.editText16);
+        faculty_email = (EditText) findViewById(R.id.editText17);
+        faculty_field = (EditText) findViewById(R.id.editText18);
+        faculty_years = (EditText) findViewById(R.id.editText19);
+        faculty_building = (Spinner) findViewById(R.id.spinner3);
+        faculty_office = (EditText) findViewById(R.id.editText21);
+        faculty_college = (Spinner) findViewById(R.id.spinner4);
+
+        faculty_fname.setEnabled(false);
+        faculty_lname.setEnabled(false);
+        faculty_email.setEnabled(false);
+        faculty_field.setEnabled(false);
+        faculty_years.setEnabled(false);
+        faculty_building.setEnabled(false);
+        faculty_office.setEnabled(false);
+        faculty_college.setEnabled(false);
+
+        faculty_fname.setSelection(faculty_fname.getText().length());
+        faculty_lname.setSelection(faculty_lname.getText().length());
+        faculty_email.setSelection(faculty_email.getText().length());
+        faculty_field.setSelection(faculty_field.getText().length());
+        faculty_years.setSelection(faculty_years.getText().length());
+        faculty_office.setSelection(faculty_office.getText().length());
+    }
+
+    public void updateProfile(View view) {
+        if (editMode == false) {
+            editMode = true;
+            faculty_fname.setEnabled(true);
+            faculty_lname.setEnabled(true);
+            faculty_email.setEnabled(true);
+            faculty_field.setEnabled(true);
+            faculty_years.setEnabled(true);
+            faculty_building.setEnabled(true);
+            faculty_office.setEnabled(true);
+            faculty_college.setEnabled(true);
+
+            faculty_fname.setSelection(faculty_fname.getText().length());
+            faculty_lname.setSelection(faculty_lname.getText().length());
+            faculty_email.setSelection(faculty_email.getText().length());
+            faculty_field.setSelection(faculty_field.getText().length());
+            faculty_years.setSelection(faculty_years.getText().length());
+            faculty_office.setSelection(faculty_office.getText().length());
+
+            faculty_fname.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_lname.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_email.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_field.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_years.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_building.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_office.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_college.setBackgroundResource(R.drawable.rounded_textbox);
+
+        }
+        else
+        {
+            editMode = false;
+            faculty_fname.setEnabled(false);
+            faculty_lname.setEnabled(false);
+            faculty_email.setEnabled(false);
+            faculty_field.setEnabled(false);
+            faculty_years.setEnabled(false);
+            faculty_building.setEnabled(false);
+            faculty_office.setEnabled(false);
+            faculty_college.setEnabled(false);
+
+            faculty_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_building.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+        }
     }
 
     @Override
