@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,8 +26,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class FacultyProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -119,24 +122,84 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         }
         else
         {
-            editMode = false;
-            faculty_fname.setEnabled(false);
-            faculty_lname.setEnabled(false);
-            faculty_email.setEnabled(false);
-            faculty_field.setEnabled(false);
-            faculty_years.setEnabled(false);
-            faculty_office.setEnabled(false);
-            faculty_college.setEnabled(false);
 
-            faculty_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+            fname = faculty_fname.getText().toString();
+            lname = faculty_lname.getText().toString();
+            email = faculty_email.getText().toString();
+            fieldOfStudy = faculty_field.getText().toString();
+            experience = faculty_years.getText().toString();
+            office = faculty_office.getText().toString();
+            college = faculty_college.getSelectedItemPosition();
+
+            if (college == 0) {
+                Toast.makeText(getApplicationContext(), "Please select a college!", Toast.LENGTH_LONG).show();
+            }
+            else if (fname.matches("")) {
+                Toast.makeText(getApplicationContext(), "Please enter a first name!", Toast.LENGTH_LONG).show();
+            }
+            else if (lname.matches("")) {
+                Toast.makeText(getApplicationContext(), "Please enter a last name!", Toast.LENGTH_LONG).show();
+            }
+            else if (fieldOfStudy.matches("")) {
+                Toast.makeText(getApplicationContext(), "Please enter a field of study!", Toast.LENGTH_LONG).show();
+            }
+            else if (experience.matches("")) {
+                Toast.makeText(getApplicationContext(), "Please enter your experience!", Toast.LENGTH_LONG).show();
+            }
+            else if (office.matches("")) {
+                Toast.makeText(getApplicationContext(), "Please enter your office!", Toast.LENGTH_LONG).show();
+            }
+            else {
+                editMode = false;
+                faculty_fname.setEnabled(false);
+                faculty_lname.setEnabled(false);
+                faculty_email.setEnabled(false);
+                faculty_field.setEnabled(false);
+                faculty_years.setEnabled(false);
+                faculty_office.setEnabled(false);
+                faculty_college.setEnabled(false);
+
+                faculty_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                saveProfile(fname, lname, email, fieldOfStudy, experience, office, college);
+                loadProfile();
+            }
+
+
         }
     }
+
+    public void saveProfile(String fname, String lname, String email, String fieldOfStudy, String experience, String office, int college)
+    {
+        String temp = readToken();
+        RequestBody formBody = new FormBody.Builder()
+                .add("fname", fname)
+                .add("lname", lname)
+                .add("college", String.valueOf(college))
+                .add("email", email)
+                .add("experience", experience)
+                .add("fieldOfStudy", fieldOfStudy)
+                .add("office", office)
+                .build();
+        try {
+            Request request = new Request.Builder()
+                    .url("https://web.njit.edu/~db329/resport/api/v1/user")
+                    .header("Authorization", "Bearer "+temp)
+                    .post(formBody)
+                    .build();
+            Response response = null;
+            response = client.newCall(request).execute();
+            //faculty_lname.setText(response.toString());//just to see the output from api if successful
+        } catch (IOException exception) {
+
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -250,7 +313,7 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 email = dataJSON.getString("email");
                 faculty_email.setText(email);
                 college = dataJSON.getInt("college");
-                faculty_college.setSelection(college+1);      //may be college-1 or college-2, depending on starting index
+                faculty_college.setSelection(college);      //may be college-1 or college-2, depending on starting index
                 fieldOfStudy = dataJSON.getString("fieldOfStudy");
                 faculty_field.setText(fieldOfStudy);
                 office = dataJSON.getString("office");
