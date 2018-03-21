@@ -37,14 +37,23 @@ public class MainActivity extends AppCompatActivity {
         ucidLogin = (EditText) findViewById(R.id.editText);
         passwordLogin = (EditText) findViewById(R.id.editText2);
 
-
-        if (readToken().equals("ERROR!") || readToken().equals("")){
+        if (readToken().equals("ERROR!") || readToken().equals("")) {
         }
         else {
-            Intent intent = new Intent(MainActivity.this, StudentProfile.class);
-            intent.putExtra("Source", "from MainActivity");
-            finish();
-            startActivity(intent);
+            if (findRole(readToken()).equals("student")) {
+                Intent intent = new Intent(MainActivity.this, StudentProfile.class);
+                intent.putExtra("Source", "from MainActivity");
+                intent.putExtra("Token", readToken());
+                finish();
+                startActivity(intent);
+            }
+            else if (findRole(readToken()).equals("faculty")) {
+                writeToken(readToken());
+                Intent intent = new Intent(MainActivity.this, FacultyProfile.class);
+                intent.putExtra("Source", "from MainActivity");
+                finish();
+                startActivity(intent);
+            }
         }
     }
 
@@ -142,18 +151,18 @@ public class MainActivity extends AppCompatActivity {
         MainActivity example = new MainActivity();
         String user = ucidLogin.getText().toString();
         String pass = passwordLogin.getText().toString();
-        String lol = example.post(user,pass);
-        if (!lol.equals("ERROR!")) {
-            if (findRole(lol).equals("student")) {
-                writeToken(lol);
+        String tokenString = example.post(user,pass);
+          if (!tokenString.equals("ERROR!")) {
+            if (findRole(tokenString).equals("student")) {
+                writeToken(tokenString);
                 Intent intent = new Intent(MainActivity.this, StudentProfile.class);
                 intent.putExtra("Source", "from MainActivity");
-                intent.putExtra("Token", lol);
+                intent.putExtra("Token", tokenString);
                 finish();
                 startActivity(intent);
             }
-            else if (findRole(lol).equals("faculty")){
-                writeToken(lol);
+            else if (findRole(tokenString).equals("faculty")){
+                writeToken(tokenString);
                 Intent intent = new Intent(MainActivity.this, FacultyProfile.class);
                 intent.putExtra("Source", "from MainActivity");
                 finish();
