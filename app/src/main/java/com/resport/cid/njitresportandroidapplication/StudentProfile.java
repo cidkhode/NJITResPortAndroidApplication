@@ -449,7 +449,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 student_class.setSelection(classType-1 );
                 honors = dataJSON.getBoolean("honors");
                 student_honors.setChecked(honors);
-                student_honors.setChecked(honors);
 
             }
         } catch (JSONException e) {
