@@ -16,7 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.CheckBox;
-
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,9 +61,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     ArrayList<String> student_majors = new ArrayList<String>();
     ArrayList<String> student_classes = new ArrayList<String>();
 
-    static EditText student_fname;
-    static EditText student_lname;
-    static EditText student_email;
+    static TextView student_fname;
+    static TextView student_lname;
+    static TextView student_email;
     static Spinner student_major;
     static EditText student_gpa;
     static Spinner student_class;
@@ -90,9 +91,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        student_fname = (EditText) findViewById(R.id.studentFirstName);
-        student_lname = (EditText) findViewById(R.id.studentLastName);
-        student_email = (EditText) findViewById(R.id.studentEmail);
+        student_fname = (TextView) findViewById(R.id.studentFirstName);
+        student_lname = (TextView) findViewById(R.id.studentLastName);
+        student_email = (TextView) findViewById(R.id.studentEmail);
         student_major = (Spinner) findViewById(R.id.spinner5);
         student_gpa = (EditText) findViewById(R.id.studentGPA);
         student_class = (Spinner) findViewById(R.id.studentClassStanding);
@@ -107,9 +108,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_class.setEnabled(false);
         student_college.setEnabled(false);
 
-        student_fname.setSelection(student_fname.getText().length());
-        student_lname.setSelection(student_lname.getText().length());
-        student_email.setSelection(student_email.getText().length());
+        //student_fname.setSelection(student_fname.getText().length());
+        //student_lname.setSelection(student_lname.getText().length());
+        //student_email.setSelection(student_email.getText().length());
         student_gpa.setSelection(student_gpa.getText().length());
         loadInfo();
 
@@ -210,23 +211,23 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     public void updateProfile(View view) {
         if(editMode == false) {
             editMode = true;
-            student_fname.setEnabled(true);
-            student_lname.setEnabled(true);
-            student_email.setEnabled(true);
+            //student_fname.setEnabled(true);
+            //student_lname.setEnabled(true);
+            //student_email.setEnabled(true);
             student_major.setEnabled(true);
             student_gpa.setEnabled(true);
             student_class.setEnabled(true);
             student_college.setEnabled(true);
             student_honors.setEnabled(true);
 
-            student_fname.setSelection(student_fname.getText().length());
-            student_lname.setSelection(student_lname.getText().length());
-            student_email.setSelection(student_email.getText().length());
+            //student_fname.setSelection(student_fname.getText().length());
+            //student_lname.setSelection(student_lname.getText().length());
+            //student_email.setSelection(student_email.getText().length());
             student_gpa.setSelection(student_gpa.getText().length());
 
-            student_fname.setBackgroundResource(R.drawable.rounded_textbox);
-            student_lname.setBackgroundResource(R.drawable.rounded_textbox);
-            student_email.setBackgroundResource(R.drawable.rounded_textbox);
+            //student_fname.setBackgroundResource(R.drawable.rounded_textbox);
+            //student_lname.setBackgroundResource(R.drawable.rounded_textbox);
+            //student_email.setBackgroundResource(R.drawable.rounded_textbox);
             student_major.setBackgroundResource(R.drawable.rounded_textbox);
             student_gpa.setBackgroundResource(R.drawable.rounded_textbox);
             student_class.setBackgroundResource(R.drawable.rounded_textbox);
@@ -259,26 +260,33 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             else
                 honors1 = Boolean.toString(honors);
 
-            editMode = false;
-            student_fname.setEnabled(false);
-            student_lname.setEnabled(false);
-            student_email.setEnabled(false);
-            student_major.setEnabled(false);
-            student_gpa.setEnabled(false);
-            student_class.setEnabled(false);
-            student_college.setEnabled(false);
-            student_honors.setEnabled(false);
-            student_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            student_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            student_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            student_major.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            student_class.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            student_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
-            System.out.println("----------------------------------------------------------");
-            System.out.println(major1 + "                 " + college1);
-            System.out.println("----------------------------------------------------------");
-            saveProfile(gpa1,major1,class1,college1, honors1);
+            if ( Float.parseFloat(gpa1) > 4.0 || Float.parseFloat(gpa1) < 0.0) {
+                Toast.makeText(getApplicationContext(), "Please enter a valid GPA!", Toast.LENGTH_LONG).show();
+            }
+            else {
+                editMode = false;
+                //student_fname.setEnabled(false);
+                //student_lname.setEnabled(false);
+                //student_email.setEnabled(false);
+                student_major.setEnabled(false);
+                student_gpa.setEnabled(false);
+                student_class.setEnabled(false);
+                student_college.setEnabled(false);
+                student_honors.setEnabled(false);
+                //student_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                //student_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                //student_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                student_major.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                student_class.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                student_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                System.out.println("----------------------------------------------------------");
+                System.out.println(major1 + " " + college1);
+                System.out.println("----------------------------------------------------------");
+                saveProfile(gpa1,major1,class1,college1, honors1);
+            }
+
+
         }
     }
 
@@ -440,9 +448,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 classType = dataJSON.getInt("class");
                 student_class.setSelection(classType-1 );
                 honors = dataJSON.getBoolean("honors");
-                if(honors == true){
-                    student_honors.setChecked(honors);
-                }
+                student_honors.setChecked(honors);
+                student_honors.setChecked(honors);
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
