@@ -13,7 +13,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/facultyProfileEditSave"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -24,37 +24,31 @@
                 android:onClick="updateProfile"
                 android:textColor="@android:color/white"/>
 
-            <EditText
-                android:id="@+id/editText15"
+            <TextView
+                android:id="@+id/facultyProfileFirstName"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/button3"
+                android:layout_below="@+id/facultyProfileEditSave"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp"
-                android:hint="@string/faculty_first_name"/>
+                android:textSize="24sp"/>
 
-            <EditText
-                android:id="@+id/editText16"
+            <TextView
+                android:id="@+id/facultyProfileLastName"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/editText15"
+                android:layout_below="@+id/facultyProfileFirstName"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_textbox_faded"
-                android:ems="10"
-                android:hint="@string/faculty_last_name"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp"/>
+                android:textSize="24sp"/>
 
             <EditText
-                android:id="@+id/editText17"
+                android:id="@+id/facultyProfileEmail"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/editText16"
+                android:layout_below="@+id/facultyProfileLastName"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_textbox_faded"
@@ -64,10 +58,10 @@
                 android:paddingHorizontal="10dp"/>
 
             <EditText
-                android:id="@+id/editText18"
+                android:id="@+id/facultyProfileField"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/editText17"
+                android:layout_below="@+id/facultyProfileEmail"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_textbox_faded"
@@ -77,10 +71,10 @@
                 android:paddingHorizontal="10dp"/>
 
             <EditText
-                android:id="@+id/editText19"
+                android:id="@+id/facultyProfileYears"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/editText18"
+                android:layout_below="@+id/facultyProfileField"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_textbox_faded"
@@ -90,10 +84,10 @@
                 android:paddingHorizontal="10dp"/>
 
             <EditText
-                android:id="@+id/editText21"
+                android:id="@+id/facultyProfileOffice"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
-                android:layout_below="@+id/editText19"
+                android:layout_below="@+id/facultyProfileYears"
                 android:layout_marginTop="12dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/rounded_textbox_faded"
@@ -103,13 +97,12 @@
                 android:paddingHorizontal="10dp"/>
 
             <Spinner
-                android:id="@+id/spinner4"
+                android:id="@+id/facultyProfileCollege"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/button3"
-                android:layout_alignStart="@+id/button3"
-                android:layout_below="@+id/editText21"
+                android:layout_below="@+id/facultyProfileOffice"
                 android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/rounded_textbox_faded"
                 android:entries="@array/faculty_colleges"/>
 

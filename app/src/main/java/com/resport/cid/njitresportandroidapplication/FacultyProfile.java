@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -43,8 +44,8 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
     String office = "";
     String fieldOfStudy = "";
     String experience = "";
-    static EditText faculty_fname;
-    static EditText faculty_lname;
+    static TextView faculty_fname;
+    static TextView faculty_lname;
     static EditText faculty_email;
     static EditText faculty_field;
     static EditText faculty_years;
@@ -67,24 +68,20 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        faculty_fname = (EditText) findViewById(R.id.editText15);
-        faculty_lname = (EditText) findViewById(R.id.editText16);
-        faculty_email = (EditText) findViewById(R.id.editText17);
-        faculty_field = (EditText) findViewById(R.id.editText18);
-        faculty_years = (EditText) findViewById(R.id.editText19);
-        faculty_office = (EditText) findViewById(R.id.editText21);
-        faculty_college = (Spinner) findViewById(R.id.spinner4);
+        faculty_fname = (TextView) findViewById(R.id.facultyProfileFirstName);
+        faculty_lname = (TextView) findViewById(R.id.facultyProfileLastName);
+        faculty_email = (EditText) findViewById(R.id.facultyProfileEmail);
+        faculty_field = (EditText) findViewById(R.id.facultyProfileField);
+        faculty_years = (EditText) findViewById(R.id.facultyProfileYears);
+        faculty_office = (EditText) findViewById(R.id.facultyProfileOffice);
+        faculty_college = (Spinner) findViewById(R.id.facultyProfileCollege);
 
-        faculty_fname.setEnabled(false);
-        faculty_lname.setEnabled(false);
         faculty_email.setEnabled(false);
         faculty_field.setEnabled(false);
         faculty_years.setEnabled(false);
         faculty_office.setEnabled(false);
         faculty_college.setEnabled(false);
 
-        faculty_fname.setSelection(faculty_fname.getText().length());
-        faculty_lname.setSelection(faculty_lname.getText().length());
         faculty_email.setSelection(faculty_email.getText().length());
         faculty_field.setSelection(faculty_field.getText().length());
         faculty_years.setSelection(faculty_years.getText().length());
@@ -104,15 +101,11 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             faculty_office.setEnabled(true);
             faculty_college.setEnabled(true);
 
-            faculty_fname.setSelection(faculty_fname.getText().length());
-            faculty_lname.setSelection(faculty_lname.getText().length());
             faculty_email.setSelection(faculty_email.getText().length());
             faculty_field.setSelection(faculty_field.getText().length());
             faculty_years.setSelection(faculty_years.getText().length());
             faculty_office.setSelection(faculty_office.getText().length());
 
-            faculty_fname.setBackgroundResource(R.drawable.rounded_textbox);
-            faculty_lname.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_email.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_field.setBackgroundResource(R.drawable.rounded_textbox);
             faculty_years.setBackgroundResource(R.drawable.rounded_textbox);
@@ -123,8 +116,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         else
         {
 
-            fname = faculty_fname.getText().toString();
-            lname = faculty_lname.getText().toString();
             email = faculty_email.getText().toString();
             fieldOfStudy = faculty_field.getText().toString();
             experience = faculty_years.getText().toString();
@@ -151,22 +142,18 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             }
             else {
                 editMode = false;
-                faculty_fname.setEnabled(false);
-                faculty_lname.setEnabled(false);
                 faculty_email.setEnabled(false);
                 faculty_field.setEnabled(false);
                 faculty_years.setEnabled(false);
                 faculty_office.setEnabled(false);
                 faculty_college.setEnabled(false);
 
-                faculty_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                faculty_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                saveProfile(fname, lname, email, fieldOfStudy, experience, office, college);
+                saveProfile(email, fieldOfStudy, experience, office, college);
                 loadProfile();
             }
 
@@ -174,12 +161,10 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         }
     }
 
-    public void saveProfile(String fname, String lname, String email, String fieldOfStudy, String experience, String office, int college)
+    public void saveProfile(String email, String fieldOfStudy, String experience, String office, int college)
     {
         String temp = readToken();
         RequestBody formBody = new FormBody.Builder()
-                .add("fname", fname)
-                .add("lname", lname)
                 .add("college", String.valueOf(college))
                 .add("email", email)
                 .add("experience", experience)
