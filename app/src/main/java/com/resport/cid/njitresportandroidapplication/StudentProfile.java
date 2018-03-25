@@ -2,6 +2,7 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -107,6 +108,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_gpa.setEnabled(false);
         student_class.setEnabled(false);
         student_college.setEnabled(false);
+        student_honors.setEnabled(false);
 
         //student_fname.setSelection(student_fname.getText().length());
         //student_lname.setSelection(student_lname.getText().length());
@@ -258,11 +260,16 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 honors1 = Boolean.toString(honors);
             }
             else
+            {
+                honors=false;
                 honors1 = Boolean.toString(honors);
+                System.out.print("---------===honors====---------"+ honors1 +"-----"+ honors);
+            }
 
-            if ( Float.parseFloat(gpa1) > 4.0 || Float.parseFloat(gpa1) < 0.0) {
+            if (!TextUtils.isEmpty(gpa1)&&( Float.parseFloat(gpa1) > 4.0 || Float.parseFloat(gpa1) < 0.0)) {
                 Toast.makeText(getApplicationContext(), "Please enter a valid GPA!", Toast.LENGTH_LONG).show();
             }
+
             else {
                 editMode = false;
                 //student_fname.setEnabled(false);
@@ -308,7 +315,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                     .build();
             Response response = null;
             response = client.newCall(request).execute();
-            //student_gpa.setText(response.toString());//just to see the output from api if successful
+            System.out.print("==================Response"+response);
         } catch (IOException exception) {
 
         }

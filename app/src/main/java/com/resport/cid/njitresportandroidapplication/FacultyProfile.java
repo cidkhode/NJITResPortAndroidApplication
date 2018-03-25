@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -153,6 +154,8 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+
+
                 saveProfile(email, fieldOfStudy, experience, office, college);
                 loadProfile();
             }

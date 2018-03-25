@@ -20,22 +20,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="95dp"
             android:background="@color/colorPrimary"
+            android:onClick="updateProfile"
             android:text="@string/edit_save"
-            android:textColor="@android:color/white"
-            android:onClick="updateProfile"/>
+            android:textColor="@android:color/white" />
 
-        <!--<EditText-->
-            <!--android:id="@+id/studentFirstName"-->
-            <!--android:layout_width="230dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_below="@+id/studentEditSave"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:background="@drawable/rounded_textbox_faded"-->
-            <!--android:ems="10"-->
-            <!--android:hint="@string/student_first_name"-->
-            <!--android:inputType="textPersonName"-->
-            <!--android:paddingHorizontal="10dp" />-->
         <TextView
             android:id="@+id/studentFirstName"
             android:layout_width="230dp"
@@ -45,9 +33,9 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/rounded_textbox_faded"
             android:ems="10"
-            android:textSize="24dp"
             android:hint="@string/student_first_name"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/studentLastName"
@@ -59,37 +47,9 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/rounded_textbox_faded"
             android:ems="10"
-            android:textSize="24dp"
             android:hint="@string/student_last_name"
-            android:paddingHorizontal="10dp" />
-
-    <!--<EditText-->
-            <!--android:id="@+id/studentLastName"-->
-            <!--android:layout_width="230dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_alignLeft="@+id/studentFirstName"-->
-            <!--android:layout_alignStart="@+id/studentFirstName"-->
-            <!--android:layout_below="@+id/studentFirstName"-->
-            <!--android:layout_marginTop="12dp"-->
-            <!--android:background="@drawable/rounded_textbox_faded"-->
-            <!--android:ems="10"-->
-            <!--android:hint="@string/student_last_name"-->
-            <!--android:inputType="textPersonName"-->
-            <!--android:paddingHorizontal="10dp" />-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/studentEmail"-->
-            <!--android:layout_width="230dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_alignLeft="@+id/studentLastName"-->
-            <!--android:layout_alignStart="@+id/studentLastName"-->
-            <!--android:layout_below="@+id/studentLastName"-->
-            <!--android:layout_marginTop="13dp"-->
-            <!--android:background="@drawable/rounded_textbox_faded"-->
-            <!--android:ems="10"-->
-            <!--android:hint="@string/student_email"-->
-            <!--android:inputType="textPersonName"-->
-            <!--android:paddingHorizontal="10dp" />-->
+            android:paddingHorizontal="10dp"
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/studentEmail"
@@ -101,9 +61,19 @@
             android:layout_marginTop="13dp"
             android:background="@drawable/rounded_textbox_faded"
             android:ems="10"
-            android:textSize="24dp"
             android:hint="@string/student_email"
-            android:paddingHorizontal="10dp" />
+            android:paddingHorizontal="10dp"
+            android:textSize="24dp" />
+
+        <Spinner
+            android:id="@+id/studentCollege"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/studentEmail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_textbox_faded"
+            android:entries="@array/student_colleges" />
 
         <Spinner
             android:id="@+id/spinner5"
@@ -111,11 +81,10 @@
             android:layout_height="40dp"
             android:layout_alignLeft="@+id/studentEmail"
             android:layout_alignStart="@+id/studentEmail"
-            android:layout_below="@+id/studentEmail"
+            android:layout_below="@+id/studentCollege"
             android:layout_marginTop="13dp"
             android:background="@drawable/rounded_textbox_faded"
             android:entries="@array/student_majors" />
-
 
 
         <EditText
@@ -129,7 +98,7 @@
             android:background="@drawable/rounded_textbox_faded"
             android:ems="10"
             android:hint="@string/student_gpa"
-            android:inputType="textPersonName"
+            android:inputType="numberDecimal"
             android:paddingHorizontal="10dp" />
 
         <CheckBox
@@ -150,25 +119,16 @@
             android:layout_alignLeft="@+id/studentSelectFile"
             android:layout_alignStart="@+id/studentSelectFile"
             android:layout_below="@+id/studentHonors"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="18dp"
             android:background="@drawable/rounded_textbox_faded"
             android:entries="@array/class_rankings" />
 
-        <Spinner
-            android:id="@+id/studentCollege"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/studentClassStanding"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/rounded_textbox_faded"
-            android:entries="@array/student_colleges" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/studentCollege"
+            android:layout_below="@+id/studentClassStanding"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
             app:srcCompat="@drawable/horizontal_line" />
@@ -196,7 +156,6 @@
             android:background="@color/colorPrimary"
             android:text="Select File... / Upload"
             android:textColor="@android:color/white" />
-
 
 
     </RelativeLayout>

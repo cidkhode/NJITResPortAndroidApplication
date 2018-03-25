@@ -68,6 +68,7 @@
                 android:ems="10"
                 android:hint="@string/faculty_field_of_expertise"
                 android:inputType="textPersonName"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:paddingHorizontal="10dp"/>
 
             <EditText
@@ -80,7 +81,7 @@
                 android:background="@drawable/rounded_textbox_faded"
                 android:ems="10"
                 android:hint="@string/faculty_years_at_njit"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:paddingHorizontal="10dp"/>
 
             <EditText
