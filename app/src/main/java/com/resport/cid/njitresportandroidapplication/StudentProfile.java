@@ -344,6 +344,8 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         if (id == R.id.stu_profile) {
             // Handle the camera action
         } else if (id == R.id.stu_browse) {
+            Intent intent = new Intent(StudentProfile.this, StudentOpportunitiesList.class);
+            startActivity(intent);
 
         } else if (id == R.id.stu_status) {
 
