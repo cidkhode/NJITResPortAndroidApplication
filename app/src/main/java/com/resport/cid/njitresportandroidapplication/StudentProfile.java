@@ -110,9 +110,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_college.setEnabled(false);
         student_honors.setEnabled(false);
 
-        //student_fname.setSelection(student_fname.getText().length());
-        //student_lname.setSelection(student_lname.getText().length());
-        //student_email.setSelection(student_email.getText().length());
         student_gpa.setSelection(student_gpa.getText().length());
         loadInfo();
 
@@ -213,23 +210,14 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     public void updateProfile(View view) {
         if(editMode == false) {
             editMode = true;
-            //student_fname.setEnabled(true);
-            //student_lname.setEnabled(true);
-            //student_email.setEnabled(true);
+
             student_major.setEnabled(true);
             student_gpa.setEnabled(true);
             student_class.setEnabled(true);
             student_college.setEnabled(true);
             student_honors.setEnabled(true);
-
-            //student_fname.setSelection(student_fname.getText().length());
-            //student_lname.setSelection(student_lname.getText().length());
-            //student_email.setSelection(student_email.getText().length());
             student_gpa.setSelection(student_gpa.getText().length());
 
-            //student_fname.setBackgroundResource(R.drawable.rounded_textbox);
-            //student_lname.setBackgroundResource(R.drawable.rounded_textbox);
-            //student_email.setBackgroundResource(R.drawable.rounded_textbox);
             student_major.setBackgroundResource(R.drawable.rounded_textbox);
             student_gpa.setBackgroundResource(R.drawable.rounded_textbox);
             student_class.setBackgroundResource(R.drawable.rounded_textbox);
@@ -272,24 +260,17 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
             else {
                 editMode = false;
-                //student_fname.setEnabled(false);
-                //student_lname.setEnabled(false);
-                //student_email.setEnabled(false);
                 student_major.setEnabled(false);
                 student_gpa.setEnabled(false);
                 student_class.setEnabled(false);
                 student_college.setEnabled(false);
                 student_honors.setEnabled(false);
-                //student_fname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                //student_lname.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                //student_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
+
                 student_major.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 student_class.setBackgroundResource(R.drawable.rounded_textbox_faded);
                 student_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                System.out.println("----------------------------------------------------------");
-                System.out.println(major1 + " " + college1);
-                System.out.println("----------------------------------------------------------");
+
                 saveProfile(gpa1,major1,class1,college1, honors1);
             }
 
@@ -315,7 +296,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                     .build();
             Response response = null;
             response = client.newCall(request).execute();
-            System.out.print("==================Response"+response);
         } catch (IOException exception) {
 
         }

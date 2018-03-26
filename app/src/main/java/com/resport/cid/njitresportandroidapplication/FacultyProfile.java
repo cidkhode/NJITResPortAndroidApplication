@@ -116,7 +116,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         }
         else
         {
-
             email = faculty_email.getText().toString();
             fieldOfStudy = faculty_field.getText().toString();
             experience = faculty_years.getText().toString();
@@ -126,11 +125,8 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             if (college == 0) {
                 Toast.makeText(getApplicationContext(), "Please select a college!", Toast.LENGTH_LONG).show();
             }
-            else if (fname.matches("")) {
-                Toast.makeText(getApplicationContext(), "Please enter a first name!", Toast.LENGTH_LONG).show();
-            }
-            else if (lname.matches("")) {
-                Toast.makeText(getApplicationContext(), "Please enter a last name!", Toast.LENGTH_LONG).show();
+            else if (email.matches("")) {
+                Toast.makeText(getApplicationContext(), "Please enter an email address!", Toast.LENGTH_LONG).show();
             }
             else if (fieldOfStudy.matches("")) {
                 Toast.makeText(getApplicationContext(), "Please enter a field of study!", Toast.LENGTH_LONG).show();
@@ -157,7 +153,7 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
 
 
                 saveProfile(email, fieldOfStudy, experience, office, college);
-                loadProfile();
+               // loadProfile();
             }
 
 
@@ -177,12 +173,11 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         try {
             Request request = new Request.Builder()
                     .url("https://web.njit.edu/~db329/resport/api/v1/user")
-                    .header("Authorization", "Bearer "+temp)
+                    .header("Authorization", "Bearer " + temp)
                     .post(formBody)
                     .build();
             Response response = null;
             response = client.newCall(request).execute();
-            //faculty_lname.setText(response.toString());//just to see the output from api if successful
         } catch (IOException exception) {
 
         }
