@@ -38,10 +38,27 @@ import okhttp3.Response;
 public class StudentOpportunitiesList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
-    static EditText studentOpportunitiesListFacultyUCIDEditText;
-    static EditText studentOpportunitiesListFacultyCollegeEditText;
+    EditText studentOpportunitiesListFacultyUCIDEditText;
+    EditText studentOpportunitiesListFacultyCollegeEditText;
     ArrayList<Opportunity> opps;
-
+    ArrayList<String> student_colleges = new ArrayList<String>();
+    ArrayList<String> student_categories = new ArrayList<String>();
+    JSONObject opp=null;
+    String id ="";
+    JSONObject info =null ;
+    String name ="";
+    String desc ="";
+    String position = "" ;
+    String category = "" ;
+    String categoryName ="";
+    String college= "" ;
+    String collegeName ="";
+    String limit= "" ;
+    String hours= "" ;
+    String minGPA = "" ;
+    JSONObject faculty= null ;
+    String facultyName= "" ;
+    String email="" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,28 +79,54 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        studentOpportunitiesListFacultyUCIDEditText = (EditText) findViewById(R.id.studentOpportunitiesListFacultyUCIDEditText);
-        loadOpportunities();
-
-
         opps = new ArrayList<>();
-        opps.add(new Opportunity("Research Opportunity in Machine Learning", "College of Computing Sciences","Research Assistant",
-                2, 3, "Machine Learning opportunity using R and big data technologies like Hadoop.","Prof. ML Profes", "abc123"));
 
-        opps.add(new Opportunity("Biological Study in Fish", "College of Science and Liberal Arts","Volunteer",
-                4, 5, "Studying fish and other animals.","Prof. Biol Dept", "defg"));
+        String responseData = loadOpportunities();
+        if(responseData != "Error")
+        {
+            JSONObject responseJSON = null;
+            try {
+                getIds();
+                responseJSON = new JSONObject(responseData);
+                String data;
+                data = responseJSON.getString("data");
+                JSONObject dataJSON = new JSONObject(data);
+                Integer number = dataJSON.getInt("num");
+                JSONArray opportunities = dataJSON.getJSONArray("opportunities");
+                for (int i = 0; i < opportunities.length(); i++) {
+                    opp = opportunities.getJSONObject(i);
+                    id = opp.getString("id");
+                    info = opp.getJSONObject("info");
+                    name = info.getString("name");
+                    desc = info.getString("desc");
+                    position = info.getString("position");
+                    category = info.getString("category");
+                    categoryName = student_categories.get(Integer.parseInt(category) -1);
+                    college = info.getString("college");
+                    collegeName = student_colleges.get(Integer.parseInt(college));
+                    limit = info.getString("limit");
+                    hours = info.getString("hours");
+                    minGPA = info.getString("minGPA");
+                    faculty = opp.getJSONObject("faculty");
+                    facultyName = faculty.getString("name");
+                    email = faculty.getString("email");
 
+                    opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, email, categoryName));
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();}
+        }
 
         OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
         listView.setAdapter(customAdapter);
-
-
 
     }
 
     public void viewOpp(View view)
     {
-
+        loadOpportunities();
     }
 
 
@@ -120,7 +163,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
     }
 
 
-    public void loadOpportunities()
+    public String loadOpportunities()
     {
         String temp = readToken();
         try {
@@ -129,12 +172,52 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     .header("Authorization", "Bearer " + temp)
                     .build();
             Response response = client.newCall(request).execute();
-            String temp1 = response.body().string();
-            studentOpportunitiesListFacultyUCIDEditText.setText(temp1);
-            parseInformation(temp1);
+            return response.body().string();
         } catch (IOException exception) {
-            //return "Error";
+            return "Error";
         }
+    }
+
+    public void getIds()
+    {
+        String result = "";
+        String temp = readToken();
+        try {
+            Request request = new Request.Builder()
+                    .url("https://web.njit.edu/~db329/resport/api/v1/info")
+                    .header("Authorization", "Bearer " + temp)
+                    .build();
+            Response response = client.newCall(request).execute();
+            result = response.body().string();
+
+            JSONObject responseJSON = null;
+            try {
+                responseJSON = new JSONObject(result);
+                String data;
+                if(responseJSON.length()==4)
+                {
+                    data = responseJSON.getString("data");
+                    JSONObject dataJSON = new JSONObject(data);
+                    JSONArray collegeInfo = dataJSON.getJSONArray("colleges");
+                    for(int i=0;i<collegeInfo.length();i++) {
+                        student_colleges.add(collegeInfo.getJSONObject(i).getString("college"));
+                    }
+
+                    JSONArray categoriesInfo = dataJSON.getJSONArray("categories");
+                    for(int i=0;i<categoriesInfo.length();i++) {
+                        student_categories.add(categoriesInfo.getJSONObject(i).getString("category"));
+                    }
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } catch (IOException e) {
+                result = "Error getting Ids";
+        }
+    }
+    public void parseInformation(String response)  {
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -158,22 +241,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -211,38 +278,4 @@ public class StudentOpportunitiesList extends AppCompatActivity
             e.printStackTrace();
         }
     }
-
-    public void parseInformation(String response)  {
-        JSONObject responseJSON = null;
-        try {
-            responseJSON = new JSONObject(response);
-            String data;
-            data = responseJSON.getString("data");
-            JSONObject dataJSON = new JSONObject(data);
-            Integer number = dataJSON.getInt("num");
-            JSONArray opportunities = dataJSON.getJSONArray("opportunities");
-            for (int i = 0; i < opportunities.length(); i++)
-            {
-                JSONObject opp = opportunities.getJSONObject(i);
-                String id = opp.getString("id");
-                JSONObject info = opp.getJSONObject("info");
-                    String name = info.getString("name");
-                    String desc = info.getString("desc");
-                    String position = info.getString("position");
-                    String category = info.getString("category");
-                    String college = info.getString("College");
-                    String limit = info.getString("limit");
-                    String hours = info.getString("hours");
-                    String minGPA = info.getString("minGPA");
-                JSONObject faculty = opp.getJSONObject("faculty");
-                    String facultyName = faculty.getString("name");
-                    String email = faculty.getString("email");
-            }
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

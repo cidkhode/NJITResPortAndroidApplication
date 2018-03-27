@@ -38,7 +38,13 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
         if (p != null) {
             TextView tt1 = (TextView) v.findViewById(R.id.opportunityTitle);
             TextView tt2 = (TextView) v.findViewById(R.id.opportunityDesc);
-            TextView tt3 = (TextView) v.findViewById(R.id.opportunityProf);
+            TextView tt3 = (TextView) v.findViewById(R.id.createOpportunityCategory);
+            TextView tt4 = (TextView) v.findViewById(R.id.createOpportunityOppCollege);
+            TextView tt5 = (TextView) v.findViewById(R.id.createOpportunityNumberOfStudents);
+            TextView tt6 = (TextView) v.findViewById(R.id.createOpportunityExpectedHoursPerWeek);
+            TextView tt7 = (TextView) v.findViewById(R.id.studentGPA);
+            TextView tt8 = (TextView) v.findViewById(R.id.opportunityProf);
+            TextView tt9 = (TextView) v.findViewById(R.id.facultyProfileEmail);
 
             if (tt1 != null) {
                 tt1.setText(p.getOppName());
@@ -49,7 +55,25 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
             }
 
             if (tt3 != null) {
-                tt3.setText(p.getOppCollege());
+                tt3.setText(p.getCategory());
+            }
+            if (tt4 != null) {
+                tt4.setText(p.getOppCollege());
+            }
+
+            if (tt5 != null) {
+                tt5.setText(p.getNumStudents());
+            }
+
+            if (tt6 != null) {
+                tt6.setText(p.getWeeklyHours());
+            }
+            if (tt8 != null) {
+                tt8.setText(p.getFacultyName());
+            }
+
+            if (tt9 != null) {
+                tt9.setText(p.getFacultyUCID());
             }
         }
 
