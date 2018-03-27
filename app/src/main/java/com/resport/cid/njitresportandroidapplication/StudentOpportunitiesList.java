@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -227,11 +228,15 @@ public class StudentOpportunitiesList extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.stu_profile) {
-            // Handle the camera action
+            Intent intent = new Intent(StudentOpportunitiesList.this, StudentProfile.class);
+            startActivity(intent);
         } else if (id == R.id.stu_browse) {
-
+            Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_status) {
-
+            Toast.makeText(StudentOpportunitiesList.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
             Intent intent = new Intent(StudentOpportunitiesList.this, ContactUsStudent.class);
             startActivity(intent);

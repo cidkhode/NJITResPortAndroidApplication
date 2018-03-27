@@ -342,13 +342,15 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         if (id == R.id.stu_profile) {
-            // Handle the camera action
+            Intent intent = new Intent(StudentProfile.this, StudentProfile.class);
+            startActivity(intent);
         } else if (id == R.id.stu_browse) {
             Intent intent = new Intent(StudentProfile.this, StudentOpportunitiesList.class);
             startActivity(intent);
-
         } else if (id == R.id.stu_status) {
-
+            Toast.makeText(StudentProfile.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentProfile.this, StudentProfile.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
             Intent intent = new Intent(StudentProfile.this, ContactUsStudent.class);
             startActivity(intent);

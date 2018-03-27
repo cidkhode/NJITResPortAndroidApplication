@@ -1,5 +1,6 @@
 package com.resport.cid.njitresportandroidapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class StudentApplicationsList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,18 +73,27 @@ public class StudentApplicationsList extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.stu_profile) {
+            Intent intent = new Intent(StudentApplicationsList.this, StudentProfile.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_browse) {
+            Intent intent = new Intent(StudentApplicationsList.this, StudentOpportunitiesList.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_status) {
+            Toast.makeText(StudentApplicationsList.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentApplicationsList.this, StudentApplicationsList.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_contact) {
+            Intent intent = new Intent(StudentApplicationsList.this, ContactUsStudent.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_logout) {
+            Toast.makeText(StudentApplicationsList.this,"Cannot resolve method clearToken() please debug thanks.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentApplicationsList.this, StudentProfile.class);
+            startActivity(intent);
+            //clearToken();
+            //Intent intent = new Intent(StudentApplicationsList.this, MainActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

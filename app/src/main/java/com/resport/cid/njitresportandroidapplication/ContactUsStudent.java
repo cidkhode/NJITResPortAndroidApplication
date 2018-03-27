@@ -13,6 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class ContactUsStudent extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -66,6 +71,19 @@ public class ContactUsStudent extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void clearToken() {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+        PrintWriter clearer = null;
+        try {
+            clearer = new PrintWriter(tokenFile);
+            clearer.write("");
+            clearer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -76,13 +94,19 @@ public class ContactUsStudent extends AppCompatActivity
             Intent intent = new Intent(ContactUsStudent.this, StudentProfile.class);
             startActivity(intent);
         } else if (id == R.id.stu_browse) {
-
+            Intent intent = new Intent(ContactUsStudent.this, StudentOpportunitiesList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_status) {
-
+            Toast.makeText(ContactUsStudent.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ContactUsStudent.this, ContactUsStudent.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
-
+            Intent intent = new Intent(ContactUsStudent.this, ContactUsStudent.class);
+            startActivity(intent);
         } else if (id == R.id.stu_logout) {
+            clearToken();
             Intent intent = new Intent(ContactUsStudent.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 
