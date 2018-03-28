@@ -30,6 +30,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+
 public class StudentOpportunitiesList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
@@ -234,17 +236,16 @@ public class StudentOpportunitiesList extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.stu_profile) {
-            Intent intent = new Intent(StudentOpportunitiesList.this, StudentProfile.class);
+            Intent intent = new Intent(StudentOpportunitiesList.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
             startActivity(intent);
         } else if (id == R.id.stu_browse) {
-            Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
-            startActivity(intent);
+
         } else if (id == R.id.stu_status) {
             Toast.makeText(StudentOpportunitiesList.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
-            startActivity(intent);
+            //Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
+            //startActivity(intent);
         } else if (id == R.id.stu_contact) {
-            Intent intent = new Intent(StudentOpportunitiesList.this, ContactUsStudent.class);
+            Intent intent = new Intent(StudentOpportunitiesList.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
             startActivity(intent);
         } else if (id == R.id.stu_logout) {
             clearToken();

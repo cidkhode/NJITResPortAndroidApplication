@@ -38,6 +38,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+
 public class StudentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     boolean editMode = false;
     OkHttpClient client = new OkHttpClient();
@@ -342,17 +344,15 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         if (id == R.id.stu_profile) {
-            Intent intent = new Intent(StudentProfile.this, StudentProfile.class);
-            startActivity(intent);
         } else if (id == R.id.stu_browse) {
-            Intent intent = new Intent(StudentProfile.this, StudentOpportunitiesList.class);
+            Intent intent = new Intent(StudentProfile.this, StudentOpportunitiesList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
             startActivity(intent);
         } else if (id == R.id.stu_status) {
             Toast.makeText(StudentProfile.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(StudentProfile.this, StudentProfile.class);
-            startActivity(intent);
+            //Intent intent = new Intent(StudentProfile.this, StudentProfile.class);
+            //startActivity(intent);
         } else if (id == R.id.stu_contact) {
-            Intent intent = new Intent(StudentProfile.this, ContactUsStudent.class);
+            Intent intent = new Intent(StudentProfile.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
             startActivity(intent);
         } else if (id == R.id.stu_logout) {
             clearToken();
