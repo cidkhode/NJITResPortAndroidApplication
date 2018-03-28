@@ -2,8 +2,6 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -28,12 +26,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
-import okhttp3.FormBody;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class StudentOpportunitiesList extends AppCompatActivity
@@ -78,7 +72,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        final ListView listView = (ListView) findViewById(R.id.listView);
 
         opps = new ArrayList<>();
 
@@ -122,6 +116,19 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
         OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
         listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Opportunity oppItem = (Opportunity) listView.getAdapter().getItem(i);
+
+                //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
+                startActivity(new Intent(StudentOpportunitiesList.this, StudentOpportunityView.class)
+                        .putExtra("Opportunity", "Name: " + oppItem.getOppName() + "\n\nCollege: " + oppItem.getOppCollege()
+                         + " \n\nNumber of Students: " + oppItem.getNumStudents() + " \n\nDescription: " + oppItem.getDescription()
+                        + " \n\nFaculty: " + oppItem.getFacultyName() + " \n\nFaculty UCID: " + oppItem.getFacultyUCID()));
+            }
+        });
 
     }
 
@@ -129,7 +136,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
     {
         loadOpportunities();
     }
-
 
     @Override
     public void onBackPressed() {
