@@ -12,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,7 +38,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     EditText studentOpportunitiesListFacultyUCIDEditText;
-    EditText studentOpportunitiesListFacultyCollegeEditText;
+    Spinner studentOpportunitiesListFacultyCollegeEditText;
     ArrayList<Opportunity> opps;
     ArrayList<String> student_colleges = new ArrayList<String>();
     ArrayList<String> student_categories = new ArrayList<String>();
@@ -57,6 +59,12 @@ public class StudentOpportunitiesList extends AppCompatActivity
     String facultyName= "" ;
     String email="" ;
     String facUCID = "";
+    JSONArray opportunities;
+    ListView listView;
+    String enteredFacUCID;
+    String enteredCollege;
+    ArrayAdapter<String> adapterColleges;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +83,12 @@ public class StudentOpportunitiesList extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
+        studentOpportunitiesListFacultyUCIDEditText = findViewById(R.id.studentOpportunitiesListFacultyUCIDEditText);
+        studentOpportunitiesListFacultyCollegeEditText = findViewById(R.id.studentOpportunitiesListFacultyCollegeEditText);
+        adapterColleges = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, student_colleges);
         opps = new ArrayList<>();
 
         String responseData = loadOpportunities();
@@ -90,7 +102,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 data = responseJSON.getString("data");
                 JSONObject dataJSON = new JSONObject(data);
                 Integer number = dataJSON.getInt("num");
-                JSONArray opportunities = dataJSON.getJSONArray("opportunities");
+                opportunities = dataJSON.getJSONArray("opportunities");
                 for (int i = 0; i < opportunities.length(); i++) {
                     opp = opportunities.getJSONObject(i);
                     id = opp.getString("id");
@@ -127,8 +139,8 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(StudentOpportunitiesList.this, StudentOpportunityView.class)
                         .putExtra("Opportunity", "Name: " + oppItem.getOppName() + "\n\nCollege: " + oppItem.getOppCollege()
-                         + " \n\nNumber of Students: " + oppItem.getNumStudents() + " \n\nDescription: " + oppItem.getDescription()
-                        + " \n\nFaculty: " + oppItem.getFacultyName() + " \n\nFaculty UCID: " + oppItem.getFacultyUCID()));
+                                + " \n\nNumber of Students: " + oppItem.getNumStudents() + " \n\nDescription: " + oppItem.getDescription()
+                                + " \n\nFaculty: " + oppItem.getFacultyName() + " \n\nFaculty UCID: " + oppItem.getFacultyUCID()));
             }
         });
 
@@ -139,6 +151,87 @@ public class StudentOpportunitiesList extends AppCompatActivity
         loadOpportunities();
     }
 
+    public void filter(View view) {
+        opps.removeAll(opps);
+
+        enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
+        enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeEditText.getSelectedItemId() - 1);
+
+        if (enteredFacUCID.equals("") && enteredCollege.equals("-1")) {
+            Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            try {
+                for (int i = 0; i < opportunities.length(); i++) {
+                    opp = opportunities.getJSONObject(i);
+                    id = opp.getString("id");
+                    info = opp.getJSONObject("info");
+                    name = info.getString("name");
+                    desc = info.getString("desc");
+                    position = info.getString("position");
+                    category = info.getString("category");
+                    categoryName = student_categories.get(Integer.parseInt(category) - 1);
+                    college = info.getString("college");
+                    collegeName = student_colleges.get(Integer.parseInt(college));
+                    limit = info.getString("limit");
+                    hours = info.getString("hours");
+                    minGPA = info.getString("minGPA");
+                    faculty = opp.getJSONObject("faculty");
+                    facultyName = faculty.getString("name");
+                    email = faculty.getString("email");
+                    facUCID = faculty.getString("ucid");
+
+                    if (enteredFacUCID.equals("") && !enteredCollege.equals("-1")) {
+                        if (college.equals(enteredCollege)) {
+                            opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                        }
+                    } else if (!enteredFacUCID.equals("") && enteredCollege.equals("-1")) {
+                        if (facUCID.equals(enteredFacUCID)) {
+                            opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                        }
+                    } else if (facUCID.equals(enteredFacUCID) && college.equals(enteredCollege)) {
+                        opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+            listView.setAdapter(customAdapter);
+        }
+
+    }
+
+    public void clear(View view) {
+        opps.removeAll(opps);
+        try{
+            for (int i = 0; i < opportunities.length(); i++) {
+                opp = opportunities.getJSONObject(i);
+                id = opp.getString("id");
+                info = opp.getJSONObject("info");
+                name = info.getString("name");
+                desc = info.getString("desc");
+                position = info.getString("position");
+                category = info.getString("category");
+                categoryName = student_categories.get(Integer.parseInt(category) -1);
+                college = info.getString("college");
+                collegeName = student_colleges.get(Integer.parseInt(college));
+                limit = info.getString("limit");
+                hours = info.getString("hours");
+                minGPA = info.getString("minGPA");
+                faculty = opp.getJSONObject("faculty");
+                facultyName = faculty.getString("name");
+                email = faculty.getString("email");
+                facUCID = faculty.getString("ucid");
+                opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+        listView.setAdapter(customAdapter);
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -223,7 +316,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
             }
 
         } catch (IOException e) {
-                result = "Error getting Ids";
+            result = "Error getting Ids";
         }
     }
     public void parseInformation(String response)  {
