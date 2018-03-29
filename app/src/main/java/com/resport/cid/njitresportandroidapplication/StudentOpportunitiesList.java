@@ -56,6 +56,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
     JSONObject faculty= null ;
     String facultyName= "" ;
     String email="" ;
+    String facUCID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +108,9 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     faculty = opp.getJSONObject("faculty");
                     facultyName = faculty.getString("name");
                     email = faculty.getString("email");
-
-                    opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, email, categoryName));
+                    facUCID = faculty.getString("ucid");
+                    opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                 }
-
 
             } catch (JSONException e) {
                 e.printStackTrace();}

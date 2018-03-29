@@ -13,9 +13,10 @@ public class Opportunity {
     String description;
     String facultyName;
     String facultyUCID;
+    String emailAddress;
     String category;
 
-    public Opportunity(String oppName, String oppCollege, String candidateTitle, int numStudents, int weeklyHours, String description, String facultyName, String facultyUCID, String category) {
+    public Opportunity(String oppName, String oppCollege, String candidateTitle, int numStudents, int weeklyHours, String description, String facultyName, String facultyUCID, String emailAddress, String category) {
         this.oppName = oppName;
         this.oppCollege = oppCollege;
         this.candidateTitle = candidateTitle;
@@ -24,6 +25,7 @@ public class Opportunity {
         this.description = description;
         this.facultyName = facultyName;
         this.facultyUCID = facultyUCID;
+        this.emailAddress = emailAddress;
         this.category = category;
     }
 
@@ -55,9 +57,9 @@ public class Opportunity {
         return facultyName;
     }
 
-    public String getFacultyUCID() {
-        return facultyUCID;
-    }
+    public String getEmailAddress() { return emailAddress; }
+
+    public String getFacultyUCID() { return facultyUCID; }
 
     public String getCategory() {
         return category;
@@ -89,10 +91,6 @@ public class Opportunity {
 
     public void setFacultyName(String facultyName) {
         this.facultyName = facultyName;
-    }
-
-    public void setFacultyUCID(String facultyUCID) {
-        this.facultyUCID = facultyUCID;
     }
 
     public void setCategory(String category) {
