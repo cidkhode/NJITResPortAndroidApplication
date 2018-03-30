@@ -111,7 +111,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     category = info.getString("category");
                     categoryName = student_categories.get(Integer.parseInt(category) -1);
                     college = info.getString("college");
-                    collegeName = student_colleges.get(Integer.parseInt(college));
+                    collegeName = student_colleges.get(Integer.parseInt(college)-1);
                     limit = info.getString("limit");
                     hours = info.getString("hours");
                     minGPA = info.getString("minGPA");
@@ -153,9 +153,9 @@ public class StudentOpportunitiesList extends AppCompatActivity
         opps.removeAll(opps);
 
         enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
-        enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeEditText.getSelectedItemId() - 1);
+        enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeEditText.getSelectedItemId());
 
-        if (enteredFacUCID.equals("") && enteredCollege.equals("-1")) {
+        if (enteredFacUCID.equals("") && enteredCollege.equals("0")) {
             Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
         }
         else {
@@ -171,7 +171,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     category = info.getString("category");
                     categoryName = student_categories.get(Integer.parseInt(category) - 1);
                     college = info.getString("college");
-                    collegeName = student_colleges.get(Integer.parseInt(college));
+                    collegeName = student_colleges.get(Integer.parseInt(college)-1);
                     limit = info.getString("limit");
                     hours = info.getString("hours");
                     minGPA = info.getString("minGPA");
@@ -180,11 +180,11 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     email = faculty.getString("email");
                     facUCID = faculty.getString("ucid");
 
-                    if (enteredFacUCID.equals("") && !enteredCollege.equals("-1")) {
+                    if (enteredFacUCID.equals("") && !enteredCollege.equals("0")) {
                         if (college.equals(enteredCollege)) {
                             opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                         }
-                    } else if (!enteredFacUCID.equals("") && enteredCollege.equals("-1")) {
+                    } else if (!enteredFacUCID.equals("") && enteredCollege.equals("0")) {
                         if (facUCID.equals(enteredFacUCID)) {
                             opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                         }
@@ -216,7 +216,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 category = info.getString("category");
                 categoryName = student_categories.get(Integer.parseInt(category) -1);
                 college = info.getString("college");
-                collegeName = student_colleges.get(Integer.parseInt(college));
+                collegeName = student_colleges.get(Integer.parseInt(college)-1);
                 limit = info.getString("limit");
                 hours = info.getString("hours");
                 minGPA = info.getString("minGPA");
