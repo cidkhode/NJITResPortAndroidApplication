@@ -119,7 +119,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     facultyName = faculty.getString("name");
                     email = faculty.getString("email");
                     facUCID = faculty.getString("ucid");
-                    opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                    opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                 }
 
             } catch (JSONException e) {
@@ -136,6 +136,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(StudentOpportunitiesList.this, StudentOpportunityView.class)
+                        .putExtra("oppId" , id)
                         .putExtra("Opportunity", "Name: " + oppItem.getOppName() + "\n\nCollege: " + oppItem.getOppCollege()
                                 + " \n\nNumber of Students: " + oppItem.getNumStudents() + " \n\nDescription: " + oppItem.getDescription()
                                 + " \n\nFaculty: " + oppItem.getFacultyName() + " \n\nFaculty UCID: " + oppItem.getFacultyUCID()));
@@ -182,14 +183,14 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
                     if (enteredFacUCID.equals("") && !enteredCollege.equals("0")) {
                         if (college.equals(enteredCollege)) {
-                            opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                            opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                         }
                     } else if (!enteredFacUCID.equals("") && enteredCollege.equals("0")) {
                         if (facUCID.equals(enteredFacUCID)) {
-                            opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                            opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                         }
                     } else if (facUCID.equals(enteredFacUCID) && college.equals(enteredCollege)) {
-                        opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                        opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
                     }
                 }
             } catch (JSONException e) {
@@ -224,7 +225,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 facultyName = faculty.getString("name");
                 email = faculty.getString("email");
                 facUCID = faculty.getString("ucid");
-                opps.add(new Opportunity(name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
             }
         } catch (JSONException e) {
             e.printStackTrace();

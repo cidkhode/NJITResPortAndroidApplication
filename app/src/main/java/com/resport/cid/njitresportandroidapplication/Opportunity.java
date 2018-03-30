@@ -5,6 +5,7 @@ package com.resport.cid.njitresportandroidapplication;
  */
 
 public class Opportunity {
+    String oppId;
     String oppName;
     String oppCollege;
     String candidateTitle;
@@ -16,7 +17,8 @@ public class Opportunity {
     String emailAddress;
     String category;
 
-    public Opportunity(String oppName, String oppCollege, String candidateTitle, int numStudents, int weeklyHours, String description, String facultyName, String facultyUCID, String emailAddress, String category) {
+    public Opportunity(String oppId, String oppName, String oppCollege, String candidateTitle, int numStudents, int weeklyHours, String description, String facultyName, String facultyUCID, String emailAddress, String category) {
+        this.oppId = oppId;
         this.oppName = oppName;
         this.oppCollege = oppCollege;
         this.candidateTitle = candidateTitle;
@@ -27,6 +29,10 @@ public class Opportunity {
         this.facultyUCID = facultyUCID;
         this.emailAddress = emailAddress;
         this.category = category;
+    }
+
+    public String getOppId() {
+        return oppId;
     }
 
     public String getOppName() {

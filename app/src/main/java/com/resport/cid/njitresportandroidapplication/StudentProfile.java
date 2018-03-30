@@ -141,7 +141,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                         idOfMajor = majorInfo.getJSONObject(i).getInt("college");
                         if(idOfMajor == idOfCollege)
                         {
-                            System.out.println("HELLO WORLD");
                             student_majors.add(majorInfo.getJSONObject(i).getString("major"));
                         }
                     }
