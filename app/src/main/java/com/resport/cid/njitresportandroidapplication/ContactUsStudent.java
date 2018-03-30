@@ -2,6 +2,7 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -88,13 +89,28 @@ public class ContactUsStudent extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if (id == R.id.stu_profile) {
-            Intent intent = new Intent(ContactUsStudent.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ContactUsStudent.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 230);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_browse) {
-            Intent intent = new Intent(ContactUsStudent.this, StudentOpportunitiesList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ContactUsStudent.this, StudentOpportunitiesList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_status) {
             Toast.makeText(ContactUsStudent.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
             //Intent intent = new Intent(ContactUsStudent.this, ContactUsStudent.class);
@@ -108,7 +124,6 @@ public class ContactUsStudent extends AppCompatActivity
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

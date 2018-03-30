@@ -2,6 +2,7 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -328,10 +329,17 @@ public class StudentOpportunitiesList extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.stu_profile) {
-            Intent intent = new Intent(StudentOpportunitiesList.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunitiesList.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_browse) {
 
         } else if (id == R.id.stu_status) {
@@ -339,15 +347,22 @@ public class StudentOpportunitiesList extends AppCompatActivity
             //Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
             //startActivity(intent);
         } else if (id == R.id.stu_contact) {
-            Intent intent = new Intent(StudentOpportunitiesList.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunitiesList.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 100);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_logout) {
             clearToken();
             Intent intent = new Intent(StudentOpportunitiesList.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
