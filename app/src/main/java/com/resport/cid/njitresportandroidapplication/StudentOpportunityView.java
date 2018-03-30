@@ -11,6 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class StudentOpportunityView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,22 +83,42 @@ public class StudentOpportunityView extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.stu_profile) {
+            Intent intent = new Intent(StudentOpportunityView.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+            startActivity(intent);
+        } else if (id == R.id.stu_browse) {
+            Intent intent = new Intent(StudentOpportunityView.this, StudentOpportunitiesList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.stu_status) {
+            Toast.makeText(StudentOpportunityView.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            //Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
+            //startActivity(intent);
+        } else if (id == R.id.stu_contact) {
+            Intent intent = new Intent(StudentOpportunityView.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+            startActivity(intent);
+        } else if (id == R.id.stu_logout) {
+            clearToken();
+            Intent intent = new Intent(StudentOpportunityView.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void clearToken() {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+        PrintWriter clearer = null;
+        try {
+            clearer = new PrintWriter(tokenFile);
+            clearer.write("");
+            clearer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

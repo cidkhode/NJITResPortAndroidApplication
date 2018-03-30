@@ -17,11 +17,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -205,6 +203,8 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
     public void clear(View view) {
         opps.removeAll(opps);
+        studentOpportunitiesListFacultyCollegeEditText.setSelection(0);
+        studentOpportunitiesListFacultyUCIDEditText.setText("");
         try{
             for (int i = 0; i < opportunities.length(); i++) {
                 opp = opportunities.getJSONObject(i);
