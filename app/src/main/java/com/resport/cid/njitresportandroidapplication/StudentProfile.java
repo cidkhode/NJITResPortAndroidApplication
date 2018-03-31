@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.CheckBox;
@@ -44,6 +45,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 public class StudentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     boolean editMode = false;
     OkHttpClient client = new OkHttpClient();
+    Button edit_save;
     String ucid = "";
     String fname = "";
     String lname = "";
@@ -94,6 +96,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        edit_save = (Button) findViewById(R.id.studentEditSave);
+
         student_fname = (TextView) findViewById(R.id.studentFirstName);
         student_lname = (TextView) findViewById(R.id.studentLastName);
         student_email = (TextView) findViewById(R.id.studentEmail);
@@ -211,6 +216,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     public void updateProfile(View view) {
         if(editMode == false) {
             editMode = true;
+            edit_save.setText("Save Profile");
 
             student_major.setEnabled(true);
             student_gpa.setEnabled(true);
@@ -261,6 +267,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
             else {
                 editMode = false;
+                edit_save.setText("Edit Profile");
                 student_major.setEnabled(false);
                 student_gpa.setEnabled(false);
                 student_class.setEnabled(false);
@@ -300,27 +307,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         } catch (IOException exception) {
 
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.student_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up mainLoginButton, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void clearToken() {

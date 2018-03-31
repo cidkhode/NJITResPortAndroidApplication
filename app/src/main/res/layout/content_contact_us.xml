@@ -46,7 +46,7 @@
                 android:layout_below="@+id/editText9"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/rounded_button"
                 android:text="@string/contactify"
                 android:textColor="@android:color/white" />
         </RelativeLayout>

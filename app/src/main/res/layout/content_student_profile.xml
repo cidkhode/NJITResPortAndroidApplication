@@ -19,7 +19,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="95dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/rounded_button"
             android:onClick="updateProfile"
             android:text="@string/edit_save"
             android:textColor="@android:color/white" />
@@ -159,7 +159,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="12dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/rounded_button"
             android:text="Select File... / Upload"
             android:textColor="@android:color/white" />
 

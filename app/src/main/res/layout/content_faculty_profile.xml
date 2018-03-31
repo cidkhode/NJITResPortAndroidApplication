@@ -19,7 +19,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="95dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/rounded_button"
                 android:text="@string/edit_save"
                 android:onClick="updateProfile"
                 android:textColor="@android:color/white"/>

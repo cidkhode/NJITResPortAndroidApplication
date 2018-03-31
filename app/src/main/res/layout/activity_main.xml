@@ -53,11 +53,11 @@
 
     <Button
         android:id="@+id/mainLoginButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="63dp"
         android:text="@string/login"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/rounded_button"
         android:textColor="@color/white"
         android:onClick="login"
         app:layout_constraintBottom_toBottomOf="parent"
