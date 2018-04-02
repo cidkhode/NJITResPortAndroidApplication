@@ -14,14 +14,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import okhttp3.OkHttpClient;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class StudentApplicationView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     Button contactFaculty;
     TextView appDetails;
+    TextView statusView;
     String appId;
+    String statusInt;
+    String status = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +50,27 @@ public class StudentApplicationView extends AppCompatActivity
 
         contactFaculty = (Button) findViewById(R.id.contactFaculty);
         appDetails = (TextView) findViewById(R.id.studentApplicationViewTextView);
+        statusView = (TextView) findViewById(R.id.applicationStatus);
         Intent intent = getIntent();
         String name = intent.getStringExtra("Application");
-        appId = intent.getStringExtra("oppId");
+        statusInt = intent.getStringExtra("status");
+        if(statusInt.equals("0"))
+        {
+            status = "Status:\nPending Review";
+            statusView.setTextColor(getResources().getColor(R.color.pending));
+        }
+        else if(statusInt.equals("1"))
+        {
+            status = "Status: Accepted!\nPlease contact faculty for more information!";
+            statusView.setTextColor(getResources().getColor(R.color.accepted));
+        }
+        else if(statusInt.equals("1"))
+        {
+            status = "Status: Denied\nSorry, the opportunity has filled up.";
+            statusView.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
+        statusView.setText(status);
+        appId = intent.getStringExtra("appId");
         appDetails.setText(name);
     }
 
@@ -63,23 +90,41 @@ public class StudentApplicationView extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.stu_profile) {
+            Intent intent = new Intent(StudentApplicationView.this, StudentProfile.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_browse) {
+            Intent intent = new Intent(StudentApplicationView.this, StudentOpportunitiesList.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_status) {
+            Intent intent = new Intent(StudentApplicationView.this, StudentApplicationsList.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_contact) {
+            Intent intent = new Intent(StudentApplicationView.this, ContactUsStudent.class);
+            startActivity(intent);
+        } else if (id == R.id.stu_logout) {
+            clearToken();
+            Intent intent = new Intent(StudentApplicationView.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void clearToken() {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+        PrintWriter clearer = null;
+        try {
+            clearer = new PrintWriter(tokenFile);
+            clearer.write("");
+            clearer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void contactFaculty(View view)

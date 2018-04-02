@@ -36,15 +36,9 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
         Application p = getItem(position);
 
         if (p != null) {
-            TextView tt1 = (TextView) v.findViewById(R.id.opportunityTitle);
-            TextView tt2 = (TextView) v.findViewById(R.id.opportunityDesc);
-            TextView tt3 = (TextView) v.findViewById(R.id.createOpportunityCategory);
-            TextView tt4 = (TextView) v.findViewById(R.id.createOpportunityOppCollege);
-            TextView tt5 = (TextView) v.findViewById(R.id.createOpportunityNumberOfStudents);
-            TextView tt6 = (TextView) v.findViewById(R.id.createOpportunityExpectedHoursPerWeek);
-            TextView tt7 = (TextView) v.findViewById(R.id.studentGPA);
-            TextView tt8 = (TextView) v.findViewById(R.id.opportunityProf);
-            TextView tt9 = (TextView) v.findViewById(R.id.facultyProfileEmail);
+            TextView tt1 = (TextView) v.findViewById(R.id.applied_opportunityTitle);
+            TextView tt2 = (TextView) v.findViewById(R.id.applied_opportunityDesc);
+            TextView tt3 = (TextView) v.findViewById(R.id.applied_opportunityProf);
 
             if (tt1 != null) {
                 tt1.setText(p.getName());
@@ -56,13 +50,6 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
 
             if (tt3 != null) {
                 tt3.setText(p.getCollege());
-            }
-            if (tt4 != null) {
-                tt4.setText(p.getFacultyName());
-            }
-
-            if (tt5 != null) {
-                tt5.setText(p.getEmail());
             }
         }
 

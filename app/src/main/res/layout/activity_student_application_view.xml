@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_student_application_view"
-        app:menu="@menu/activity_student_application_view_drawer" />
+        app:headerLayout="@layout/nav_header_student_profile"
+        app:menu="@menu/activity_student_profile_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

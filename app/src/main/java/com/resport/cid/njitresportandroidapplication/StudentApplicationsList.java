@@ -124,7 +124,8 @@ public class StudentApplicationsList extends AppCompatActivity
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(StudentApplicationsList.this, StudentApplicationView.class)
-                        .putExtra("oppId" , id)
+                        .putExtra("appId" , id)
+                        .putExtra("status", status.toString())
                         .putExtra("Application", "Name: " + appItem.getName() + "\n\nCollege: " + appItem.getCollege()
                                 + " \n\nDescription: " + appItem.getDescription()
                                 + " \n\nFaculty: " + appItem.getFacultyName() + " \n\nFaculty UCID: " + appItem.getUCID()));

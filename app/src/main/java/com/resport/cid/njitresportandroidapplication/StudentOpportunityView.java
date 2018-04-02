@@ -77,7 +77,7 @@ public class StudentOpportunityView extends AppCompatActivity
             Toast.makeText(StudentOpportunityView.this,"Applied! We hope you get it!", Toast.LENGTH_LONG).show();
             Response response = null;
             response = client.newCall(request).execute();
-            System.out.println("Showed interest! Good luck");
+            System.out.println("-------------------" + response.toString() + "--------------------");
         } catch (IOException exception) {
 
         }
@@ -105,10 +105,10 @@ public class StudentOpportunityView extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.stu_profile) {
-            Intent intent = new Intent(StudentOpportunityView.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+            Intent intent = new Intent(StudentOpportunityView.this, StudentProfile.class);
             startActivity(intent);
         } else if (id == R.id.stu_browse) {
-            Intent intent = new Intent(StudentOpportunityView.this, StudentOpportunitiesList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+            Intent intent = new Intent(StudentOpportunityView.this, StudentOpportunitiesList.class);
             startActivity(intent);
 
         } else if (id == R.id.stu_status) {
@@ -116,7 +116,7 @@ public class StudentOpportunityView extends AppCompatActivity
             Intent intent = new Intent(StudentOpportunityView.this, StudentApplicationsList.class);
             startActivity(intent);
         } else if (id == R.id.stu_contact) {
-            Intent intent = new Intent(StudentOpportunityView.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+            Intent intent = new Intent(StudentOpportunityView.this, ContactUsStudent.class);
             startActivity(intent);
         } else if (id == R.id.stu_logout) {
             clearToken();
