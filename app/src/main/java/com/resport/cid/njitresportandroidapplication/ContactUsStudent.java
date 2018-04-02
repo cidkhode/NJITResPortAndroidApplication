@@ -90,9 +90,9 @@ public class ContactUsStudent extends AppCompatActivity
             }, 250);
             drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_status) {
-            Toast.makeText(ContactUsStudent.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            //Intent intent = new Intent(ContactUsStudent.this, ContactUsStudent.class);
-            //startActivity(intent);
+            //Toast.makeText(ContactUsStudent.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ContactUsStudent.this, StudentApplicationsList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
 
         } else if (id == R.id.stu_logout) {

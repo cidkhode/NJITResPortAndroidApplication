@@ -1,5 +1,6 @@
 package com.resport.cid.njitresportandroidapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,9 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import okhttp3.OkHttpClient;
 
 public class StudentApplicationView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    OkHttpClient client = new OkHttpClient();
+    Button contactFaculty;
+    TextView appDetails;
+    String appId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,13 @@ public class StudentApplicationView extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        contactFaculty = (Button) findViewById(R.id.contactFaculty);
+        appDetails = (TextView) findViewById(R.id.studentApplicationViewTextView);
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("Application");
+        appId = intent.getStringExtra("oppId");
+        appDetails.setText(name);
     }
 
     @Override
@@ -63,5 +80,10 @@ public class StudentApplicationView extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void contactFaculty(View view)
+    {
+
     }
 }

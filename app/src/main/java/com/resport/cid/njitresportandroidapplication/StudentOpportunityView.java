@@ -112,9 +112,9 @@ public class StudentOpportunityView extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.stu_status) {
-            Toast.makeText(StudentOpportunityView.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            //Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
-            //startActivity(intent);
+            //Toast.makeText(StudentOpportunityView.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentOpportunityView.this, StudentApplicationsList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
             Intent intent = new Intent(StudentOpportunityView.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
             startActivity(intent);

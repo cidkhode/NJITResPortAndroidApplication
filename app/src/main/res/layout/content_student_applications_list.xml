@@ -27,54 +27,54 @@
             android:inputType="textPersonName"
             android:paddingHorizontal="10dp" />
 
-        <EditText
-            android:id="@+id/studentApplicationsListFacultyCollegeEditText"
+        <Spinner
+            android:id="@+id/studentApplicationListFacultyCollegeSpinner"
             android:layout_width="230dp"
             android:layout_height="40dp"
             android:layout_alignLeft="@+id/studentApplicationsListFacultyUCIDEditText"
             android:layout_alignStart="@+id/studentApplicationsListFacultyUCIDEditText"
             android:layout_below="@+id/studentApplicationsListFacultyUCIDEditText"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/rounded_textbox"
-            android:ems="10"
+            android:layout_marginTop="18dp"
             android:gravity="center"
-            android:hint="@string/student_last_name"
-            android:inputType="textPersonName"
-            android:paddingHorizontal="10dp" />
+            android:background="@drawable/rounded_textbox"
+            android:entries="@array/opportunity_colleges" />
 
         <Button
             android:id="@+id/studentApplicationListFilterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/studentApplicationsListFacultyCollegeEditText"
-            android:layout_alignStart="@+id/studentApplicationsListFacultyCollegeEditText"
-            android:layout_below="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_alignLeft="@+id/studentApplicationListFacultyCollegeSpinner"
+            android:layout_alignStart="@+id/studentApplicationListFacultyCollegeSpinner"
+            android:layout_below="@+id/studentApplicationListFacultyCollegeSpinner"
             android:text="FILTER"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/rounded_button"
             android:textColor="@color/white" />
 
         <Button
             android:id="@+id/studentApplicationListClearButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/studentApplicationsListFacultyCollegeEditText"
-            android:layout_alignRight="@+id/studentApplicationsListFacultyCollegeEditText"
-            android:layout_below="@+id/studentApplicationsListFacultyCollegeEditText"
+            android:layout_alignEnd="@+id/studentApplicationListFacultyCollegeSpinner"
+            android:layout_alignRight="@+id/studentApplicationListFacultyCollegeSpinner"
+            android:layout_below="@+id/studentApplicationListFacultyCollegeSpinner"
             android:text="CLEAR"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/rounded_button"
             android:textColor="@color/white" />
 
         <ListView
-            android:id="@+id/listView"
+            android:id="@+id/studentsListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/studentApplicationListClearButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:dividerHeight="10.0sp"
+            android:divider="@color/backgroundGray"
+            android:clickable="true" />
 
     </RelativeLayout>
 

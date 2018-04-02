@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +36,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     EditText studentOpportunitiesListFacultyUCIDEditText;
-    Spinner studentOpportunitiesListFacultyCollegeEditText;
+    Spinner studentOpportunitiesListFacultyCollegeSpinner;
     ArrayList<Opportunity> opps;
     ArrayList<String> student_colleges = new ArrayList<String>();
     ArrayList<String> student_categories = new ArrayList<String>();
@@ -85,13 +84,13 @@ public class StudentOpportunitiesList extends AppCompatActivity
         listView = (ListView) findViewById(R.id.listView);
 
         studentOpportunitiesListFacultyUCIDEditText = findViewById(R.id.studentOpportunitiesListFacultyUCIDEditText);
-        studentOpportunitiesListFacultyCollegeEditText = findViewById(R.id.studentOpportunitiesListFacultyCollegeEditText);
+        studentOpportunitiesListFacultyCollegeSpinner = findViewById(R.id.studentOpportunitiesListFacultyCollegeSpinner);
         adapterColleges = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, student_colleges);
         opps = new ArrayList<>();
 
         String responseData = loadOpportunities();
-        if(responseData != "Error")
+        if(!responseData.equals("Error"))
         {
             JSONObject responseJSON = null;
             try {
@@ -129,6 +128,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
         OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
         listView.setAdapter(customAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
@@ -146,16 +146,11 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
     }
 
-    public void viewOpp(View view)
-    {
-        loadOpportunities();
-    }
-
     public void filter(View view) {
         opps.removeAll(opps);
 
         enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
-        enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeEditText.getSelectedItemId());
+        enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeSpinner.getSelectedItemId());
 
         if (enteredFacUCID.equals("") && enteredCollege.equals("0")) {
             Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
@@ -205,7 +200,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
     public void clear(View view) {
         opps.removeAll(opps);
-        studentOpportunitiesListFacultyCollegeEditText.setSelection(0);
+        studentOpportunitiesListFacultyCollegeSpinner.setSelection(0);
         studentOpportunitiesListFacultyUCIDEditText.setText("");
         try{
             for (int i = 0; i < opportunities.length(); i++) {
@@ -298,8 +293,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
             result = "Error getting Ids";
         }
     }
-    public void parseInformation(String response)  {
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -320,9 +313,9 @@ public class StudentOpportunitiesList extends AppCompatActivity
         } else if (id == R.id.stu_browse) {
 
         } else if (id == R.id.stu_status) {
-            Toast.makeText(StudentOpportunitiesList.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            //Intent intent = new Intent(StudentOpportunitiesList.this, StudentOpportunitiesList.class);
-            //startActivity(intent);
+            //Toast.makeText(StudentOpportunitiesList.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentOpportunitiesList.this, StudentApplicationsList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
             new Handler().postDelayed(new Runnable() {
                 @Override

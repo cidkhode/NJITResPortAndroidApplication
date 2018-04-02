@@ -340,9 +340,9 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             }, 250);
             drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_status) {
-            Toast.makeText(StudentProfile.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            //Intent intent = new Intent(StudentProfile.this, StudentProfile.class);
-            //startActivity(intent);
+            //Toast.makeText(StudentProfile.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(StudentProfile.this, StudentApplicationsList.class);
+            startActivity(intent);
         } else if (id == R.id.stu_contact) {
             new Handler().postDelayed(new Runnable() {
                 @Override

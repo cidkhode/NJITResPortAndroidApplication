@@ -125,5 +125,6 @@
     <string name="title_activity_student_applications_list">StudentApplicationsList</string>
     <string name="title_activity_student_application_view">StudentApplicationView</string>
     <string name="show_interest">Show Interest</string>
+    <string name="contact_faculty">Contact Faculty</string>
 
 </resources>

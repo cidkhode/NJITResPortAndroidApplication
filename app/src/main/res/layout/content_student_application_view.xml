@@ -1,11 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.resport.cid.njitresportandroidapplication.StudentApplicationView"
-    tools:showIn="@layout/app_bar_student_application_view">
+    android:background="@color/backgroundGray"
+    android:fillViewport="true"
+    tools:context=".StudentApplicationView">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/studentApplicationViewTextView"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:textSize="20dp"
+            android:text="Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx"
+            android:textColor="@color/black"
+            android:paddingHorizontal="10dp" />
+
+        <TextView
+            android:id="@+id/applicationStatus"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/studentApplicationViewTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Status: "
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/contactFaculty"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/applicationStatus"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:onClick="contactFaculty"
+            android:text="@string/contact_faculty"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</ScrollView>
