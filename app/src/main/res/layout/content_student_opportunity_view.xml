@@ -34,6 +34,7 @@
             android:layout_below="@+id/studentOpportunityViewTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:onClick="showInterest"
             android:background="@drawable/rounded_button"
             android:gravity="center"

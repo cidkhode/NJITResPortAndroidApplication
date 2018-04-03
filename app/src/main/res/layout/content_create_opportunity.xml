@@ -111,7 +111,12 @@
             android:ems="10"
             android:gravity="top"
             android:hint="@string/details_requirements"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:isScrollContainer="true"
+            android:focusable="true"
+            android:enabled="true"
+            android:minLines="6"
+            android:maxLines="6"
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp" />
 
@@ -120,6 +125,7 @@
             android:layout_width="150dp"
             android:layout_height="54dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
             android:onClick="createOpp"
             android:layout_below="@+id/createOpportunityDescription"
             android:layout_marginTop="20dp"

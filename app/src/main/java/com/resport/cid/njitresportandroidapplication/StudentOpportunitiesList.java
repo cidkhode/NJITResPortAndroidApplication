@@ -137,13 +137,12 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(StudentOpportunitiesList.this, StudentOpportunityView.class)
-                        .putExtra("oppId" , id)
+                        .putExtra("oppId" , oppItem.getOppId())
                         .putExtra("Opportunity", "Name: " + oppItem.getOppName() + "\n\nCollege: " + oppItem.getOppCollege()
                                 + " \n\nNumber of Students: " + oppItem.getNumStudents() + " \n\nDescription: " + oppItem.getDescription()
                                 + " \n\nFaculty: " + oppItem.getFacultyName() + " \n\nFaculty UCID: " + oppItem.getFacultyUCID()));
             }
         });
-
     }
 
     public void filter(View view) {
