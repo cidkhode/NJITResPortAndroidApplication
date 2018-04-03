@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -74,12 +77,16 @@ public class StudentOpportunityView extends AppCompatActivity
                     .header("Authorization", "Bearer " + temp)
                     .post(formBody)
                     .build();
-            Toast.makeText(StudentOpportunityView.this,"Applied! We hope you get it!", Toast.LENGTH_LONG).show();
             Response response = null;
             response = client.newCall(request).execute();
-            System.out.println("-------------------" + response.toString() + "--------------------");
+            JSONObject responseBody = new JSONObject(response.body().string());
+            String message = responseBody.getString("msg");
+            Toast.makeText(StudentOpportunityView.this, message, Toast.LENGTH_LONG).show();
+
         } catch (IOException exception) {
 
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
     
