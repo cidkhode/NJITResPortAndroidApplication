@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/viewApplicant"
+            android:id="@+id/createOpportunityName"
             android:layout_width="230dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
@@ -29,7 +29,7 @@
             android:id="@+id/createOpportunityOppCollege"
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/viewApplicant"
+            android:layout_below="@+id/createOpportunityName"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"
@@ -75,11 +75,24 @@
             android:inputType="number"
             android:paddingHorizontal="10dp" />
 
+        <EditText
+            android:id="@+id/createOpportunityMinGPA"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/createOpportunityExpectedHoursPerWeek"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_textbox"
+            android:ems="10"
+            android:hint="Minimum GPA required"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="10dp" />
+
         <Spinner
             android:id="@+id/createOpportunityCategory"
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/createOpportunityExpectedHoursPerWeek"
+            android:layout_below="@+id/createOpportunityMinGPA"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_textbox"
@@ -88,24 +101,26 @@
 
         <EditText
             android:id="@+id/createOpportunityDescription"
+            android:layout_marginTop="60dp"
             android:layout_width="230dp"
             android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/createOpportunityExpectedHoursPerWeek"
-            android:layout_marginTop="20dp"
+            android:layout_alignLeft="@+id/createOpportunityCategory"
+            android:layout_alignStart="@+id/createOpportunityCategory"
+            android:layout_alignTop="@+id/createOpportunityCategory"
             android:background="@drawable/rounded_textbox"
             android:ems="10"
+            android:gravity="top"
             android:hint="@string/details_requirements"
-            android:inputType="number"
+            android:inputType="textPersonName"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="10dp"
-            android:gravity="top"/>
+            android:paddingVertical="10dp" />
 
         <Button
             android:id="@+id/createOpportunitySubmitButton"
             android:layout_width="150dp"
             android:layout_height="54dp"
             android:layout_centerHorizontal="true"
+            android:onClick="createOpp"
             android:layout_below="@+id/createOpportunityDescription"
             android:layout_marginTop="20dp"
             android:text="@string/create"
