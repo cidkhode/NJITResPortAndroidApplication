@@ -55,7 +55,8 @@ public class StudentApplicationsList extends AppCompatActivity
     String college = "";
     String facUCID = "";
     String status = "";
-
+    String enteredFacUCID = "";
+    String enteredCollege = "";
     String collegeName = "";
 
     @Override
@@ -134,6 +135,77 @@ public class StudentApplicationsList extends AppCompatActivity
 
     }
 
+    public void filter(View view) {
+        applied_opps.removeAll(applied_opps);
+
+        enteredFacUCID = studentApplicationsListFacultyUCIDEditText.getText().toString();
+        enteredCollege = Long.toString(studentApplicationListFacultyCollegeSpinner.getSelectedItemId());
+
+        if (enteredFacUCID.equals("") && enteredCollege.equals("0")) {
+            Toast.makeText(StudentApplicationsList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            try {
+                for (int i = 0; i < applications.length(); i++) {
+                    app = applications.getJSONObject(i);
+                    id = app.getString("id");
+                    name = app.getString("name");
+                    description = app.getString("description");
+                    position = app.getString("position");
+                    facultyName = app.getString("name");
+                    email = app.getString("email");
+                    timestamp = app.getString("timestamp");
+                    status = app.getString("status");
+                    college = app.getString("college");
+                    facUCID = app.getString("facultyUCID");
+                    collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
+
+                    if (enteredFacUCID.equals("") && !enteredCollege.equals("0")) {
+                        if (college.equals(enteredCollege)) {
+                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                        }
+                    } else if (!enteredFacUCID.equals("") && enteredCollege.equals("0")) {
+                        if (facUCID.equals(enteredFacUCID)) {
+                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                        }
+                    } else if (facUCID.equals(enteredFacUCID) && college.equals(enteredCollege)) {
+                        applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
+            studentsListView.setAdapter(customAdapter);
+        }
+    }
+
+    public void clear(View view) {
+        applied_opps.removeAll(applied_opps);
+        studentApplicationListFacultyCollegeSpinner.setSelection(0);
+        studentApplicationsListFacultyUCIDEditText.setText("");
+        try{
+            for (int i = 0; i < applications.length(); i++) {
+                app = applications.getJSONObject(i);
+                id = app.getString("id");
+                name = app.getString("name");
+                description = app.getString("description");
+                position = app.getString("position");
+                facultyName = app.getString("name");
+                email = app.getString("email");
+                timestamp = app.getString("timestamp");
+                status = app.getString("status");
+                college = app.getString("college");
+                facUCID = app.getString("facultyUCID");
+                collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
+                applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
+        studentsListView.setAdapter(customAdapter);
+    }
 
     public String loadAppliedOpportunities()
     {

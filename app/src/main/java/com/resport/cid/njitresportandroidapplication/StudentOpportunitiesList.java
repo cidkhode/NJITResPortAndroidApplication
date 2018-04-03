@@ -228,6 +228,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
         OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
         listView.setAdapter(customAdapter);
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
