@@ -9,6 +9,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="name">Name</string>
+    <string name="email">Email</string>
     <string name="edit_save">Edit Profile</string>
     <string name="title_activity_faculty_profile">Faculty Profile</string>
     <string name="faculty_last_name">Faculty Last Name</string>
@@ -16,12 +17,18 @@
     <string name="faculty_field_of_expertise">Faculty Field of Expertise</string>
     <string name="faculty_first_name">Faculty First Name</string>
     <string name="faculty_years_at_njit">Faculty Years at NJIT</string>
+    <string name="student_name">Student Name</string>
     <string name="student_first_name">Student First Name</string>
     <string name="student_last_name">Student Last Name</string>
     <string name="student_id">Student ID</string>
     <string name="student_email">Student Email</string>
     <string name="student_major">Student Major</string>
     <string name="student_gpa">Student GPA</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="gpa">GPA</string>
+    <string name="class_standing_text">Class Standing</string>
+    <string name="select_upload_fire">Select File... / Upload</string>
 
     <string-array name="class_rankings">
         <item>Select Class Standing...</item>
@@ -128,5 +135,9 @@
     <string name="contact_faculty">Contact Faculty</string>
     <string name="enter_your_password">Enter Your Password</string>
     <string name="enter_your_ucid">Enter Your UCID</string>
+    <string name="college">College</string>
+    <string name="major">Major</string>
+    <string name="honors">Honors</string>
+    <string name="click_to_upload_resume">Click To Upload Resume</string>
 
 </resources>

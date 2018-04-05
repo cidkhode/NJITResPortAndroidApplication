@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,7 +33,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import okhttp3.FormBody;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -67,8 +65,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     ArrayList<String> student_majors = new ArrayList<String>();
     ArrayList<String> student_classes = new ArrayList<String>();
 
-    static TextView student_fname;
-    static TextView student_lname;
+    static TextView student_name;
     static TextView student_email;
     static Spinner student_major;
     static EditText student_gpa;
@@ -99,8 +96,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
         edit_save = (Button) findViewById(R.id.studentEditSave);
 
-        student_fname = (TextView) findViewById(R.id.studentFirstName);
-        student_lname = (TextView) findViewById(R.id.studentLastName);
+        student_name = (TextView) findViewById(R.id.studentName);
         student_email = (TextView) findViewById(R.id.studentEmail);
         student_major = (Spinner) findViewById(R.id.spinner5);
         student_gpa = (EditText) findViewById(R.id.studentGPA);
@@ -108,8 +104,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         student_college = (Spinner) findViewById(R.id.studentCollege);
         student_honors = (CheckBox) findViewById(R.id.studentHonors);
 
-        student_fname.setEnabled(false);
-        student_lname.setEnabled(false);
+        student_name.setEnabled(false);
         student_email.setEnabled(false);
         student_major.setEnabled(false);
         student_gpa.setEnabled(false);
@@ -410,9 +405,8 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 JSONObject dataJSON = new JSONObject(data);
                 ucid = dataJSON.getString("ucid");
                 fname = dataJSON.getString("fname");
-                student_fname.setText(fname);
                 lname = dataJSON.getString("lname");
-                student_lname.setText(lname);
+                student_name.setText(fname + " " + lname);
                 student_email.setText(ucid+"@njit.edu");
                 college = dataJSON.getInt("college");
                 student_college.setSelection(college-2);

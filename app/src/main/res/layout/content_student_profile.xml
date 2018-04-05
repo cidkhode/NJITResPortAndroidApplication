@@ -25,144 +25,197 @@
             android:textColor="@android:color/white" />
 
         <TextView
-            android:id="@+id/studentFirstName"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
+            android:id="@+id/student_firstname_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/studentEditSave"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="@string/student_first_name"
-            android:paddingHorizontal="10dp"
-            android:textAlignment="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/name"
             android:textColor="@color/black"
-            android:textSize="24dp"
-            android:visibility="visible" />
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/studentLastName"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/studentFirstName"
-            android:layout_alignStart="@+id/studentFirstName"
-            android:layout_below="@+id/studentFirstName"
-            android:layout_marginTop="12dp"
+            android:id="@+id/studentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/student_firstname_text"
+            android:layout_alignStart="@+id/student_firstname_text"
+            android:layout_below="@+id/student_firstname_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
             android:ems="10"
-            android:hint="@string/student_last_name"
-            android:paddingHorizontal="10dp"
-            android:textAlignment="center"
+            android:hint="@string/student_name"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/student_email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/studentName"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/email"
             android:textColor="@color/black"
-            android:textSize="24dp"
-            android:visibility="visible" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/studentEmail"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/studentLastName"
-            android:layout_alignStart="@+id/studentLastName"
-            android:layout_below="@+id/studentLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/student_email_text"
+            android:layout_alignStart="@+id/student_email_text"
+            android:layout_below="@+id/student_email_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
             android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
             android:ems="10"
             android:hint="@string/student_email"
-            android:paddingHorizontal="10dp"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:visibility="visible" />
+            android:padding="10dp"
+            android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/studentCollege"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/studentEmail"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/rounded_textbox_faded_shadows"
-            android:entries="@array/student_colleges" />
-
-        <Spinner
-            android:id="@+id/spinner5"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
+        <TextView
+            android:id="@+id/student_gpa_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/studentEmail"
             android:layout_alignStart="@+id/studentEmail"
-            android:layout_below="@+id/studentCollege"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/rounded_textbox_faded_shadows"
-            android:entries="@array/student_majors" />
-
+            android:layout_below="@+id/studentEmail"
+            android:text="@string/gpa"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/studentGPA"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/spinner5"
-            android:layout_alignStart="@+id/spinner5"
-            android:layout_below="@+id/spinner5"
-            android:layout_marginTop="11dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
+            android:padding="10dp"
+            android:layout_alignLeft="@+id/student_gpa_text"
+            android:layout_alignStart="@+id/student_gpa_text"
+            android:layout_below="@+id/student_gpa_text"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="13dp"
             android:ems="10"
-            android:hint="@string/student_gpa"
             android:inputType="numberDecimal"
-            android:paddingHorizontal="10dp" />
+            android:hint="@string/student_gpa" />
 
-        <CheckBox
-            android:id="@+id/studentHonors"
+        <TextView
+            android:id="@+id/student_class_standing_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/studentGPA"
             android:layout_alignStart="@+id/studentGPA"
             android:layout_below="@+id/studentGPA"
-            android:layout_marginTop="17dp"
-            android:text="Honors" />
-
+            android:text="@string/class_standing_text"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <Spinner
             android:id="@+id/studentClassStanding"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/studentSelectFile"
-            android:layout_alignStart="@+id/studentSelectFile"
-            android:layout_below="@+id/studentHonors"
-            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:background="@drawable/rounded_textbox_faded_shadows"
+            android:layout_alignLeft="@+id/student_class_standing_text"
+            android:layout_alignStart="@+id/student_class_standing_text"
+            android:layout_below="@+id/student_class_standing_text"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
             android:entries="@array/class_rankings" />
 
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="300dp"
+        <TextView
+            android:id="@+id/student_college_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/studentClassStanding"
+            android:layout_alignStart="@+id/studentClassStanding"
             android:layout_below="@+id/studentClassStanding"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            app:srcCompat="@drawable/horizontal_line" />
+            android:text="@string/college"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/studentCollege"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:layout_alignLeft="@+id/student_college_text"
+            android:layout_alignStart="@+id/student_college_text"
+            android:layout_below="@+id/student_college_text"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:entries="@array/student_colleges" />
+
+        <TextView
+            android:id="@+id/student_major_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/studentCollege"
+            android:layout_alignStart="@+id/studentCollege"
+            android:layout_below="@+id/studentCollege"
+            android:text="@string/major"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/spinner5"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:layout_alignLeft="@+id/student_major_text"
+            android:layout_alignStart="@+id/student_major_text"
+            android:layout_below="@+id/student_major_text"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:entries="@array/student_majors" />
+
+        <CheckBox
+            android:id="@+id/studentHonors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/spinner5"
+            android:layout_alignStart="@+id/spinner5"
+            android:layout_below="@+id/spinner5"
+            android:layout_marginBottom="13dp"
+            android:text="@string/honors" />
 
         <TextView
             android:id="@+id/studentUploadResume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="19dp"
-            android:text="Click To Upload Resume"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:layout_alignLeft="@+id/studentHonors"
+            android:layout_alignStart="@+id/studentHonors"
+            android:layout_below="@+id/studentHonors"
+            android:layout_marginBottom="13dp"
+            android:text="@string/click_to_upload_resume"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/studentSelectFile"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/studentUploadResume"
+            android:layout_alignStart="@+id/studentUploadResume"
             android:layout_below="@+id/studentUploadResume"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/rounded_button"
-            android:text="Select File... / Upload"
-            android:textColor="@android:color/white" />
-
+            android:layout_marginRight="25dp"
+            android:background="@drawable/rounded_corner_button"
+            android:text="@string/select_upload_fire"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
