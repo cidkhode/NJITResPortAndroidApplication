@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        ucidLogin = (EditText) findViewById(R.id.editText);
+        ucidLogin = (EditText) findViewById(R.id.ucid_login);
         passwordLogin = (EditText) findViewById(R.id.editText2);
 
         if (readToken().equals("ERROR!") || readToken().equals("")) {
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-    void login(View view){
+    public void login(View view){
         MainActivity example = new MainActivity();
         String user = ucidLogin.getText().toString();
         String pass = passwordLogin.getText().toString();

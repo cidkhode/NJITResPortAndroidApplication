@@ -1,68 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGray"
-    tools:context="com.resport.cid.njitresportandroidapplication.MainActivity">
+    android:background="@color/white"
+    android:fillViewport="true"
+    tools:context="com.resport.cid.njitresportandroidapplication.MainActivity" >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login_image" android:contentDescription="@string/todo" />
+    <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="230dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="44dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginStart="61dp"
-        android:background="@drawable/rounded_textbox"
-        android:ems="10"
-        android:hint="@string/ucid"
-        android:inputType="textPersonName"
-        android:paddingHorizontal="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="170dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            app:srcCompat="@drawable/resport_logo" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="230dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginStart="61dp"
-        android:background="@drawable/rounded_textbox"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:paddingHorizontal="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/mainLoginButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="34dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="UCID" />
 
-    <Button
-        android:id="@+id/mainLoginButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="63dp"
-        android:text="@string/login"
-        android:background="@drawable/rounded_button"
-        android:textColor="@color/white"
-        android:onClick="login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        <EditText
+            android:id="@+id/ucid_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageView"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_textbox_shadows"
+            android:ems="10"
+            android:hint="Enter Your UCID"
+            android:inputType="text"
+            android:padding="10dp" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/password_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ucid_login"
+            android:layout_alignStart="@+id/ucid_login"
+            android:layout_below="@+id/ucid_login"
+            android:layout_marginTop="23dp"
+            android:text="Password"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/ucid_login"
+            android:layout_alignLeft="@+id/password_login"
+            android:layout_alignRight="@+id/ucid_login"
+            android:layout_alignStart="@+id/password_login"
+            android:layout_below="@+id/password_login"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_textbox_shadows"
+            android:ems="10"
+            android:hint="Enter Your Password"
+            android:inputType="textPassword"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/mainLoginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editText2"
+            android:layout_alignLeft="@+id/editText2"
+            android:layout_alignRight="@+id/editText2"
+            android:layout_alignStart="@+id/editText2"
+            android:layout_below="@+id/editText2"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_button"
+            android:text="@string/login"
+            android:onClick="login"/>
+
+    </android.widget.RelativeLayout>
+</ScrollView>
