@@ -109,11 +109,11 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             faculty_years.setSelection(faculty_years.getText().length());
             faculty_office.setSelection(faculty_office.getText().length());
 
-            faculty_email.setBackgroundResource(R.drawable.rounded_textbox);
-            faculty_field.setBackgroundResource(R.drawable.rounded_textbox);
-            faculty_years.setBackgroundResource(R.drawable.rounded_textbox);
-            faculty_office.setBackgroundResource(R.drawable.rounded_textbox);
-            faculty_college.setBackgroundResource(R.drawable.rounded_textbox);
+            faculty_email.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            faculty_field.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            faculty_years.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            faculty_office.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            faculty_college.setBackgroundResource(R.drawable.rounded_textbox_shadows);
 
         }
         else
@@ -148,11 +148,11 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 faculty_office.setEnabled(false);
                 faculty_college.setEnabled(false);
 
-                faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                faculty_email.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                faculty_field.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                faculty_years.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                faculty_office.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                faculty_college.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
 
 
                 saveProfile(email, fieldOfStudy, experience, office, college);

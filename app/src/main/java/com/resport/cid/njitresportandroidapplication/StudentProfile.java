@@ -225,10 +225,10 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             student_honors.setEnabled(true);
             student_gpa.setSelection(student_gpa.getText().length());
 
-            student_major.setBackgroundResource(R.drawable.rounded_textbox);
-            student_gpa.setBackgroundResource(R.drawable.rounded_textbox);
-            student_class.setBackgroundResource(R.drawable.rounded_textbox);
-            student_college.setBackgroundResource(R.drawable.rounded_textbox);
+            student_major.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            student_gpa.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            student_class.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            student_college.setBackgroundResource(R.drawable.rounded_textbox_shadows);
         }
 
         else
@@ -274,10 +274,10 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
                 student_college.setEnabled(false);
                 student_honors.setEnabled(false);
 
-                student_major.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                student_class.setBackgroundResource(R.drawable.rounded_textbox_faded);
-                student_college.setBackgroundResource(R.drawable.rounded_textbox_faded);
+                student_major.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                student_gpa.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                student_class.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                student_college.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
 
                 saveProfile(gpa1,major1,class1,college1, honors1);
             }

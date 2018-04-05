@@ -29,10 +29,9 @@
             android:layout_alignStart="@+id/imageView"
             android:layout_below="@+id/imageView"
             android:layout_marginTop="34dp"
-            android:text="TextView"
             android:textColor="@color/black"
             android:textSize="18sp"
-            tools:text="UCID" />
+            android:text="@string/ucid" />
 
         <EditText
             android:id="@+id/ucid_login"
@@ -46,7 +45,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/rounded_textbox_shadows"
             android:ems="10"
-            android:hint="Enter Your UCID"
+            android:hint="@string/enter_your_ucid"
             android:inputType="text"
             android:padding="10dp" />
 
@@ -58,7 +57,7 @@
             android:layout_alignStart="@+id/ucid_login"
             android:layout_below="@+id/ucid_login"
             android:layout_marginTop="23dp"
-            android:text="Password"
+            android:text="@string/password"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -75,7 +74,7 @@
             android:layout_marginBottom="12dp"
             android:background="@drawable/rounded_textbox_shadows"
             android:ems="10"
-            android:hint="Enter Your Password"
+            android:hint="@string/enter_your_password"
             android:inputType="textPassword"
             android:padding="10dp" />
 

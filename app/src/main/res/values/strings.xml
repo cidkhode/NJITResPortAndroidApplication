@@ -126,5 +126,7 @@
     <string name="title_activity_student_application_view">Viewing Application Details</string>
     <string name="show_interest">Show Interest</string>
     <string name="contact_faculty">Contact Faculty</string>
+    <string name="enter_your_password">Enter Your Password</string>
+    <string name="enter_your_ucid">Enter Your UCID</string>
 
 </resources>

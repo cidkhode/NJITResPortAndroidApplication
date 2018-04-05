@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundGray"
+        android:background="@color/backgroundWhite"
         android:fillViewport="true"
         tools:context=".ContactUs">
 
@@ -31,7 +31,7 @@
                 android:layout_below="@+id/textView3"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_textbox"
+                android:background="@drawable/rounded_textbox_shadows"
                 android:ems="10"
                 android:gravity="top"
                 android:hint="@string/type_your_message_here"

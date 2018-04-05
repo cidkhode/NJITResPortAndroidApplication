@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGray"
+    android:background="@color/backgroundWhite"
     android:fillViewport="true"
     tools:context=".StudentProfile">
 
@@ -78,7 +78,7 @@
             android:layout_below="@+id/studentEmail"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
-            android:background="@drawable/rounded_textbox_faded"
+            android:background="@drawable/rounded_textbox_faded_shadows"
             android:entries="@array/student_colleges" />
 
         <Spinner
@@ -89,7 +89,7 @@
             android:layout_alignStart="@+id/studentEmail"
             android:layout_below="@+id/studentCollege"
             android:layout_marginTop="13dp"
-            android:background="@drawable/rounded_textbox_faded"
+            android:background="@drawable/rounded_textbox_faded_shadows"
             android:entries="@array/student_majors" />
 
 
@@ -101,7 +101,7 @@
             android:layout_alignStart="@+id/spinner5"
             android:layout_below="@+id/spinner5"
             android:layout_marginTop="11dp"
-            android:background="@drawable/rounded_textbox_faded"
+            android:background="@drawable/rounded_textbox_faded_shadows"
             android:ems="10"
             android:hint="@string/student_gpa"
             android:inputType="numberDecimal"
@@ -126,7 +126,7 @@
             android:layout_alignStart="@+id/studentSelectFile"
             android:layout_below="@+id/studentHonors"
             android:layout_marginTop="18dp"
-            android:background="@drawable/rounded_textbox_faded"
+            android:background="@drawable/rounded_textbox_faded_shadows"
             android:entries="@array/class_rankings" />
 
 

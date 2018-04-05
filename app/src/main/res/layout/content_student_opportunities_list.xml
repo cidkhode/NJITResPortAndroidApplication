@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGray"
+    android:background="@color/backgroundWhite"
     android:fillViewport="true"
     tools:context=".StudentOpportunitiesList">
 
@@ -21,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
-            android:background="@drawable/rounded_textbox"
+            android:background="@drawable/rounded_textbox_shadows"
             android:ems="10"
             android:gravity="center"
             android:hint="Faculty UCID"
@@ -37,7 +37,7 @@
             android:layout_below="@+id/studentOpportunitiesListFacultyUCIDEditText"
             android:layout_marginTop="18dp"
             android:gravity="center"
-            android:background="@drawable/rounded_textbox"
+            android:background="@drawable/rounded_textbox_shadows"
             android:entries="@array/opportunity_colleges" />
 
         <Button
@@ -76,7 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
             android:dividerHeight="10.0sp"
-            android:divider="@color/backgroundGray"
+            android:divider="@color/backgroundWhite"
             android:clickable="true" />
 
     </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize"
-    android:background="@color/backgroundGray"
+    android:background="@color/backgroundWhite"
     android:fillViewport="true"
     tools:context=".StudentApplicationView">
 
@@ -20,7 +20,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_textbox"
+            android:background="@drawable/rounded_textbox_shadows"
             android:ems="10"
             android:textSize="20dp"
             android:text="Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx"

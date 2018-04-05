@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundGray"
+        android:background="@color/backgroundWhite"
         android:fillViewport="true"
         tools:context=".FacultyProfile">
 
@@ -57,7 +57,7 @@
                 android:layout_below="@+id/facultyProfileLastName"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded"
+                android:background="@drawable/rounded_textbox_faded_shadows"
                 android:ems="10"
                 android:hint="@string/faculty_email"
                 android:inputType="textEmailAddress"
@@ -70,7 +70,7 @@
                 android:layout_below="@+id/facultyProfileEmail"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded"
+                android:background="@drawable/rounded_textbox_faded_shadows"
                 android:ems="10"
                 android:hint="@string/faculty_field_of_expertise"
                 android:inputType="textPersonName"
@@ -84,7 +84,7 @@
                 android:layout_below="@+id/facultyProfileField"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded"
+                android:background="@drawable/rounded_textbox_faded_shadows"
                 android:ems="10"
                 android:hint="@string/faculty_years_at_njit"
                 android:inputType="number"
@@ -97,7 +97,7 @@
                 android:layout_below="@+id/facultyProfileYears"
                 android:layout_marginTop="12dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/rounded_textbox_faded"
+                android:background="@drawable/rounded_textbox_faded_shadows"
                 android:ems="10"
                 android:hint="Office #"
                 android:inputType="textPersonName"
@@ -110,7 +110,7 @@
                 android:layout_below="@+id/facultyProfileOffice"
                 android:layout_marginTop="15dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/rounded_textbox_faded"
+                android:background="@drawable/rounded_textbox_faded_shadows"
                 android:entries="@array/faculty_colleges"/>
 
         </RelativeLayout>
