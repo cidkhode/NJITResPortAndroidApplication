@@ -11,4 +11,8 @@
     <color name="opportunityListColor">#eaefef</color>
     <color name="accepted">#008000</color>
     <color name="pending">#FFA500</color>
+    <color name="paid">#008000</color>
+    <color name="unpaid">#327BC8</color>
+    <color name="for_credit">#2FAFA5</color>
+    <color name="not_for_credit">#FFA500</color>
 </resources>

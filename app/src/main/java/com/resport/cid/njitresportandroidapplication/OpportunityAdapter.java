@@ -1,6 +1,7 @@
 package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
             TextView tt7 = (TextView) v.findViewById(R.id.studentGPA);
             TextView tt8 = (TextView) v.findViewById(R.id.opportunityProf);
             TextView tt9 = (TextView) v.findViewById(R.id.facultyProfileEmail);
+            TextView tt10 = (TextView) v.findViewById(R.id.category1);
+            TextView tt11 = (TextView) v.findViewById(R.id.category2);
 
             if (tt1 != null) {
                 tt1.setText(p.getOppName());
@@ -74,6 +77,28 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
 
             if (tt9 != null) {
                 tt9.setText(p.getFacultyUCID());
+            }
+
+            String category1 = p.getCategory().split("and")[0].trim();
+            String category2 = p.getCategory().split("and")[1].trim();
+            if (tt10 != null) {
+                if(category1.equals("Paid")) {
+                    tt10.setBackgroundResource(R.drawable.rounded_textbox_paid);
+                }
+                else if(category1.equals("Unpaid")) {
+                    tt10.setBackgroundResource(R.drawable.rounded_textbox_unpaid);
+                }
+                tt10.setText(category1);
+            }
+
+            if (tt11 != null) {
+                if(category2.equals("For Credit")) {
+                    tt11.setBackgroundResource(R.drawable.rounded_textbox_for_credit);
+                }
+                else if(category2.equals("No Credit")) {
+                    tt11.setBackgroundResource(R.drawable.rounded_textbox_not_for_credit);
+                }
+                tt11.setText(category2);
             }
         }
 
