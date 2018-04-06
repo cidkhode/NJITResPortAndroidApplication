@@ -1,5 +1,6 @@
 package com.resport.cid.njitresportandroidapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -11,9 +12,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class facultyViewApplicant extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String info;
+    TextView facultyViewParticularApplicant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,14 @@ public class facultyViewApplicant extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        facultyViewParticularApplicant = (TextView) findViewById(R.id.facultyViewParticularApplicant);
+
+
+        Intent intent = getIntent();
+        info = intent.getStringExtra("Applicant");
+        facultyViewParticularApplicant.setText(info);
+
     }
 
     @Override
@@ -66,4 +83,19 @@ public class facultyViewApplicant extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    public void clearToken() {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+        PrintWriter clearer = null;
+        try {
+            clearer = new PrintWriter(tokenFile);
+            clearer.write("");
+            clearer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

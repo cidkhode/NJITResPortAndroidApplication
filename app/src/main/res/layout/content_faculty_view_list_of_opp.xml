@@ -13,34 +13,46 @@
         android:layout_height="wrap_content">
 
 
-        <TextView
-            android:id="@+id/facultyListOfOpp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="14dp"
-            android:background="@color/white"
-            android:text="This is a list \n
-- Of opportunities a \n
-- Faculty has created \n
-- When they see this, \n
-- They can click on a \n
-- Particular opportunity \n
-- And be brought to the \n
-- List of students who \n
-- Have shown interest"
-            android:textSize="24dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/facultyListOfOpp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginBottom="14dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:text="This is a list \n-->
+<!-- - Of opportunities a \n-->
+<!-- - Faculty has created \n-->
+<!-- - When they see this, \n-->
+<!-- - They can click on a \n-->
+<!-- - Particular opportunity \n-->
+<!-- - And be brought to the \n-->
+<!-- - List of students who \n-->
+<!-- - Have shown interest"-->
+            <!--android:textSize="24dp" />-->
 
-        <TextView
-            android:id="@+id/facultyTitleViewApplicants"
+        <EditText
+            android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
             android:text="View Applicants"
+            android:background="@color/colorPrimary"
             android:textSize="24dp" />
+
+        <ListView
+            android:id="@+id/facultyListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:dividerHeight="10.0sp"
+            android:layout_below="@+id/test"
+            android:divider="@color/backgroundGray"
+            android:clickable="true" />
 
     </RelativeLayout>
 </ScrollView>

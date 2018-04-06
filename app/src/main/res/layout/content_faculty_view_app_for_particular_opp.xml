@@ -21,20 +21,28 @@
             android:layout_marginTop="12dp"
             android:text="View Applicants"
             android:textSize="24dp" />
-        <TextView
-            android:id="@+id/facultyListOfApplicantsForParticularOpp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/facultyTitleViewApplicantsForParticularOpp"
+        <!--<EditText-->
+            <!--android:id="@+id/facultyListOfApplicantsForParticularOpp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/facultyTitleViewApplicantsForParticularOpp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="75dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:text=""-->
+            <!--android:textSize="24dp" />-->
+
+        <ListView
+            android:id="@+id/facultyListApp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="75dp"
-            android:background="@color/white"
-            android:text="This is a list \n
-- Of students who \n
-- Have shown interest in \n
-- Particular opportunity \n
-- From previous page"
-            android:textSize="24dp" />
+            android:layout_marginTop="12dp"
+            android:dividerHeight="10.0sp"
+            android:layout_below="@+id/facultyTitleViewApplicantsForParticularOpp"
+            android:divider="@color/backgroundGray"
+            android:clickable="true" />
+
 
 
 

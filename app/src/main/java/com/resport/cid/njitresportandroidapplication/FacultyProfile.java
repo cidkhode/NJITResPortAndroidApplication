@@ -206,6 +206,8 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             Intent intent = new Intent(FacultyProfile.this, CreateOpportunity.class);
             startActivity(intent);
         } else if (id == R.id.fac_applicants) {
+            Intent intent = new Intent(FacultyProfile.this, FacultyViewListOfOpp.class);
+            startActivity(intent);
 
         } else if (id == R.id.fac_contact) {
             Intent intent = new Intent(FacultyProfile.this, ContactUs.class);
