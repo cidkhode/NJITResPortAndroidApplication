@@ -1,5 +1,6 @@
 package com.resport.cid.njitresportandroidapplication;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +31,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -37,24 +42,31 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CreateOpportunity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
 
     OkHttpClient client = new OkHttpClient();
     String oppName = "";
     String jobTitle = "";
-    String numStu="";
     int maxNum;
+    String maxNum1;
     int hour;
+    String hours1;
     String details="";
     long college;
+    String college1;
     long category;
+    String category1;
     double gpa;
+    String gpa1;
+    Date expirationDate = null;
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
     ArrayAdapter<String> adapterColleges ;
     ArrayAdapter<String> adapterCategories;
     Button submitButton;
+    String expiration="";
 
+    DatePickerDialog datePickerDialog;
     static EditText createOpportunityName;
     static Spinner createOpportunityOppCollege;
     static EditText createOpportunityJobTitle;
@@ -63,7 +75,7 @@ public class CreateOpportunity extends AppCompatActivity
     static EditText createOpportunityDescription;
     static Spinner createOpportunityCategory;
     static EditText createOpportunityMinGPA;
-
+    static Button createOpportunityExpirationDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +92,10 @@ public class CreateOpportunity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        datePickerDialog = new DatePickerDialog(
+                this, CreateOpportunity.this, Calendar.getInstance().get(Calendar.YEAR),
+                                                                              Calendar.getInstance().get(Calendar.MONTH),
+                                                                              Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
         submitButton = (Button) findViewById(R.id.createOpportunitySubmitButton);
         createOpportunityName = (EditText) findViewById(R.id.createOpportunityName);
@@ -90,6 +106,7 @@ public class CreateOpportunity extends AppCompatActivity
         createOpportunityCategory = (Spinner) findViewById(R.id.createOpportunityCategory);
         createOpportunityDescription = (EditText) findViewById(R.id.createOpportunityDescription);
         createOpportunityMinGPA = (EditText) findViewById(R.id.createOpportunityMinGPA);
+        createOpportunityExpirationDate = (Button) findViewById(R.id.createOpportunityExpirationDate);
 
         createOpportunityName.setSelection(createOpportunityName.getText().length());
         createOpportunityJobTitle.setSelection(createOpportunityJobTitle.getText().length());
@@ -115,17 +132,12 @@ public class CreateOpportunity extends AppCompatActivity
 
         oppName = createOpportunityName.getText().toString();
         jobTitle = createOpportunityJobTitle.getText().toString();
-        maxNum = Integer.parseInt(createOpportunityNumberOfStudents.getText().toString());
-        String maxNum1 = String.valueOf(maxNum);
-        hour = Integer.parseInt(createOpportunityExpectedHoursPerWeek.getText().toString());
-        String hours1 = String.valueOf(hour);
-        details=createOpportunityDescription.getText().toString();
-        college = createOpportunityOppCollege.getSelectedItemId()+1;
-        String college1 = String.valueOf(college);
-        category = createOpportunityCategory.getSelectedItemId()+1;
-        String category1 = String.valueOf(category);
-        gpa = Double.parseDouble(createOpportunityMinGPA.getText().toString());
-        String gpa1 = String.valueOf(gpa);
+        maxNum1 = createOpportunityNumberOfStudents.getText().toString();
+        hours1 = createOpportunityExpectedHoursPerWeek.getText().toString();
+        details = createOpportunityDescription.getText().toString();
+        college1 = Long.toString(createOpportunityOppCollege.getSelectedItemId()+1);
+        category1 = Long.toString(createOpportunityCategory.getSelectedItemId()+1);
+        gpa1 = createOpportunityMinGPA.getText().toString();
 
         String result = saveOpp(oppName,jobTitle,maxNum1,hours1,details,college1,category1,gpa1);
         try {
@@ -147,19 +159,43 @@ public class CreateOpportunity extends AppCompatActivity
 
     }
 
+    public void showDatePickerDialog(View view)
+    {
+        datePickerDialog.show();
+    }
+
     public String saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA)
     {
         String temp = readToken();
-        RequestBody formBody = new FormBody.Builder()
-                .add("name", name)
-                .add("description", desc)
-                .add("position", title)
-                .add("maxStudents", maxStudents)
-                .add("hoursWeekly", hoursWeekly)
-                .add("college", colleges)
-                .add("category", categories)
-                .add("minGPA", minGPA)
-                .build();
+        RequestBody formBody = null;
+        if(createOpportunityExpirationDate.getText().toString().equals("Select Date...")) {
+            formBody = new FormBody.Builder()
+                    .add("name", name)
+                    .add("description", desc)
+                    .add("position", title)
+                    .add("maxStudents", maxStudents)
+                    .add("hoursWeekly", hoursWeekly)
+                    .add("college", colleges)
+                    .add("category", categories)
+                    .add("minGPA", minGPA)
+                    .build();
+        }
+        else
+        {
+            int date = (int) (expirationDate.getTime() / 1000);
+            formBody = new FormBody.Builder()
+                    .add("name", name)
+                    .add("description", desc)
+                    .add("position", title)
+                    .add("maxStudents", maxStudents)
+                    .add("hoursWeekly", hoursWeekly)
+                    .add("college", colleges)
+                    .add("category", categories)
+                    .add("minGPA", minGPA)
+                    .add("deadline", Integer.toString(date))
+                    .build();
+            createOpportunityExpirationDate.setText("Select Date...");
+        }
         try {
             Request request = new Request.Builder()
                     .url("https://web.njit.edu/~db329/resport/api/v1/opportunity")
@@ -285,5 +321,12 @@ public class CreateOpportunity extends AppCompatActivity
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        expiration = Integer.toString(i1+1) + "/" + Integer.toString(i2) + "/" + Integer.toString(i);
+        createOpportunityExpirationDate.setText(expiration);
+        expirationDate = new GregorianCalendar(i, i1, i2).getTime();
     }
 }

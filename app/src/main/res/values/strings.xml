@@ -123,7 +123,7 @@
     <string name="create">Create!</string>
     <string name="opportunity_name">Opportunity Name</string>
     <string name="details_requirements">Details / Requirements</string>
-    <string name="expected_hours_per_week">Expected Hours Per Week</string>
+    <string name="expected_hours_per_week">Hours</string>
     <string name="number_of_students">Number of Students</string>
     <string name="job_title">Job Title</string>
     <string name="title_activity_faculty_view_applicant">Viewing Applicant</string>
@@ -145,5 +145,9 @@
     <string name="years_experience">Years of Experience</string>
     <string name="office">Office #</string>
     <string name="office_text">Office</string>
+    <string name="description">Description</string>
+    <string name="position">Position</string>
+    <string name="number_of_students_0_if_no_limit">Number of Students (0 if no limit)</string>
+    <string name="min_gpa">Minimum GPA</string>
 
 </resources>
