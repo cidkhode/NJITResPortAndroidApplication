@@ -44,8 +44,7 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
     String office = "";
     String fieldOfStudy = "";
     String experience = "";
-    static TextView faculty_fname;
-    static TextView faculty_lname;
+    static TextView faculty_name;
     static EditText faculty_email;
     static EditText faculty_field;
     static EditText faculty_years;
@@ -68,13 +67,12 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        faculty_fname = (TextView) findViewById(R.id.facultyProfileFirstName);
-        faculty_lname = (TextView) findViewById(R.id.facultyProfileLastName);
-        faculty_email = (EditText) findViewById(R.id.facultyProfileEmail);
-        faculty_field = (EditText) findViewById(R.id.facultyProfileField);
-        faculty_years = (EditText) findViewById(R.id.facultyProfileYears);
-        faculty_office = (EditText) findViewById(R.id.facultyProfileOffice);
-        faculty_college = (Spinner) findViewById(R.id.facultyProfileCollege);
+        faculty_name = (TextView) findViewById(R.id.facultyName);
+        faculty_email = (EditText) findViewById(R.id.facultyEmail);
+        faculty_field = (EditText) findViewById(R.id.facultyField);
+        faculty_years = (EditText) findViewById(R.id.facultyYears);
+        faculty_office = (EditText) findViewById(R.id.facultyOffice);
+        faculty_college = (Spinner) findViewById(R.id.facultyCollege);
 
         edit_save = (Button) findViewById(R.id.facultyProfileEditSave);
 
@@ -96,8 +94,7 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
         if (editMode == false) {
             editMode = true;
             edit_save.setText("Save Profile");
-            faculty_fname.setEnabled(true);
-            faculty_lname.setEnabled(true);
+            faculty_name.setEnabled(true);
             faculty_email.setEnabled(true);
             faculty_field.setEnabled(true);
             faculty_years.setEnabled(true);
@@ -158,8 +155,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 saveProfile(email, fieldOfStudy, experience, office, college);
                // loadProfile();
             }
-
-
         }
     }
 
@@ -271,9 +266,8 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 JSONObject dataJSON = new JSONObject(data);
                 ucid = dataJSON.getString("ucid");
                 fname = dataJSON.getString("fname");
-                faculty_fname.setText(fname);
                 lname = dataJSON.getString("lname");
-                faculty_lname.setText(lname);
+                faculty_name.setText(fname + " " + lname);
                 email = dataJSON.getString("email");
                 faculty_email.setText(email);
                 college = dataJSON.getInt("college");

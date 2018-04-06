@@ -25,93 +25,168 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/facultyProfileFirstName"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
+                android:id="@+id/faculty_firstname_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/facultyProfileEditSave"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:hint="@string/faculty_first_name"
-                android:textAlignment="center"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/name"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:visibility="visible" />
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/facultyProfileLastName"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/facultyProfileFirstName"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
-                android:hint="@string/faculty_last_name"
-                android:textAlignment="center"
+                android:id="@+id/facultyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/faculty_firstname_text"
+                android:layout_alignStart="@+id/faculty_firstname_text"
+                android:layout_below="@+id/faculty_firstname_text"
+                android:layout_marginBottom="13dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/rounded_textbox_faded_shadows"
+                android:ems="10"
+                android:hint="@string/faculty_name"
+                android:padding="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/faculty_college_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/facultyName"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:text="@string/college"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/facultyProfileEmail"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/facultyProfileLastName"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded_shadows"
-                android:ems="10"
-                android:hint="@string/faculty_email"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="10dp"/>
-
-            <EditText
-                android:id="@+id/facultyProfileField"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/facultyProfileEmail"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded_shadows"
-                android:ems="10"
-                android:hint="@string/faculty_field_of_expertise"
-                android:inputType="textPersonName"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:paddingHorizontal="10dp"/>
-
-            <EditText
-                android:id="@+id/facultyProfileYears"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/facultyProfileField"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_textbox_faded_shadows"
-                android:ems="10"
-                android:hint="@string/faculty_years_at_njit"
-                android:inputType="number"
-                android:paddingHorizontal="10dp"/>
-
-            <EditText
-                android:id="@+id/facultyProfileOffice"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/facultyProfileYears"
-                android:layout_marginTop="12dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/rounded_textbox_faded_shadows"
-                android:ems="10"
-                android:hint="Office #"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="10dp"/>
+                android:textSize="18sp" />
 
             <Spinner
-                android:id="@+id/facultyProfileCollege"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/facultyProfileOffice"
-                android:layout_marginTop="15dp"
-                android:layout_centerHorizontal="true"
+                android:id="@+id/facultyCollege"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:background="@drawable/rounded_textbox_faded_shadows"
-                android:entries="@array/faculty_colleges"/>
+                android:layout_alignLeft="@+id/faculty_college_text"
+                android:layout_alignStart="@+id/faculty_college_text"
+                android:layout_below="@+id/faculty_college_text"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="13dp"
+                android:layout_marginRight="25dp"
+                android:entries="@array/faculty_colleges" />
+
+            <TextView
+                android:id="@+id/faculty_preferred_email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/facultyCollege"
+                android:layout_alignStart="@+id/facultyCollege"
+                android:layout_below="@+id/facultyCollege"
+                android:text="@string/preferred_email"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/facultyEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_textbox_faded_shadows"
+                android:padding="10dp"
+                android:layout_alignLeft="@+id/faculty_preferred_email_text"
+                android:layout_alignStart="@+id/faculty_preferred_email_text"
+                android:layout_below="@+id/faculty_preferred_email_text"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="13dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email" />
+
+            <TextView
+                android:id="@+id/faculty_field_of_study_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/facultyEmail"
+                android:layout_alignStart="@+id/facultyEmail"
+                android:layout_below="@+id/facultyEmail"
+                android:text="@string/field_of_study"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/facultyField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_textbox_faded_shadows"
+                android:padding="10dp"
+                android:layout_alignLeft="@+id/faculty_field_of_study_text"
+                android:layout_alignStart="@+id/faculty_field_of_study_text"
+                android:layout_below="@+id/faculty_field_of_study_text"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="13dp"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="@string/faculty_field_of_expertise" />
+
+            <TextView
+                android:id="@+id/faculty_experience_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/facultyField"
+                android:layout_alignStart="@+id/facultyField"
+                android:layout_below="@+id/facultyField"
+                android:text="@string/years_experience"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/facultyYears"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_textbox_faded_shadows"
+                android:padding="10dp"
+                android:layout_alignLeft="@+id/faculty_experience_text"
+                android:layout_alignStart="@+id/faculty_experience_text"
+                android:layout_below="@+id/faculty_experience_text"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="13dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/faculty_field_of_expertise" />
+
+            <TextView
+                android:id="@+id/faculty_office_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/facultyYears"
+                android:layout_alignStart="@+id/facultyYears"
+                android:layout_below="@+id/facultyYears"
+                android:text="@string/office_text"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/facultyOffice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_textbox_faded_shadows"
+                android:padding="10dp"
+                android:layout_alignLeft="@+id/faculty_office_text"
+                android:layout_alignStart="@+id/faculty_office_text"
+                android:layout_below="@+id/faculty_office_text"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="13dp"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="@string/office" />
 
         </RelativeLayout>
     </ScrollView>

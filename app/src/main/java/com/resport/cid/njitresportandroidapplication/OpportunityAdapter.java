@@ -45,7 +45,7 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
             TextView tt6 = (TextView) v.findViewById(R.id.createOpportunityExpectedHoursPerWeek);
             TextView tt7 = (TextView) v.findViewById(R.id.studentGPA);
             TextView tt8 = (TextView) v.findViewById(R.id.opportunityProf);
-            TextView tt9 = (TextView) v.findViewById(R.id.facultyProfileEmail);
+            TextView tt9 = (TextView) v.findViewById(R.id.facultyEmail);
             TextView tt10 = (TextView) v.findViewById(R.id.category1);
             TextView tt11 = (TextView) v.findViewById(R.id.category2);
 
