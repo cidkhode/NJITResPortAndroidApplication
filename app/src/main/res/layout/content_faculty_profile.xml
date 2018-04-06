@@ -183,7 +183,7 @@
                 android:layout_below="@+id/faculty_office_text"
                 android:layout_marginTop="13dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginBottom="13dp"
+                android:layout_marginBottom="20dp"
                 android:ems="10"
                 android:inputType="text"
                 android:hint="@string/office" />
