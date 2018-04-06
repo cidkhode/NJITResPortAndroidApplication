@@ -247,8 +247,9 @@
             android:layout_below="@+id/faculty_create_opportunity_date_text"
             android:text="Select Date..."
             android:onClick="showDatePickerDialog"
-            android:background="@drawable/rounded_corner_button"
-            android:textColor="@color/white"
+            android:background="@drawable/rounded_corner_button_red_outline"
+            android:stateListAnimator="@null"
+            android:textColor="@color/colorPrimary"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp" />
