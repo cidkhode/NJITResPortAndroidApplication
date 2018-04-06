@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dip"
+    android:background="@drawable/opportunity_litview">
+
+    <TextView
+        android:id="@+id/faculty_opportunityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Research Opportunity Title"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/faculty_opportunityDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/faculty_opportunityTitle"
+        android:text="Description of research opportunity."
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/faculty_opportunityPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/faculty_opportunityDesc"
+        android:text="Research Assistant"
+        android:textSize="14sp"
+        android:textColor="#000000"/>
+
+
+</RelativeLayout>
