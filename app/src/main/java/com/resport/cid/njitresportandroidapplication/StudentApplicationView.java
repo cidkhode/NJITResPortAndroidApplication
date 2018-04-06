@@ -64,7 +64,7 @@ public class StudentApplicationView extends AppCompatActivity
             status = "Status: Accepted!\nPlease contact faculty for more information!";
             statusView.setTextColor(getResources().getColor(R.color.accepted));
         }
-        else if(statusInt.equals("1"))
+        else if(statusInt.equals("-1"))
         {
             status = "Status: Denied\nSorry, the opportunity has filled up.";
             statusView.setTextColor(getResources().getColor(R.color.colorPrimary));

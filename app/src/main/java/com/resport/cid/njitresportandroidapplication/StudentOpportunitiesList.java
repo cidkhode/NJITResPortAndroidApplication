@@ -25,7 +25,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -55,6 +58,8 @@ public class StudentOpportunitiesList extends AppCompatActivity
     String minGPA = "" ;
     JSONObject faculty= null ;
     String facultyName= "" ;
+    int expirationDateInt;
+    String expirationDate = "";
     String email="" ;
     String facUCID = "";
     JSONArray opportunities;
@@ -115,11 +120,14 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     limit = info.getString("limit");
                     hours = info.getString("hours");
                     minGPA = info.getString("minGPA");
+                    expirationDateInt = Integer.parseInt(info.getString("deadline"));
+                    expirationDate = new SimpleDateFormat("MM/dd/yyyy")
+                            .format(new Date(expirationDateInt * 1000L));
                     faculty = opp.getJSONObject("faculty");
                     facultyName = faculty.getString("name");
                     email = faculty.getString("email");
                     facUCID = faculty.getString("ucid");
-                    opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                    opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate));
                 }
 
             } catch (JSONException e) {
@@ -170,6 +178,9 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     limit = info.getString("limit");
                     hours = info.getString("hours");
                     minGPA = info.getString("minGPA");
+                    expirationDateInt = Integer.parseInt(info.getString("deadline"));
+                    expirationDate = new SimpleDateFormat("MM/dd/yyyy")
+                            .format(new Date(expirationDateInt * 1000L));
                     faculty = opp.getJSONObject("faculty");
                     facultyName = faculty.getString("name");
                     email = faculty.getString("email");
@@ -177,14 +188,14 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
                     if (enteredFacUCID.equals("") && !enteredCollege.equals("0")) {
                         if (college.equals(enteredCollege)) {
-                            opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                            opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate));
                         }
                     } else if (!enteredFacUCID.equals("") && enteredCollege.equals("0")) {
                         if (facUCID.equals(enteredFacUCID)) {
-                            opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                            opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate));
                         }
                     } else if (facUCID.equals(enteredFacUCID) && college.equals(enteredCollege)) {
-                        opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                        opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate));
                     }
                 }
             } catch (JSONException e) {
@@ -215,11 +226,14 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 limit = info.getString("limit");
                 hours = info.getString("hours");
                 minGPA = info.getString("minGPA");
+                expirationDateInt = Integer.parseInt(info.getString("deadline"));
+                expirationDate = new SimpleDateFormat("MM/dd/yyyy")
+                        .format(new Date(expirationDateInt * 1000L));
                 faculty = opp.getJSONObject("faculty");
                 facultyName = faculty.getString("name");
                 email = faculty.getString("email");
                 facUCID = faculty.getString("ucid");
-                opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName));
+                opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate));
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -41,7 +41,8 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
             TextView tt3 = (TextView) v.findViewById(R.id.applied_opportunityProf);
             TextView tt4 = (TextView) v.findViewById(R.id.category1_applied);
             TextView tt5 = (TextView) v.findViewById(R.id.category2_applied);
-            
+            TextView tt6 = (TextView) v.findViewById(R.id.applied_opportunityStatus);
+
             if (tt1 != null) {
                 tt1.setText(p.getName());
             }
@@ -74,6 +75,23 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
                     tt5.setBackgroundResource(R.drawable.rounded_textbox_not_for_credit);
                 }
                 tt5.setText(category2);
+            }
+
+            int status = p.getStatus();
+            if (tt6 != null) {
+                if(status == 0) {
+                    tt6.setTextColor(tt6.getResources().getColor(R.color.pending));
+                    tt6.setBackgroundResource(R.drawable.rounded_textbox_orange_outline);
+                    tt6.setText("Pending");
+                } else if(status == 1) {
+                    tt6.setTextColor(tt6.getResources().getColor(R.color.accepted));
+                    tt6.setBackgroundResource(R.drawable.rounded_textbox_green_outline);
+                    tt6.setText("Accepted!");
+                } else if(status == -1) {
+                    tt6.setTextColor(tt6.getResources().getColor(R.color.colorPrimary));
+                    tt6.setBackgroundResource(R.drawable.rounded_textbox_red_outline);
+                    tt6.setText("Denied :(");
+                }
             }
         }
 

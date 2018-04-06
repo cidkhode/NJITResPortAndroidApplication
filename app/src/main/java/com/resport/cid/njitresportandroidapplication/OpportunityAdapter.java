@@ -1,7 +1,6 @@
 package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +47,7 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
             TextView tt9 = (TextView) v.findViewById(R.id.facultyEmail);
             TextView tt10 = (TextView) v.findViewById(R.id.category1);
             TextView tt11 = (TextView) v.findViewById(R.id.category2);
+            TextView tt12 = (TextView) v.findViewById(R.id.opportunityExpirationDate);
 
             if (tt1 != null) {
                 tt1.setText(p.getOppName());
@@ -99,6 +99,19 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
                     tt11.setBackgroundResource(R.drawable.rounded_textbox_not_for_credit);
                 }
                 tt11.setText(category2);
+            }
+
+            if (tt12 != null) {
+                if(p.getExpiration().contains("1969")) {
+                    tt12.setTextColor(tt12.getResources().getColor(R.color.accepted));
+                    tt12.setBackgroundResource(R.drawable.rounded_textbox_green_outline);
+                    tt12.setText("No Expiration!");
+                }
+                else {
+                    tt12.setTextColor(tt12.getResources().getColor(R.color.colorPrimary));
+                    tt12.setBackgroundResource(R.drawable.rounded_textbox_red_outline);
+                    tt12.setText(p.getExpiration());
+                }
             }
         }
 

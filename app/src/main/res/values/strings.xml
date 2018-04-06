@@ -149,5 +149,7 @@
     <string name="position">Position</string>
     <string name="number_of_students_0_if_no_limit">Number of Students (0 if no limit)</string>
     <string name="min_gpa">Minimum GPA</string>
+    <string name="no_credit">No Credit</string>
+    <string name="paid">Paid</string>
 
 </resources>

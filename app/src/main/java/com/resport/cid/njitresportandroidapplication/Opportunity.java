@@ -16,8 +16,11 @@ public class Opportunity {
     String facultyUCID;
     String emailAddress;
     String category;
+    String expiration;
 
-    public Opportunity(String oppId, String oppName, String oppCollege, String candidateTitle, int numStudents, int weeklyHours, String description, String facultyName, String facultyUCID, String emailAddress, String category) {
+    public Opportunity(String oppId, String oppName, String oppCollege, String candidateTitle,
+                       int numStudents, int weeklyHours, String description, String facultyName,
+                       String facultyUCID, String emailAddress, String category, String expiration) {
         this.oppId = oppId;
         this.oppName = oppName;
         this.oppCollege = oppCollege;
@@ -29,6 +32,7 @@ public class Opportunity {
         this.facultyUCID = facultyUCID;
         this.emailAddress = emailAddress;
         this.category = category;
+        this.expiration = expiration;
     }
 
     public String getOppId() {
@@ -71,35 +75,5 @@ public class Opportunity {
         return category;
     }
 
-    public void setOppName(String oppName) {
-        this.oppName = oppName;
-    }
-
-    public void setOppCollege(String oppCollege) {
-        this.oppCollege = oppCollege;
-    }
-
-    public void setCandidateTitle(String candidateTitle) {
-        this.candidateTitle = candidateTitle;
-    }
-
-    public void setNumStudents(int numStudents) {
-        this.numStudents = numStudents;
-    }
-
-    public void setWeeklyHours(int weeklyHours) {
-        this.weeklyHours = weeklyHours;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    public String getExpiration() { return expiration; }
 }
