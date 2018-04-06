@@ -15,8 +15,9 @@ public class Application  {
     int status;
     String college;
     String ucid;
+    String category;
 
-    public Application(String id, String name, String description, String position, String facultyName, String email, long timestamp, int status, String college, String ucid)
+    public Application(String id, String name, String description, String position, String facultyName, String email, long timestamp, int status, String college, String ucid, String category)
     {
         this.id = id;
         this.name = name;
@@ -28,6 +29,7 @@ public class Application  {
         this.status = status;
         this.college = college;
         this.ucid = ucid;
+        this.category = category;
     }
 
     public String getId() {
@@ -65,4 +67,6 @@ public class Application  {
     public String getCollege() { return college; }
 
     public String getUCID() { return ucid; }
+
+    public String getCategory() { return category; }
 }

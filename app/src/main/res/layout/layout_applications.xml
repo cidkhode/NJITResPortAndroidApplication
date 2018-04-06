@@ -32,8 +32,37 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/applied_opportunityDesc"
         android:text="Prof. Example - YWCC"
+        android:layout_marginBottom="5dp"
         android:textSize="14sp"
         android:textColor="#000000"/>
 
+    <TextView
+        android:id="@+id/category1_applied"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/applied_opportunityProf"
+        android:background="@drawable/rounded_textbox_paid"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Paid"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/category2_applied"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/category1_applied"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/category1_applied"
+        android:layout_toRightOf="@+id/category1_applied"
+        android:background="@drawable/rounded_textbox_not_for_credit"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="No Credit"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

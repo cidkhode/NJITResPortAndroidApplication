@@ -49,6 +49,8 @@ public class StudentApplicationsList extends AppCompatActivity
     String name = "";
     String description = "";
     String position = "";
+    String category = "" ;
+    String categoryName="";
     String facultyName = "";
     String email = "";
     String timestamp = "";
@@ -99,6 +101,8 @@ public class StudentApplicationsList extends AppCompatActivity
                     name = app.getString("name");
                     description = app.getString("description");
                     position = app.getString("position");
+                    category = app.getString("category");
+                    categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
                     facultyName = app.getString("name");
                     email = app.getString("email");
                     timestamp = app.getString("timestamp");
@@ -107,7 +111,7 @@ public class StudentApplicationsList extends AppCompatActivity
                     facUCID = app.getString("facultyUCID");
                     collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
 
-                    applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                    applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
                 }
 
             } catch (JSONException e) {
@@ -152,6 +156,8 @@ public class StudentApplicationsList extends AppCompatActivity
                     name = app.getString("name");
                     description = app.getString("description");
                     position = app.getString("position");
+                    category = app.getString("category");
+                    categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
                     facultyName = app.getString("name");
                     email = app.getString("email");
                     timestamp = app.getString("timestamp");
@@ -162,14 +168,14 @@ public class StudentApplicationsList extends AppCompatActivity
 
                     if (enteredFacUCID.equals("") && !enteredCollege.equals("0")) {
                         if (college.equals(enteredCollege)) {
-                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
                         }
                     } else if (!enteredFacUCID.equals("") && enteredCollege.equals("0")) {
                         if (facUCID.equals(enteredFacUCID)) {
-                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
                         }
                     } else if (facUCID.equals(enteredFacUCID) && college.equals(enteredCollege)) {
-                        applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                        applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
                     }
                 }
             } catch (JSONException e) {
@@ -191,6 +197,8 @@ public class StudentApplicationsList extends AppCompatActivity
                 name = app.getString("name");
                 description = app.getString("description");
                 position = app.getString("position");
+                category = app.getString("category");
+                categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
                 facultyName = app.getString("name");
                 email = app.getString("email");
                 timestamp = app.getString("timestamp");
@@ -198,7 +206,7 @@ public class StudentApplicationsList extends AppCompatActivity
                 college = app.getString("college");
                 facUCID = app.getString("facultyUCID");
                 collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
-                applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID));
+                applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
             }
         } catch (JSONException e) {
             e.printStackTrace();

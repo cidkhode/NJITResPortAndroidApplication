@@ -155,7 +155,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
             Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
         }
         else {
-
             try {
                 for (int i = 0; i < opportunities.length(); i++) {
                     opp = opportunities.getJSONObject(i);

@@ -39,7 +39,9 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
             TextView tt1 = (TextView) v.findViewById(R.id.applied_opportunityTitle);
             TextView tt2 = (TextView) v.findViewById(R.id.applied_opportunityDesc);
             TextView tt3 = (TextView) v.findViewById(R.id.applied_opportunityProf);
-
+            TextView tt4 = (TextView) v.findViewById(R.id.category1_applied);
+            TextView tt5 = (TextView) v.findViewById(R.id.category2_applied);
+            
             if (tt1 != null) {
                 tt1.setText(p.getName());
             }
@@ -50,6 +52,28 @@ public class ApplicationAdapter extends ArrayAdapter<Application> {
 
             if (tt3 != null) {
                 tt3.setText(p.getCollege());
+            }
+
+            String category1 = p.getCategory().split("and")[0].trim();
+            String category2 = p.getCategory().split("and")[1].trim();
+            if (tt4 != null) {
+                if(category1.equals("Paid")) {
+                    tt4.setBackgroundResource(R.drawable.rounded_textbox_paid);
+                }
+                else if(category1.equals("Unpaid")) {
+                    tt4.setBackgroundResource(R.drawable.rounded_textbox_unpaid);
+                }
+                tt4.setText(category1);
+            }
+
+            if (tt5 != null) {
+                if(category2.equals("For Credit")) {
+                    tt5.setBackgroundResource(R.drawable.rounded_textbox_for_credit);
+                }
+                else if(category2.equals("No Credit")) {
+                    tt5.setBackgroundResource(R.drawable.rounded_textbox_not_for_credit);
+                }
+                tt5.setText(category2);
             }
         }
 
