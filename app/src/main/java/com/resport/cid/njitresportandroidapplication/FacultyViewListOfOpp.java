@@ -179,6 +179,7 @@ public class FacultyViewListOfOpp extends AppCompatActivity
             Intent intent = new Intent(FacultyViewListOfOpp.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
