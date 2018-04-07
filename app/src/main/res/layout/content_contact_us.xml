@@ -48,6 +48,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_button"
                 android:text="@string/contactify"
+                android:onClick="send"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
     </ScrollView>

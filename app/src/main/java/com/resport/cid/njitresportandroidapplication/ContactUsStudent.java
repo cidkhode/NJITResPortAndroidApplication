@@ -11,17 +11,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class ContactUsStudent extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    OkHttpClient client = new OkHttpClient();
+    EditText msg ;
+    String message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +52,9 @@ public class ContactUsStudent extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        msg = (EditText) findViewById(R.id.msg);
+
     }
 
     @Override
@@ -47,6 +65,55 @@ public class ContactUsStudent extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void send(View view)
+    {
+        message = msg.getText().toString();
+        String temp = readToken();
+        RequestBody formBody = null;
+        formBody = new FormBody.Builder()
+                .add("msg",message)
+                .build();
+
+        try {
+            Request request = new Request.Builder()
+                    .url("https://web.njit.edu/~db329/resport/api/v1/sendmail")
+                    .header("Authorization", "Bearer " + temp)
+                    .post(formBody)
+                    .build();
+            Response response = null;
+            response = client.newCall(request).execute();
+            JSONObject responseJSON = new JSONObject(response.body().string());
+            String msg1 = responseJSON.getString("msg");
+            Toast.makeText(ContactUsStudent.this, msg1, Toast.LENGTH_LONG).show();
+
+
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String readToken() {
+        File path = getApplicationContext().getFilesDir();
+        File tokenFile = new File(path, "token.txt");
+
+        int size = (int) tokenFile.length();
+        byte[] data = new byte[size];
+        FileInputStream reader = null;
+        try {
+            reader = new FileInputStream(tokenFile);
+            reader.read(data);
+            reader.close();
+            String token = new String(data);
+            return token;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "ERROR!";
     }
 
     public void clearToken() {

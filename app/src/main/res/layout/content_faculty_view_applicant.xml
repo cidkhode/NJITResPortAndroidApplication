@@ -22,7 +22,7 @@
         android:layout_below="@+id/facultyTitleViewParticularApplicant"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="133dp"
+        android:layout_marginTop="100dp"
         android:background="@color/white"
         android:includeFontPadding="false"
         android:text="Name: John Smith
@@ -36,14 +36,11 @@ College: Ying Wu College
 
     <Button
         android:id="@+id/facultyViewResume"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="54dp"
-        android:layout_alignEnd="@+id/facultyViewParticularApplicant"
-        android:layout_alignLeft="@+id/facultyViewParticularApplicant"
-        android:layout_alignRight="@+id/facultyViewParticularApplicant"
-        android:layout_alignStart="@+id/facultyViewParticularApplicant"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/facultyViewParticularApplicant"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_corner_button"
         android:text="View Resume"
         android:textColor="@color/white"
@@ -62,6 +59,7 @@ College: Ying Wu College
         android:text="Accept"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:onClick="accept"
         tools:ignore="RtlCompat" />
 
     <Button
@@ -75,20 +73,20 @@ College: Ying Wu College
         android:background="@drawable/rounded_corner_button"
         android:text="Decline"
         android:textColor="@color/white"
+        android:onClick="decline"
         android:textSize="18dp" />
 
     <Button
         android:id="@+id/facultyContactStudent"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="54dp"
-        android:layout_alignEnd="@+id/facultyViewResume"
-        android:layout_alignLeft="@+id/facultyViewResume"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/facultyViewResume"
-        android:layout_alignStart="@+id/facultyViewResume"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corner_button"
+        android:layout_below="@+id/facultyDecline"
         android:text="Contact Student"
         android:textColor="@color/white"
+        android:onClick="contactStudent"
         android:textSize="18dp" />
 
 

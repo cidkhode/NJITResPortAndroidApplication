@@ -10,14 +10,18 @@ public class FacultyListApplicant {
     Double gpa;
     String class1;
     String ucid;
+    Integer appid;
+    Integer status;
 
-    public FacultyListApplicant(String name, String major, Double gpa, String class1, String ucid)
+    public FacultyListApplicant(String name, String major, Double gpa, String class1, String ucid, Integer appid, Integer status)
     {
         this.name = name;
         this.major = major;
         this.gpa = gpa;
         this.class1 = class1;
         this.ucid = ucid;
+        this.appid = appid;
+        this.status = status;
     }
 
     public String getName() {
@@ -33,4 +37,10 @@ public class FacultyListApplicant {
     public String getClass1() {return class1;}
 
     public String getUcid() {return ucid;}
+
+    public Integer getAppid() {return appid;}
+
+    public Integer getStatus() {return status;}
+
+
 }

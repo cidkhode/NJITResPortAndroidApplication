@@ -98,7 +98,7 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                     className = student_class.get(classes-1);
                     major = allApplicants.getInt("major");
                     majorName = student_majors.get(major-1);
-                    facultyListApps.add(new FacultyListApplicant(name, majorName, gpa, className, ucid));
+                    facultyListApps.add(new FacultyListApplicant(name, majorName, gpa, className, ucid, appid, status));
                 }
 
 
@@ -118,6 +118,9 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(FacultyViewAppForParticularOpp.this, facultyViewApplicant.class)
+                        .putExtra("ucid",oppItem.getUcid())
+                        .putExtra("appid", oppItem.getAppid().toString())
+                        .putExtra("status", oppItem.getStatus().toString())
                         .putExtra("Applicant", "Name: " + oppItem.getName() + "\n\nEmail: " + oppItem.getUcid()+"@njit.edu"
                                 + " \n\nMajor: " + oppItem.getMajor() + " \n\nGPA: " + oppItem.getGpa()
                                 + " \n\nClass: " + oppItem.getClass1() ));
@@ -200,12 +203,12 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
         } else if (id == R.id.fac_contact) {
             Intent intent = new Intent(FacultyViewAppForParticularOpp.this, ContactUs.class);
             startActivity(intent);
-
         } else if (id == R.id.fac_logout) {
             clearToken();
             Intent intent = new Intent(FacultyViewAppForParticularOpp.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
