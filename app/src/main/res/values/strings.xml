@@ -135,6 +135,7 @@
     <string name="title_activity_student_application_view">Viewing Application Details</string>
     <string name="show_interest">Show Interest</string>
     <string name="contact_faculty">Contact Faculty</string>
+    <string name="contact">Contact</string>
     <string name="enter_your_password">Enter Your Password</string>
     <string name="enter_your_ucid">Enter Your UCID</string>
     <string name="college">College</string>
@@ -151,5 +152,9 @@
     <string name="min_gpa">Minimum GPA</string>
     <string name="no_credit">No Credit</string>
     <string name="paid">Paid</string>
+    <string name="student_class_standing">Student Class Standing</string>
+    <string name="student_college">Student College</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
 
 </resources>

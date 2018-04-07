@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,21 +22,16 @@
             android:name=".StudentProfile"
             android:label="@string/title_activity_student_profile"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        android:windowSoftInputMode="stateHidden"
-        android:screenOrientation="portrait"/>
+
         <activity
             android:name=".FacultyProfile"
             android:label="@string/title_activity_faculty_profile"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <![CDATA[
 
-
-        android:windowSoftInputMode="stateHidden"
-        android:screenOrientation="portrait"/>
-
-        ]]>
         <activity
             android:name=".ContactUs"
             android:label="@string/title_activity_contact_us"
@@ -53,11 +48,13 @@
             android:name=".CreateOpportunity"
             android:label="@string/title_activity_create_opportunity"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".facultyViewApplicant"
+            android:name=".FacultyViewApplicant"
             android:label="@string/title_activity_faculty_view_applicant"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FacultyViewAppForParticularOpp"
             android:label="@string/title_activity_faculty_view_app_opp_list"
@@ -65,23 +62,27 @@
         <activity
             android:name=".FacultyViewListOfOpp"
             android:label="@string/title_activity_faculty_view_app_list"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentOpportunitiesList"
             android:label="@string/title_activity_student_opportunities_list"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentOpportunityView"
             android:label="@string/title_activity_student_opportunity_view"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentApplicationsList"
             android:label="@string/title_activity_student_applications_list"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentApplicationView"
             android:label="@string/title_activity_student_application_view"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

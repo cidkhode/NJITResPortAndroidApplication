@@ -326,9 +326,15 @@ public class StudentOpportunitiesList extends AppCompatActivity
         } else if (id == R.id.stu_browse) {
 
         } else if (id == R.id.stu_status) {
-            //Toast.makeText(StudentOpportunitiesList.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(StudentOpportunitiesList.this, StudentApplicationsList.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunitiesList.this, StudentApplicationsList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_contact) {
             new Handler().postDelayed(new Runnable() {
                 @Override

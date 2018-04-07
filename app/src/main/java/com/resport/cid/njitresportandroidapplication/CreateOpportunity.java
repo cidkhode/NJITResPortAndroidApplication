@@ -3,6 +3,7 @@ package com.resport.cid.njitresportandroidapplication;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +41,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class CreateOpportunity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
@@ -268,17 +271,39 @@ public class CreateOpportunity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.fac_profile) {
-            Intent intent = new Intent(CreateOpportunity.this, FacultyProfile.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(CreateOpportunity.this, FacultyProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_create) {
 
         } else if (id == R.id.fac_applicants) {
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(CreateOpportunity.this, FacultyViewListOfOpp.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_contact) {
-            Intent intent = new Intent(CreateOpportunity.this, ContactUs.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(CreateOpportunity.this, ContactUs.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_logout) {
             clearToken();
             Intent intent = new Intent(CreateOpportunity.this, MainActivity.class);
@@ -286,7 +311,6 @@ public class CreateOpportunity extends AppCompatActivity
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -2,6 +2,7 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -39,6 +40,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class FacultyViewListOfOpp extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -161,18 +164,39 @@ public class FacultyViewListOfOpp extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.fac_profile) {
-            Intent intent = new Intent(FacultyViewListOfOpp.this, FacultyProfile.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewListOfOpp.this, FacultyProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_create) {
-            Intent intent = new Intent(FacultyViewListOfOpp.this, CreateOpportunity.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewListOfOpp.this, CreateOpportunity.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_applicants) {
 
         } else if (id == R.id.fac_contact) {
-            Intent intent = new Intent(FacultyViewListOfOpp.this, ContactUs.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewListOfOpp.this, ContactUs.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_logout) {
             clearToken();
             Intent intent = new Intent(FacultyViewListOfOpp.this, MainActivity.class);
@@ -181,7 +205,6 @@ public class FacultyViewListOfOpp extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

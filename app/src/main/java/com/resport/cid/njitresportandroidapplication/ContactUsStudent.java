@@ -157,9 +157,15 @@ public class ContactUsStudent extends AppCompatActivity
             }, 250);
             drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_status) {
-            //Toast.makeText(ContactUsStudent.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(ContactUsStudent.this, StudentApplicationsList.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ContactUsStudent.this, StudentApplicationsList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 230);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_contact) {
 
         } else if (id == R.id.stu_logout) {

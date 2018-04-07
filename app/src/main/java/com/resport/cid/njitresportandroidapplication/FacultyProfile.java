@@ -2,6 +2,7 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,6 +32,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class FacultyProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     boolean editMode = false;
@@ -199,19 +202,39 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.fac_profile) {
 
         } else if (id == R.id.fac_create) {
-            Intent intent = new Intent(FacultyProfile.this, CreateOpportunity.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyProfile.this, CreateOpportunity.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_applicants) {
-            Intent intent = new Intent(FacultyProfile.this, FacultyViewListOfOpp.class);
-            startActivity(intent);
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyProfile.this, FacultyViewListOfOpp.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_contact) {
-            Intent intent = new Intent(FacultyProfile.this, ContactUs.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyProfile.this, ContactUs.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_logout) {
             clearToken();
             Intent intent = new Intent(FacultyProfile.this, MainActivity.class);
@@ -219,7 +242,6 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

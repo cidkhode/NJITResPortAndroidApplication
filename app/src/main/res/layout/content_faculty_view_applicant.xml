@@ -1,95 +1,232 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/backgroundWhite"
-    android:padding="6dip">
+    android:fillViewport="true"
+    android:layout_marginTop="?attr/actionBarSize"
+    tools:context=".FacultyProfile">
 
-    <TextView
-        android:id="@+id/facultyTitleViewParticularApplicant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:text="View Applicants"
-        android:textSize="24dp" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/facultyViewParticularApplicant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/facultyTitleViewParticularApplicant"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:background="@color/white"
-        android:includeFontPadding="false"
-        android:text="Name: John Smith
-Email: js007@njit.edu
-Major: Computer Science
-GPA: 3.973
-Class Ranking: Junior
-College: Ying Wu College
-        of Computing"
-        android:textSize="24dp" />
+        <TextView
+            android:id="@+id/view_student_applicant_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10.0sp"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/facultyViewResume"
-        android:layout_width="300dp"
-        android:layout_height="54dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/facultyViewParticularApplicant"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/rounded_corner_button"
-        android:text="View Resume"
-        android:textColor="@color/white"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/view_student_applicant_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_name_text"
+            android:layout_alignStart="@+id/view_student_applicant_name_text"
+            android:layout_below="@+id/view_student_applicant_name_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/student_name"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/facultyAccept"
-        android:layout_width="120dp"
-        android:layout_height="54dp"
-        android:layout_below="@+id/facultyViewResume"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="54dp"
-        android:background="@drawable/rounded_corner_button"
-        android:text="Accept"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:onClick="accept"
-        tools:ignore="RtlCompat" />
+        <TextView
+            android:id="@+id/view_student_applicant_email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_student_applicant_name"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/email"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/facultyDecline"
-        android:layout_width="120dp"
-        android:layout_height="54dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/facultyViewResume"
-        android:layout_marginRight="54dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_corner_button"
-        android:text="Decline"
-        android:textColor="@color/white"
-        android:onClick="decline"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/view_student_applicant_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_email_text"
+            android:layout_alignStart="@+id/view_student_applicant_email_text"
+            android:layout_below="@+id/view_student_applicant_email_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/student_email"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/facultyContactStudent"
-        android:layout_width="300dp"
-        android:layout_height="54dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_corner_button"
-        android:layout_below="@+id/facultyDecline"
-        android:text="Contact Student"
-        android:textColor="@color/white"
-        android:onClick="contactStudent"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/view_student_applicant_major_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_student_applicant_email"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/major"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/view_student_applicant_major"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_major_text"
+            android:layout_alignStart="@+id/view_student_applicant_major_text"
+            android:layout_below="@+id/view_student_applicant_major_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/student_major"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/view_student_applicant_gpa_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_student_applicant_major"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/gpa"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/view_student_applicant_gpa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_gpa_text"
+            android:layout_alignStart="@+id/view_student_applicant_gpa_text"
+            android:layout_below="@+id/view_student_applicant_gpa_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/student_gpa"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/view_student_applicant_class_standing_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_student_applicant_gpa"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/class_standing_text"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_student_applicant_class_standing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_class_standing_text"
+            android:layout_alignStart="@+id/view_student_applicant_class_standing_text"
+            android:layout_below="@+id/view_student_applicant_class_standing_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/student_class_standing"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_student_applicant_college_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_student_applicant_class_standing"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/college"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_student_applicant_college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_college_text"
+            android:layout_alignStart="@+id/view_student_applicant_college_text"
+            android:layout_below="@+id/view_student_applicant_college_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/student_college"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/facultyAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_alignLeft="@+id/view_student_applicant_college"
+            android:layout_alignStart="@+id/view_student_applicant_college"
+            android:layout_below="@+id/view_student_applicant_college"
+            android:background="@drawable/rounded_textbox_green_outline"
+            android:textColor="@color/accepted"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/accept" />
+
+        <Button
+            android:id="@+id/facultyDecline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_alignRight="@+id/view_student_applicant_college"
+            android:layout_alignEnd="@+id/view_student_applicant_college"
+            android:layout_alignTop="@+id/facultyAccept"
+            android:background="@drawable/rounded_textbox_red_outline"
+            android:textColor="@color/colorPrimary"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/decline" />
+
+        <Button
+            android:id="@+id/facultyContactStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_below="@id/view_student_applicant_college"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_textbox_blue_outline"
+            android:textColor="@color/contactStudent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/contact" />
+
+    </RelativeLayout>
+</ScrollView>

@@ -8,7 +8,9 @@
         android:id="@+id/faculty_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="Name"
@@ -26,27 +28,45 @@
         android:textColor="#000000"/>
 
     <TextView
-        android:id="@+id/faculty_gpa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/faculty_major"
-        android:text="GPA"
-        android:textSize="14sp" />
-
-
-    <TextView
         android:id="@+id/faculty_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/faculty_gpa"
-        android:text="GPA"
+        android:layout_below="@+id/faculty_major"
+        android:text="Class"
+        android:layout_marginBottom="5dp"
         android:textSize="14sp"
         android:textColor="#000000"/>
 
+    <TextView
+        android:id="@+id/faculty_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/rounded_textbox_green_outline"
+        android:layout_below="@+id/faculty_class"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="GPA"
+        android:textColor="@color/accepted"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/faculty_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/faculty_class"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_toEndOf="@+id/faculty_gpa"
+        android:layout_toRightOf="@+id/faculty_gpa"
+        android:background="@drawable/rounded_textbox_orange_outline"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/pending"
+        android:text="Pending" />
 
 
 </RelativeLayout>

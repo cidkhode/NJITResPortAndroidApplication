@@ -2,19 +2,17 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,12 +24,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class FacultyViewAppForParticularOpp extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,17 +40,19 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
     ArrayList<FacultyListApplicant> facultyListApps;
     String information ;
     JSONObject allApplicants;
-    Integer appid ;
-    Integer status ;
+    int appid ;
+    int status ;
     Long timestamp ;
     String ucid ;
     String name ;
     Double gpa ;
     Boolean honors ;
-    Integer classes ;
+    int classes ;
     String className;
-    Integer major ;
+    int major ;
     String majorName;
+    int college;
+    String collegeName;
     JSONArray applicants;
     ArrayList<String> student_colleges = new ArrayList<String>();
     ArrayList<String> student_majors = new ArrayList<String>();
@@ -80,7 +80,6 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
         facultyListApp = (ListView) findViewById(R.id.facultyListApp);
         Intent intent = getIntent();
         information = intent.getStringExtra("FacultyOpp");
-        System.out.println("---------------------------------------------"+information);
 
         try {
             applicants = new JSONArray(information);
@@ -91,17 +90,16 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                     timestamp = allApplicants.getLong("timestamp");
                     ucid = allApplicants.getString("ucid");
                     name = allApplicants.getString("name");
-                    System.out.println("---------------------------------------------" + name);
                     gpa = allApplicants.getDouble("gpa");
                     honors = allApplicants.getBoolean("honors");
                     classes = allApplicants.getInt("class");
                     className = student_class.get(classes-1);
                     major = allApplicants.getInt("major");
                     majorName = student_majors.get(major-1);
-                    facultyListApps.add(new FacultyListApplicant(name, majorName, gpa, className, ucid, appid, status));
+                    college = allApplicants.getInt("college");
+                    collegeName = student_colleges.get(college-1);
+                    facultyListApps.add(new FacultyListApplicant(name, majorName, gpa, className, ucid, appid, status, collegeName));
                 }
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -117,17 +115,18 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                 FacultyListApplicant oppItem = (FacultyListApplicant) facultyListApp.getAdapter().getItem(i);
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
-                startActivity(new Intent(FacultyViewAppForParticularOpp.this, facultyViewApplicant.class)
+                startActivity(new Intent(FacultyViewAppForParticularOpp.this, FacultyViewApplicant.class)
                         .putExtra("ucid",oppItem.getUcid())
                         .putExtra("appid", oppItem.getAppid().toString())
                         .putExtra("status", oppItem.getStatus().toString())
-                        .putExtra("Applicant", "Name: " + oppItem.getName() + "\n\nEmail: " + oppItem.getUcid()+"@njit.edu"
-                                + " \n\nMajor: " + oppItem.getMajor() + " \n\nGPA: " + oppItem.getGpa()
-                                + " \n\nClass: " + oppItem.getClass1() ));
+                        .putExtra("Name", oppItem.getName())
+                        .putExtra("Email", oppItem.getUcid()+"@njit.edu")
+                        .putExtra("Major", oppItem.getMajor())
+                        .putExtra("GPA", Double.toString(oppItem.getGpa()))
+                        .putExtra("Class", oppItem.getClassStanding())
+                        .putExtra("College", oppItem.getCollege()));
             }
         });
-
-
     }
     public void getIds()
     {
@@ -189,20 +188,47 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.fac_profile) {
-            Intent intent = new Intent(FacultyViewAppForParticularOpp.this, FacultyProfile.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewAppForParticularOpp.this, FacultyProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_create) {
-            Intent intent = new Intent(FacultyViewAppForParticularOpp.this, CreateOpportunity.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewAppForParticularOpp.this, CreateOpportunity.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_applicants) {
-            Intent intent = new Intent(FacultyViewAppForParticularOpp.this, FacultyViewListOfOpp.class);
-            startActivity(intent);
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewAppForParticularOpp.this, FacultyViewListOfOpp.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_contact) {
-            Intent intent = new Intent(FacultyViewAppForParticularOpp.this, ContactUs.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewAppForParticularOpp.this, ContactUs.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_logout) {
             clearToken();
             Intent intent = new Intent(FacultyViewAppForParticularOpp.this, MainActivity.class);
@@ -211,7 +237,6 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

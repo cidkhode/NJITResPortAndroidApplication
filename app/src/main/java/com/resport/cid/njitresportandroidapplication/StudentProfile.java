@@ -335,9 +335,15 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             }, 250);
             drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_status) {
-            //Toast.makeText(StudentProfile.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(StudentProfile.this, StudentApplicationsList.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent =new Intent(StudentProfile.this, StudentApplicationsList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_contact) {
             new Handler().postDelayed(new Runnable() {
                 @Override
