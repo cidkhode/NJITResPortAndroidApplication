@@ -39,6 +39,7 @@ public class FacultyOppAdapter extends ArrayAdapter<FacultyOpp> {
             TextView tt1 = (TextView) v.findViewById(R.id.faculty_opportunityTitle);
             TextView tt2 = (TextView) v.findViewById(R.id.faculty_opportunityDesc);
             TextView tt3 = (TextView) v.findViewById(R.id.faculty_opportunityPosition);
+            TextView tt4 = (TextView) v.findViewById(R.id.faculty_opportunityExpirationDate);
 
             if (tt1 != null) {
                 tt1.setText(p.getName());
@@ -50,6 +51,19 @@ public class FacultyOppAdapter extends ArrayAdapter<FacultyOpp> {
 
             if (tt3 != null) {
                 tt3.setText(p.getPosition());
+            }
+
+            if (tt4 != null) {
+                if(p.getExpiration().contains("1969")) {
+                    tt4.setTextColor(tt4.getResources().getColor(R.color.accepted));
+                    tt4.setBackgroundResource(R.drawable.rounded_textbox_green_outline);
+                    tt4.setText("No Expiration!");
+                }
+                else {
+                    tt4.setTextColor(tt4.getResources().getColor(R.color.colorPrimary));
+                    tt4.setBackgroundResource(R.drawable.rounded_textbox_red_outline);
+                    tt4.setText(p.getExpiration());
+                }
             }
         }
 

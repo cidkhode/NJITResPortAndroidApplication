@@ -29,7 +29,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import okhttp3.FormBody;
@@ -42,7 +44,6 @@ public class FacultyViewListOfOpp extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     ListView facultyListView;
-    EditText test ;
     ArrayList<FacultyOpp> facultyOpps;
 
     JSONObject responseJSON ;
@@ -58,7 +59,8 @@ public class FacultyViewListOfOpp extends AppCompatActivity
     String position;
     JSONArray applicants;
     String name;
-
+    int expirationDateInt;
+    String expirationDate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +78,6 @@ public class FacultyViewListOfOpp extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        test = (EditText) findViewById(R.id.test);
         facultyListView = (ListView) findViewById(R.id.facultyListView);
         facultyOpps = new ArrayList<>();
         getInfo();
@@ -133,15 +133,14 @@ public class FacultyViewListOfOpp extends AppCompatActivity
                     oppName = info.getString("name");
                     description = info.getString("description");
                     position = info.getString("position");
-
+                    expirationDateInt = Integer.parseInt(info.getString("deadline"));
+                    expirationDate = new SimpleDateFormat("MM/dd/yyyy")
+                            .format(new Date(expirationDateInt * 1000L));
                     applicants = arrayItems.getJSONArray("applicants");
 
-
-                    facultyOpps.add(new FacultyOpp(id, oppName, description, position, applicants));
+                    facultyOpps.add(new FacultyOpp(id, oppName, description, position, expirationDate, applicants));
                 }
             }
-
-
         }
         catch (JSONException e) {
             e.printStackTrace(); }
