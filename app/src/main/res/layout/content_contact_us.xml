@@ -46,9 +46,9 @@
                 android:layout_below="@+id/message"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/rounded_textbox_blue_outline"
                 android:text="@string/contactify"
                 android:onClick="send"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/contactColor" />
         </RelativeLayout>
     </ScrollView>
