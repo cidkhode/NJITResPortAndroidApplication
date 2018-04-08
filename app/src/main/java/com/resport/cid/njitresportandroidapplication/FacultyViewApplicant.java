@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class FacultyViewApplicant extends AppCompatActivity
     String gpa;
     String classStanding;
     String college;
+    boolean honors;
 
     TextView facultyViewName;
     TextView facultyViewEmail;
@@ -49,6 +51,8 @@ public class FacultyViewApplicant extends AppCompatActivity
     TextView facultyViewGPA;
     TextView facultyViewClassStanding;
     TextView facultyViewCollege;
+    CheckBox facultyViewHonors;
+
     Integer appid;
     String ucid;
 
@@ -79,6 +83,8 @@ public class FacultyViewApplicant extends AppCompatActivity
         facultyViewGPA = (TextView) findViewById(R.id.view_student_applicant_gpa);
         facultyViewClassStanding = (TextView) findViewById(R.id.view_student_applicant_class_standing);
         facultyViewCollege = (TextView) findViewById(R.id.view_student_applicant_college);
+        facultyViewHonors = (CheckBox) findViewById(R.id.view_student_applicant_honors);
+        facultyViewHonors.setEnabled(false);
 
         facultyAccept = (Button) findViewById(R.id.facultyAccept);
         facultyDecline = (Button) findViewById(R.id.facultyDecline);
@@ -94,6 +100,7 @@ public class FacultyViewApplicant extends AppCompatActivity
         ucid = intent.getStringExtra("ucid");
         appid = Integer.parseInt(intent.getStringExtra("appid"));
         status = Integer.parseInt(intent.getStringExtra("status"));
+        honors = intent.getExtras().getBoolean("Honors");
 
         facultyViewName.setText(name);
         facultyViewEmail.setText(email);
@@ -101,6 +108,7 @@ public class FacultyViewApplicant extends AppCompatActivity
         facultyViewGPA.setText(gpa);
         facultyViewClassStanding.setText(classStanding);
         facultyViewCollege.setText(college);
+        facultyViewHonors.setChecked(honors);
 
         facultyAccept.setOnClickListener(new View.OnClickListener() {
             @Override

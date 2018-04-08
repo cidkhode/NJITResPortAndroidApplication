@@ -187,6 +187,16 @@
             android:padding="10dp"
             android:textSize="18sp" />
 
+        <CheckBox
+            android:id="@+id/view_student_applicant_honors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_college"
+            android:layout_alignStart="@+id/view_student_applicant_college"
+            android:layout_below="@+id/view_student_applicant_college"
+            android:layout_marginBottom="13dp"
+            android:text="Honors" />
+
         <Button
             android:id="@+id/facultyAccept"
             android:layout_width="wrap_content"
@@ -194,7 +204,7 @@
             android:layout_marginBottom="13dp"
             android:layout_alignLeft="@+id/view_student_applicant_college"
             android:layout_alignStart="@+id/view_student_applicant_college"
-            android:layout_below="@+id/view_student_applicant_college"
+            android:layout_below="@+id/view_student_applicant_honors"
             android:background="@drawable/rounded_textbox_green_outline"
             android:textColor="@color/accepted"
             android:paddingLeft="5dp"
@@ -219,14 +229,13 @@
             android:id="@+id/facultyContactStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="13dp"
-            android:layout_below="@id/view_student_applicant_college"
+            android:layout_below="@+id/view_student_applicant_honors"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_textbox_blue_outline"
-            android:textColor="@color/contactColor"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="@string/contact" />
+            android:text="@string/contact"
+            android:textColor="@color/contactColor" />
 
     </RelativeLayout>
 </ScrollView>

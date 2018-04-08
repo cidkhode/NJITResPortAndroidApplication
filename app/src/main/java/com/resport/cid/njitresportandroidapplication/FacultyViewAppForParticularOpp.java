@@ -98,7 +98,7 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                     majorName = student_majors.get(major-1);
                     college = allApplicants.getInt("college");
                     collegeName = student_colleges.get(college-1);
-                    facultyListApps.add(new FacultyListApplicant(name, majorName, gpa, className, ucid, appid, status, collegeName));
+                    facultyListApps.add(new FacultyListApplicant(name, majorName, gpa, className, ucid, appid, status, collegeName, honors));
                 }
 
         } catch (JSONException e) {
@@ -124,7 +124,8 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                         .putExtra("Major", oppItem.getMajor())
                         .putExtra("GPA", Double.toString(oppItem.getGpa()))
                         .putExtra("Class", oppItem.getClassStanding())
-                        .putExtra("College", oppItem.getCollege()));
+                        .putExtra("College", oppItem.getCollege())
+                        .putExtra("Honors", oppItem.getHonors()));
             }
         });
     }
@@ -240,7 +241,6 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     public String readToken() {
         File path = getApplicationContext().getFilesDir();
