@@ -19,10 +19,11 @@
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10.0sp"
-            android:dividerHeight="10.0sp"
+            android:dividerHeight="12dp"
             android:divider="@color/backgroundWhite"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="10.0sp"
             android:clickable="true" />
 
     </RelativeLayout>

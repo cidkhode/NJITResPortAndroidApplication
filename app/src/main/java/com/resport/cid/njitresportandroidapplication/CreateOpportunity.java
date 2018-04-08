@@ -50,16 +50,12 @@ public class CreateOpportunity extends AppCompatActivity
     OkHttpClient client = new OkHttpClient();
     String oppName = "";
     String jobTitle = "";
-    int maxNum;
     String maxNum1;
-    int hour;
     String hours1;
     String details="";
     long college;
     String college1;
-    long category;
     String category1;
-    double gpa;
     String gpa1;
     Date expirationDate = null;
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
