@@ -19,7 +19,7 @@
     <color name="goodGPA">#00CF1C</color>
     <color name="badGPA">#FFB200</color>
     <color name="terribleGPA">#FF0000</color>
-    <color name="contactStudent">#327BC8</color>
+    <color name="contactColor">#327BC8</color>
     <color name="acceptStudentDisabled">#30008000</color>
     <color name="declineStudentDisabled">#30CC2127</color>
 </resources>

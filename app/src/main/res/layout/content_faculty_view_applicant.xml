@@ -223,7 +223,7 @@
             android:layout_below="@id/view_student_applicant_college"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_textbox_blue_outline"
-            android:textColor="@color/contactStudent"
+            android:textColor="@color/contactColor"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/contact" />

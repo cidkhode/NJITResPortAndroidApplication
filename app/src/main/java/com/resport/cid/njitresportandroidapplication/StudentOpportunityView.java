@@ -2,6 +2,7 @@ package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,7 +36,12 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 public class StudentOpportunityView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
-    TextView oppDetails;
+    TextView oppName;
+    TextView oppCollege;
+    TextView oppNumberOfStudents;
+    TextView oppDescription;
+    TextView oppFacultyName;
+    TextView oppFacultyUCID;
     Button showInterest;
     String oppId;
     @Override
@@ -55,14 +61,29 @@ public class StudentOpportunityView extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         showInterest = (Button) findViewById(R.id.showInterest);
-        oppDetails = (TextView) findViewById(R.id.studentOpportunityViewTextView);
+        oppName = (TextView) findViewById(R.id.view_opportunity_name);
+        oppCollege = (TextView) findViewById(R.id.view_opportunity_college);
+        oppNumberOfStudents = (TextView) findViewById(R.id.view_opportunity_number_of_students);
+        oppDescription = (TextView) findViewById(R.id.view_opportunity_description);
+        oppFacultyName = (TextView) findViewById(R.id.view_opportunity_faculty_name);
+        oppFacultyUCID = (TextView) findViewById(R.id.view_opportunity_faculty_ucid);
         Intent intent = getIntent();
-        String name = intent.getStringExtra("Opportunity");
-        oppId = intent.getStringExtra("oppId");
-        oppDetails.setText(name);
+        String name = intent.getStringExtra("Name");
+        String college = intent.getStringExtra("College");
+        String numberOfStudents = Integer.toString(intent.getIntExtra("Number",0));
+        String description = intent.getStringExtra("Description");
+        String facultyName = intent.getStringExtra("FacultyName");
+        String facultyUCID = intent.getStringExtra("FacultyUCID");
 
+        oppName.setText(name);
+        oppCollege.setText(college);
+        oppNumberOfStudents.setText(numberOfStudents);
+        oppDescription.setText(description);
+        oppFacultyName.setText(facultyName);
+        oppFacultyUCID.setText(facultyUCID);
+
+        oppId = intent.getStringExtra("oppId");
     }
 
     public void showInterest(View view)
@@ -110,21 +131,47 @@ public class StudentOpportunityView extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.stu_profile) {
-            Intent intent = new Intent(StudentOpportunityView.this, StudentProfile.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunityView.this, StudentProfile.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_browse) {
-            Intent intent = new Intent(StudentOpportunityView.this, StudentOpportunitiesList.class);
-            startActivity(intent);
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunityView.this, StudentOpportunitiesList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_status) {
-            //Toast.makeText(StudentOpportunityView.this,"Statuses Page is not ready yet.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(StudentOpportunityView.this, StudentApplicationsList.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunityView.this, StudentApplicationsList.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_contact) {
-            Intent intent = new Intent(StudentOpportunityView.this, ContactUsStudent.class);
-            startActivity(intent);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(StudentOpportunityView.this, ContactUsStudent.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.stu_logout) {
             clearToken();
             Intent intent = new Intent(StudentOpportunityView.this, MainActivity.class);
@@ -132,7 +179,6 @@ public class StudentOpportunityView extends AppCompatActivity
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

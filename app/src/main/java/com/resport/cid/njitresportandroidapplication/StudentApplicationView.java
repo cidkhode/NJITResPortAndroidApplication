@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,11 +29,16 @@ public class StudentApplicationView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     Button contactFaculty;
-    TextView appDetails;
-    TextView statusView;
+    TextView appName;
+    TextView appCollege;
+    TextView appDescription;
+    TextView appFacultyName;
+    TextView appFacultyUCID;
+    TextView appStatus;
     String appId;
-    String statusInt;
-    String status = "";
+    int statusInt;
+    String status;
+    String facultyUCID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,29 +57,44 @@ public class StudentApplicationView extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         contactFaculty = (Button) findViewById(R.id.contactFaculty);
-        appDetails = (TextView) findViewById(R.id.studentApplicationViewTextView);
-        statusView = (TextView) findViewById(R.id.applicationStatus);
+        appName = (TextView) findViewById(R.id.view_application_name);
+        appCollege = (TextView) findViewById(R.id.view_application_college);
+        appDescription = (TextView) findViewById(R.id.view_application_description);
+        appFacultyName = (TextView) findViewById(R.id.view_application_faculty_name);
+        appFacultyUCID = (TextView) findViewById(R.id.view_application_faculty_ucid);
+        appStatus = (TextView) findViewById(R.id.view_application_faculty_status);
+
         Intent intent = getIntent();
-        String name = intent.getStringExtra("Application");
-        statusInt = intent.getStringExtra("status");
-        if(statusInt.equals("0"))
+        statusInt = intent.getIntExtra("status",0);
+        String name = intent.getStringExtra("Name");
+        String college = intent.getStringExtra("College");
+        String description = intent.getStringExtra("Description");
+        String facultyName = intent.getStringExtra("FacultyName");
+        facultyUCID = intent.getStringExtra("FacultyUCID");
+
+        appName.setText(name);
+        appCollege.setText(college);
+        appDescription.setText(description);
+        appFacultyName.setText(facultyName);
+        appFacultyUCID.setText(facultyUCID);
+
+        if(statusInt == 0)
         {
             status = "Status:\nPending Review";
-            statusView.setTextColor(getResources().getColor(R.color.pending));
+            appStatus.setTextColor(getResources().getColor(R.color.pending));
         }
-        else if(statusInt.equals("1"))
+        else if(statusInt == 1)
         {
             status = "Status: Accepted!\nPlease contact faculty for more information!";
-            statusView.setTextColor(getResources().getColor(R.color.accepted));
+            appStatus.setTextColor(getResources().getColor(R.color.accepted));
         }
-        else if(statusInt.equals("-1"))
+        else if(statusInt == -1)
         {
             status = "Status: Denied\nSorry, the opportunity has filled up.";
-            statusView.setTextColor(getResources().getColor(R.color.colorPrimary));
+            appStatus.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
-        statusView.setText(status);
+        appStatus.setText(status);
         appId = intent.getStringExtra("appId");
-        appDetails.setText(name);
     }
 
     @Override
@@ -129,6 +152,13 @@ public class StudentApplicationView extends AppCompatActivity
 
     public void contactFaculty(View view)
     {
-
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{ facultyUCID+"@njit.edu" });
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(StudentApplicationView.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -14,33 +14,198 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/studentOpportunityViewTextView"
-            android:layout_width="300dp"
+            android:id="@+id/view_opportunity_name_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_textbox_shadows"
-            android:ems="10"
-            android:textSize="20dp"
-            android:text="Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10.0sp"
+            android:text="@string/opportunity_name"
             android:textColor="@color/black"
-            android:paddingHorizontal="10dp" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_opportunity_name_text"
+            android:layout_alignStart="@+id/view_opportunity_name_text"
+            android:layout_below="@+id/view_opportunity_name_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/opportunity_name"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_college_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_opportunity_name"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/college"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_opportunity_college_text"
+            android:layout_alignStart="@+id/view_opportunity_college_text"
+            android:layout_below="@+id/view_opportunity_college_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/college"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_number_of_students_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_opportunity_college"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/number_of_students"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_number_of_students"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_opportunity_number_of_students_text"
+            android:layout_alignStart="@+id/view_opportunity_number_of_students_text"
+            android:layout_below="@+id/view_opportunity_number_of_students_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/number_of_students"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_opportunity_number_of_students"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_opportunity_description_text"
+            android:layout_alignStart="@+id/view_opportunity_description_text"
+            android:layout_below="@+id/view_opportunity_description_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:hint="@string/description"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_faculty_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_opportunity_description"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/faculty_name"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_faculty_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_opportunity_faculty_name_text"
+            android:layout_alignStart="@+id/view_opportunity_faculty_name_text"
+            android:layout_below="@+id/view_opportunity_faculty_name_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/faculty_name"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_faculty_ucid_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view_opportunity_faculty_name"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/faculty_ucid"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/view_opportunity_faculty_ucid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_opportunity_faculty_ucid_text"
+            android:layout_alignStart="@+id/view_opportunity_faculty_ucid_text"
+            android:layout_below="@+id/view_opportunity_faculty_ucid_text"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:ems="10"
+            android:hint="@string/faculty_ucid"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/showInterest"
-            android:layout_width="220dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/studentOpportunityViewTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_alignLeft="@+id/view_opportunity_faculty_ucid"
+            android:layout_alignStart="@+id/view_opportunity_faculty_ucid"
+            android:layout_below="@+id/view_opportunity_faculty_ucid"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/rounded_textbox_red_outline"
+            android:ems="10"
+            android:padding="10dp"
+            android:text="Show Interest"
             android:onClick="showInterest"
-            android:background="@drawable/rounded_button"
-            android:gravity="center"
-            android:text="@string/show_interest"
-            android:textColor="@color/white" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
 
     </RelativeLayout>
-
 </ScrollView>

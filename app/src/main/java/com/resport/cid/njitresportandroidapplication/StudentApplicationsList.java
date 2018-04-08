@@ -106,7 +106,7 @@ public class StudentApplicationsList extends AppCompatActivity
                     position = app.getString("position");
                     category = app.getString("category");
                     categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
-                    facultyName = app.getString("name");
+                    facultyName = app.getString("facultyName");
                     email = app.getString("email");
                     timestamp = app.getString("timestamp");
                     status = app.getString("status");
@@ -133,10 +133,12 @@ public class StudentApplicationsList extends AppCompatActivity
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(StudentApplicationsList.this, StudentApplicationView.class)
                         .putExtra("appId" , id)
-                        .putExtra("status", status.toString())
-                        .putExtra("Application", "Name: " + appItem.getName() + "\n\nCollege: " + appItem.getCollege()
-                                + " \n\nDescription: " + appItem.getDescription()
-                                + " \n\nFaculty: " + appItem.getFacultyName() + " \n\nFaculty UCID: " + appItem.getUCID()));
+                        .putExtra("status", appItem.getStatus())
+                        .putExtra("Name", appItem.getName())
+                        .putExtra("College", appItem.getCollege())
+                        .putExtra("Description", appItem.getDescription())
+                        .putExtra("FacultyName", appItem.getFacultyName())
+                        .putExtra("FacultyUCID", appItem.getUCID()));
             }
         });
 

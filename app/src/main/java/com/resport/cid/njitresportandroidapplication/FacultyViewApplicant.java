@@ -98,7 +98,7 @@ public class FacultyViewApplicant extends AppCompatActivity
         facultyViewName.setText(name);
         facultyViewEmail.setText(email);
         facultyViewMajor.setText(major);
-        facultyViewGPA.setText(name);
+        facultyViewGPA.setText(gpa);
         facultyViewClassStanding.setText(classStanding);
         facultyViewCollege.setText(college);
 
@@ -134,7 +134,7 @@ public class FacultyViewApplicant extends AppCompatActivity
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("message/rfc822");
-                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{ucid+"@njit.edu"});
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{ ucid+"@njit.edu" });
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
