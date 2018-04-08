@@ -54,7 +54,7 @@ public class FacultyOppAdapter extends ArrayAdapter<FacultyOpp> {
             }
 
             if (tt4 != null) {
-                if(p.getExpiration().contains("1970")) {
+                if(p.getExpiration().contains("1970") || p.getExpiration().contains("1969")) {
                     tt4.setTextColor(tt4.getResources().getColor(R.color.accepted));
                     tt4.setBackgroundResource(R.drawable.rounded_textbox_green_outline);
                     tt4.setText("No Expiration!");
