@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundWhite"
     android:fillViewport="true"
     tools:context=".StudentApplicationsList">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dip" >
 
 
         <EditText
@@ -77,8 +71,7 @@
             android:layout_marginTop="12dp"
             android:dividerHeight="10.0sp"
             android:divider="@color/backgroundWhite"
-            android:clickable="true" />
+            android:clickable="true"
+            android:padding="15dp"/>
 
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

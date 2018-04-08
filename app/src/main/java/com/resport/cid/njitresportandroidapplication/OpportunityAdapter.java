@@ -102,7 +102,7 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
             }
 
             if (tt12 != null) {
-                if(p.getExpiration().contains("1969")) {
+                if(p.getExpiration().contains("1970")) {
                     tt12.setTextColor(tt12.getResources().getColor(R.color.accepted));
                     tt12.setBackgroundResource(R.drawable.rounded_textbox_green_outline);
                     tt12.setText("No Expiration!");
