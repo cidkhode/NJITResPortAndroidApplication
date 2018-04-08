@@ -9,8 +9,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -68,6 +70,21 @@ public class StudentOpportunityView extends AppCompatActivity
         oppDescription = (TextView) findViewById(R.id.view_opportunity_description);
         oppFacultyName = (TextView) findViewById(R.id.view_opportunity_faculty_name);
         oppFacultyUCID = (TextView) findViewById(R.id.view_opportunity_faculty_ucid);
+
+        oppDescription.setMovementMethod(new ScrollingMovementMethod());
+
+        oppDescription.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                switch (event.getAction() & MotionEvent.ACTION_MASK){
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("Name");
         String college = intent.getStringExtra("College");

@@ -8,10 +8,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 public class StudentApplicationView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
+    ScrollView scrollView_student_application_view;
     Button contactFaculty;
     TextView appName;
     TextView appCollege;
@@ -56,6 +60,7 @@ public class StudentApplicationView extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        scrollView_student_application_view = (ScrollView) findViewById(R.id.scrollView_student_application_view);
         contactFaculty = (Button) findViewById(R.id.contactFaculty);
         appName = (TextView) findViewById(R.id.view_application_name);
         appCollege = (TextView) findViewById(R.id.view_application_college);
@@ -63,6 +68,20 @@ public class StudentApplicationView extends AppCompatActivity
         appFacultyName = (TextView) findViewById(R.id.view_application_faculty_name);
         appFacultyUCID = (TextView) findViewById(R.id.view_application_faculty_ucid);
         appStatus = (TextView) findViewById(R.id.view_application_faculty_status);
+
+        appDescription.setMovementMethod(new ScrollingMovementMethod());
+
+        appDescription.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                switch (event.getAction() & MotionEvent.ACTION_MASK){
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         Intent intent = getIntent();
         statusInt = intent.getIntExtra("status",0);
@@ -95,6 +114,26 @@ public class StudentApplicationView extends AppCompatActivity
         }
         appStatus.setText(status);
         appId = intent.getStringExtra("appId");
+
+  /*      scrollView_student_application_view.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                appDescription.getParent().requestDisallowInterceptTouchEvent(false);
+
+                return false;
+            }
+        });
+*/
+/*
+        appDescription.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                appDescription.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });*/
     }
 
     @Override

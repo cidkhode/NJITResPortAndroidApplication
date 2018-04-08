@@ -126,6 +126,8 @@
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:ems="10"
             android:maxLines="5"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
             android:hint="@string/description"
             android:padding="10dp"
