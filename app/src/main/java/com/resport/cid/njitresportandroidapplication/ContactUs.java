@@ -77,7 +77,9 @@ public class ContactUs extends AppCompatActivity
                 JSONObject responseJSON = new JSONObject(response.body().string());
                 String msg1 = responseJSON.getString("msg");
                 Toast.makeText(ContactUs.this, msg1, Toast.LENGTH_LONG).show();
-
+                if(msg1.contains("successfully")) {
+                    msg.setText("");
+                }
 
             } catch (IOException exception) {
                 exception.printStackTrace();
