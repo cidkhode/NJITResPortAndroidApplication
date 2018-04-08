@@ -133,19 +133,21 @@ public class StudentOpportunitiesList extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();}
         }
-
-        OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
-        listView.setAdapter(customAdapter);
+        if(opps.size() == 0) {
+            Toast.makeText(StudentOpportunitiesList.this, "There are no opportunities to show. Check back another time!", Toast.LENGTH_LONG).show();
+        } else {
+            OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+            listView.setAdapter(customAdapter);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Opportunity oppItem = (Opportunity) listView.getAdapter().getItem(i);
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Opportunity oppItem = (Opportunity) listView.getAdapter().getItem(i);
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(StudentOpportunitiesList.this, StudentOpportunityView.class)
-                        .putExtra("oppId" , oppItem.getOppId())
+                        .putExtra("oppId", oppItem.getOppId())
                         .putExtra("Name", oppItem.getOppName())
                         .putExtra("College", oppItem.getOppCollege())
                         .putExtra("Number", oppItem.getNumStudents())
@@ -204,10 +206,14 @@ public class StudentOpportunitiesList extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
-            listView.setAdapter(customAdapter);
-        }
 
+            if(opps.size() == 0) {
+                Toast.makeText(StudentOpportunitiesList.this, "There are no opportunities to show. Check back another time!", Toast.LENGTH_LONG).show();
+            } else {
+                OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+                listView.setAdapter(customAdapter);
+            }
+        }
     }
 
     public void clear(View view) {
@@ -241,8 +247,12 @@ public class StudentOpportunitiesList extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
-        listView.setAdapter(customAdapter);
+        if(opps.size() == 0) {
+            Toast.makeText(StudentOpportunitiesList.this, "There are no opportunities to show. Check back another time!", Toast.LENGTH_LONG).show();
+        } else {
+            OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+            listView.setAdapter(customAdapter);
+        }
     }
 
     @Override
@@ -264,7 +274,9 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     .header("Authorization", "Bearer " + temp)
                     .build();
             Response response = client.newCall(request).execute();
-            return response.body().string();
+            String responseBody = response.body().string();
+            //System.out.println("------------------------------BODY OF RESPONSE----------------------------\n" + responseBody + "\n----------------------------------------------------------------------");
+            return responseBody;
         } catch (IOException exception) {
             return "Error";
         }

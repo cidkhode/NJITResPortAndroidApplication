@@ -121,26 +121,29 @@ public class StudentApplicationsList extends AppCompatActivity
                 e.printStackTrace();}
         }
 
-        ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
-        studentsListView.setAdapter(customAdapter);
+        if(applied_opps.size() == 0) {
+            Toast.makeText(StudentApplicationsList.this, "You have not showed interest to any opportunity yet!", Toast.LENGTH_LONG).show();
+        } else {
+            ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
+            studentsListView.setAdapter(customAdapter);
 
-        studentsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Application appItem = (Application) studentsListView.getAdapter().getItem(i);
+            studentsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Application appItem = (Application) studentsListView.getAdapter().getItem(i);
 
-                //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
-                startActivity(new Intent(StudentApplicationsList.this, StudentApplicationView.class)
-                        .putExtra("appId" , id)
-                        .putExtra("status", appItem.getStatus())
-                        .putExtra("Name", appItem.getName())
-                        .putExtra("College", appItem.getCollege())
-                        .putExtra("Description", appItem.getDescription())
-                        .putExtra("FacultyName", appItem.getFacultyName())
-                        .putExtra("FacultyUCID", appItem.getUCID()));
-            }
-        });
+                    //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
+                    startActivity(new Intent(StudentApplicationsList.this, StudentApplicationView.class)
+                            .putExtra("appId", id)
+                            .putExtra("status", appItem.getStatus())
+                            .putExtra("Name", appItem.getName())
+                            .putExtra("College", appItem.getCollege())
+                            .putExtra("Description", appItem.getDescription())
+                            .putExtra("FacultyName", appItem.getFacultyName())
+                            .putExtra("FacultyUCID", appItem.getUCID()));
+                }
+            });
+        }
 
     }
 
@@ -186,8 +189,12 @@ public class StudentApplicationsList extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
-            studentsListView.setAdapter(customAdapter);
+            if(applied_opps.size() == 0) {
+                Toast.makeText(StudentApplicationsList.this, "No shown interest opportunities with this filter!", Toast.LENGTH_LONG).show();
+            } else {
+                ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
+                studentsListView.setAdapter(customAdapter);
+            }
         }
     }
 
@@ -216,8 +223,12 @@ public class StudentApplicationsList extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
-        studentsListView.setAdapter(customAdapter);
+        if (applied_opps.size() == 0) {
+            Toast.makeText(StudentApplicationsList.this, "You have not showed interest to any opportunity yet!", Toast.LENGTH_LONG).show();
+        } else {
+            ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
+            studentsListView.setAdapter(customAdapter);
+        }
     }
 
     public String loadAppliedOpportunities()

@@ -85,9 +85,12 @@ public class FacultyViewListOfOpp extends AppCompatActivity
         facultyOpps = new ArrayList<>();
         getInfo();
 
-        FacultyOppAdapter customAdapter = new FacultyOppAdapter(this, R.layout.layout_faculty_opp, facultyOpps);
-        facultyListView.setAdapter(customAdapter);
-
+        if(facultyOpps.size() == 0) {
+            Toast.makeText(FacultyViewListOfOpp.this, "You have not created any opportunities yet!", Toast.LENGTH_LONG).show();
+        } else {
+            FacultyOppAdapter customAdapter = new FacultyOppAdapter(this, R.layout.layout_faculty_opp, facultyOpps);
+            facultyListView.setAdapter(customAdapter);
+        }
         facultyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)

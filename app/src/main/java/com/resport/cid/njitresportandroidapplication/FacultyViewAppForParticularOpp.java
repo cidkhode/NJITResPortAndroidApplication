@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -104,9 +105,12 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        FacultyListApplicantAdapter customAdapter = new FacultyListApplicantAdapter(this, R.layout.layout_faculty_list_app, facultyListApps);
-        facultyListApp.setAdapter(customAdapter);
+        if(facultyListApps.size() == 0) {
+            Toast.makeText(FacultyViewAppForParticularOpp.this, "No applicants to show just yet. Check back another time!", Toast.LENGTH_LONG).show();
+        } else {
+            FacultyListApplicantAdapter customAdapter = new FacultyListApplicantAdapter(this, R.layout.layout_faculty_list_app, facultyListApps);
+            facultyListApp.setAdapter(customAdapter);
+        }
 
         facultyListApp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
