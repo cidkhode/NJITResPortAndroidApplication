@@ -24,6 +24,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/opportunityTitle"
         android:text="Description of research opportunity."
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="14sp" />
 
     <TextView
