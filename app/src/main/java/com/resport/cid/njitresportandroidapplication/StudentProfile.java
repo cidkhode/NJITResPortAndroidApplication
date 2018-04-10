@@ -1,8 +1,12 @@
 package com.resport.cid.njitresportandroidapplication;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +25,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +37,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.FileSystem;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -44,6 +55,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     boolean editMode = false;
     OkHttpClient client = new OkHttpClient();
     Button edit_save;
+    Button studentSelectFile;
     String ucid = "";
     String fname = "";
     String lname = "";
@@ -60,11 +72,13 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     JSONArray collegeInfo = null;
     JSONArray majorInfo = null;
     JSONArray classesInfo = null;
-
+    static String fileName = "";
+    static File resumeFile;
     ArrayList<String> student_colleges = new ArrayList<String>();
     ArrayList<String> student_majors = new ArrayList<String>();
     ArrayList<String> student_classes = new ArrayList<String>();
 
+    static TextView resume_file_path;
     static TextView student_name;
     static TextView student_email;
     static Spinner student_major;
@@ -73,13 +87,28 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
     static Spinner student_college;
     static CheckBox student_honors;
 
+    ArrayList<File> resumeFileNames; /*cannot be String,
+                                         since they are immutable,
+                                         and so if user keeps changing
+                                         files for resumes, the filepaths
+                                         will also change, but the String
+                                         variable for the filepath would
+                                         be the first filepath, and would
+                                         not change after that*/
+
     ArrayAdapter<String> adapterColleges;
     ArrayAdapter<String> adapterMajors;
     ArrayAdapter<String> adapterClasses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //CAD Majors
+
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("---------REQUESTING PERMISSIONS-------");
+            requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10001);
+        }
+
+        resumeFileNames = new ArrayList<File>();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
@@ -95,6 +124,8 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         edit_save = (Button) findViewById(R.id.studentEditSave);
+        studentSelectFile = (Button) findViewById(R.id.studentSelectFile);
+        resume_file_path = (TextView) findViewById(R.id.filePath);
 
         student_name = (TextView) findViewById(R.id.studentName);
         student_email = (TextView) findViewById(R.id.studentEmail);
@@ -159,8 +190,57 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
         });
 
-        loadProfile();
+        studentSelectFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(editMode == false) {
+                    Toast.makeText(view.getContext(), "Please Click \"Edit Profile\" to Upload a Resume",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    new MaterialFilePicker()
+                            .withActivity(StudentProfile.this)
+                            .withRequestCode(1000)
+                            .withFilter(Pattern.compile(".*\\.pdf")) // Filtering files and directories by file name using regexp
+                            .withFilterDirectories(false) // Set directories filterable (false by default)
+                            .withHiddenFiles(true) // Show hidden files and folders
+                            .start();
+                }
+            }
+        });
 
+        loadProfile();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1000 && resultCode == RESULT_OK) {
+            String filePath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+            resume_file_path.setText("Filepath: " + filePath);
+            File file = new File(filePath);
+            if(resumeFileNames.size() == 0)
+                resumeFileNames.add(file);
+            else if(resumeFileNames.size() == 1)
+            {
+                resumeFileNames.set(0, file);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch(requestCode) {
+            case 1001: {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission granted!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(this, "Permission not granted!", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        }
     }
 
     public void loadInfo()
@@ -253,7 +333,6 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             {
                 honors=false;
                 honors1 = Boolean.toString(honors);
-                System.out.print("---------===honors====---------"+ honors1 +"-----"+ honors);
             }
 
             if (!TextUtils.isEmpty(gpa1)&&( Float.parseFloat(gpa1) > 4.0 || Float.parseFloat(gpa1) < 0.0)) {
@@ -276,31 +355,39 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
 
                 saveProfile(gpa1,major1,class1,college1, honors1);
             }
-
-
         }
     }
 
     public void saveProfile(String gpa1, String major1, String class1, String college1, String honors1)
     {
         String temp = readToken();
-        RequestBody formBody = new FormBody.Builder()
-                .add("gpa", gpa1)
-                .add("major", major1)
-                .add("class", class1)
-                .add("college", college1)
-                .add("honors", honors1)
-                .build();
+        MultipartBody.Builder formBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("gpa", gpa1)
+                .addFormDataPart("major", major1)
+                .addFormDataPart("class", class1)
+                .addFormDataPart("college", college1)
+                .addFormDataPart("honors", honors1);
+        if(resumeFileNames.size() > 0) {
+            resume_file_path.setText(resumeFileNames.get(0).getName());
+            formBody.addFormDataPart("resume",resumeFileNames.get(0).getName(),
+                            RequestBody.create(MediaType.parse("application/pdf"),
+                            resumeFileNames.get(0)));
+        }
+
+        MultipartBody form = formBody.build();
         try {
             Request request = new Request.Builder()
                     .url("https://web.njit.edu/~db329/resport/api/v1/user")
                     .header("Authorization", "Bearer " + temp)
-                    .post(formBody)
+                    .post(form)
                     .build();
             Response response = null;
             response = client.newCall(request).execute();
+            System.out.println(response.body().string());
+            Toast.makeText(this, "Save successful!", Toast.LENGTH_LONG).show();
         } catch (IOException exception) {
-
+            Toast.makeText(this, "Save failed.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -377,6 +464,7 @@ public class StudentProfile extends AppCompatActivity implements NavigationView.
             Response response = client.newCall(request).execute();
             parseInformation(response.body().string());
         } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 

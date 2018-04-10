@@ -217,6 +217,18 @@
             android:text="@string/select_upload_fire"
             android:textColor="@color/white" />
 
+        <TextView
+            android:id="@+id/filePath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/studentSelectFile"
+            android:layout_alignStart="@+id/studentSelectFile"
+            android:layout_below="@+id/studentSelectFile"
+            android:layout_marginBottom="13dp"
+            android:text="Filepath: "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
     </RelativeLayout>
 
 </ScrollView>
