@@ -22,4 +22,5 @@
     <color name="contactColor">#327BC8</color>
     <color name="acceptStudentDisabled">#30008000</color>
     <color name="declineStudentDisabled">#30CC2127</color>
+    <color name="disabledRed">#30CC2127</color>
 </resources>

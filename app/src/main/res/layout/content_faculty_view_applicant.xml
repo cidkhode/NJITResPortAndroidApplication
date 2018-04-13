@@ -198,13 +198,29 @@
             android:text="Honors" />
 
         <Button
+            android:id="@+id/view_student_resume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_student_applicant_honors"
+            android:layout_alignStart="@+id/view_student_applicant_honors"
+            android:layout_below="@+id/view_student_applicant_honors"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:enabled="false"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/rounded_textbox_red_disabled_outline"
+            android:textColor="@color/disabledRed"
+            android:text="View Resume" />
+
+        <Button
             android:id="@+id/facultyAccept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="13dp"
             android:layout_alignLeft="@+id/view_student_applicant_college"
             android:layout_alignStart="@+id/view_student_applicant_college"
-            android:layout_below="@+id/view_student_applicant_honors"
+            android:layout_below="@+id/view_student_resume"
             android:background="@drawable/rounded_textbox_green_outline"
             android:textColor="@color/accepted"
             android:paddingLeft="5dp"
@@ -229,7 +245,7 @@
             android:id="@+id/facultyContactStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view_student_applicant_honors"
+            android:layout_below="@+id/view_student_resume"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_textbox_blue_outline"
             android:paddingLeft="5dp"

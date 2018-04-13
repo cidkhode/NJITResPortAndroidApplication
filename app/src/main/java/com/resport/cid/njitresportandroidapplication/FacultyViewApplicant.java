@@ -1,6 +1,7 @@
 package com.resport.cid.njitresportandroidapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
@@ -43,6 +44,7 @@ public class FacultyViewApplicant extends AppCompatActivity
     String gpa;
     String classStanding;
     String college;
+    String link;
     boolean honors;
 
     TextView facultyViewName;
@@ -59,6 +61,8 @@ public class FacultyViewApplicant extends AppCompatActivity
     Button facultyDecline;
     Button facultyAccept;
     Button facultyContactStudent;
+    Button viewResume;
+
     Integer status;
 
     @Override
@@ -89,6 +93,7 @@ public class FacultyViewApplicant extends AppCompatActivity
         facultyAccept = (Button) findViewById(R.id.facultyAccept);
         facultyDecline = (Button) findViewById(R.id.facultyDecline);
         facultyContactStudent = (Button) findViewById(R.id.facultyContactStudent);
+        viewResume = (Button) findViewById(R.id.view_student_resume);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("Name");
@@ -101,6 +106,21 @@ public class FacultyViewApplicant extends AppCompatActivity
         appid = Integer.parseInt(intent.getStringExtra("appid"));
         status = Integer.parseInt(intent.getStringExtra("status"));
         honors = intent.getExtras().getBoolean("Honors");
+        link = intent.getStringExtra("Resume");
+
+        System.out.println("--------LINK------ " + link);
+
+        if(link.contains("http")) {
+            viewResume.setEnabled(true);
+            viewResume.setBackgroundResource(R.drawable.rounded_corner_button_red_outline);
+            viewResume.setTextColor(viewResume.getResources().getColor(R.color.colorPrimary));
+        }
+        else
+        {
+            viewResume.setEnabled(false);
+            viewResume.setBackgroundResource(R.drawable.rounded_textbox_red_disabled_outline);
+            viewResume.setTextColor(viewResume.getResources().getColor(R.color.disabledRed));
+        }
 
         facultyViewName.setText(name);
         facultyViewEmail.setText(email);
@@ -134,6 +154,13 @@ public class FacultyViewApplicant extends AppCompatActivity
                 facultyDecline.setTextColor(facultyDecline.getResources().getColor(R.color.declineStudentDisabled));
                 facultyAccept.setTextColor(facultyAccept.getResources().getColor(R.color.acceptStudentDisabled));
                 Toast.makeText(FacultyViewApplicant.this, "Declined student", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        viewResume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)).setPackage("com.google.android.apps.docs"));
             }
         });
 

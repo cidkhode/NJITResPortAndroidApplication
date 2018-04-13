@@ -26,8 +26,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -36,7 +39,6 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     ArrayList<String> apps = new ArrayList<String>();
-    //EditText facultyListOfApplicantsForParticularOpp ;
     ListView facultyListApp;
     ArrayList<FacultyListApplicant> facultyListApps;
     String information ;
@@ -44,6 +46,7 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
     int appid ;
     int status ;
     Long timestamp ;
+    String applicantUCID;
     String ucid ;
     String name ;
     Double gpa ;
@@ -117,6 +120,8 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
             {
                 FacultyListApplicant oppItem = (FacultyListApplicant) facultyListApp.getAdapter().getItem(i);
+                applicantUCID = oppItem.getUcid();
+                String link = checkIfResumeExists();
 
                 //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                 startActivity(new Intent(FacultyViewAppForParticularOpp.this, FacultyViewApplicant.class)
@@ -129,7 +134,8 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                         .putExtra("GPA", Double.toString(oppItem.getGpa()))
                         .putExtra("Class", oppItem.getClassStanding())
                         .putExtra("College", oppItem.getCollege())
-                        .putExtra("Honors", oppItem.getHonors()));
+                        .putExtra("Honors", oppItem.getHonors())
+                        .putExtra("Resume", link));
             }
         });
     }
@@ -264,6 +270,49 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
         }
         return "ERROR!";
     }
+
+
+    public String checkIfResumeExists()
+    {
+        String temp = readToken();
+        HttpUrl resumeUrl = new HttpUrl.Builder()
+                .scheme("https")
+                .host("web.njit.edu")
+                .addPathSegment("~db329")
+                .addPathSegment("resport")
+                .addPathSegment("api")
+                .addPathSegment("v1")
+                .addPathSegment("resume")
+                .addPathSegment(applicantUCID)
+                .addQueryParameter("ucid", applicantUCID)
+                .build();
+        try {
+            System.out.println("----URL---------------URL----" + resumeUrl.toString());
+            Request request = new Request.Builder()
+                    .header("Authorization", "Bearer " + temp)
+                    .url(resumeUrl)
+                    .build();
+            Response response = null;
+            response = client.newCall(request).execute();
+            String responseString = response.body().string();
+            System.out.println("------------RESUME STUFF------------- " + responseString);
+            JSONObject jsonObject = new JSONObject(responseString);
+
+            if(jsonObject.length() == 4) {
+                String data = jsonObject.getString("data");
+                JSONObject dataJSON = new JSONObject(data);
+                String link = dataJSON.getString("resume");
+                return link;
+            }
+            else
+                return "Not uploaded resume yet!";
+        } catch (IOException exception) {
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "ERROR!";
+    }
+
     public void clearToken() {
         File path = getApplicationContext().getFilesDir();
         File tokenFile = new File(path, "token.txt");
