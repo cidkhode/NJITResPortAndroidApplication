@@ -26,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
     EditText ucidLogin;
     EditText passwordLogin;
     OkHttpClient client = new OkHttpClient();
+    OkHttpConnection conn = new OkHttpConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        client = conn.getNewHttpClient();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         ucidLogin = (EditText) findViewById(R.id.ucid_login);
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             if (findRole(readToken()).equals("student")) {
+                writeToken(readToken());
                 Intent intent = new Intent(MainActivity.this, StudentProfile.class);
                 intent.putExtra("Source", "from MainActivity");
                 intent.putExtra("Token", readToken());
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 writeToken(readToken());
                 Intent intent = new Intent(MainActivity.this, FacultyProfile.class);
                 intent.putExtra("Source", "from MainActivity");
+                intent.putExtra("Token", readToken());
                 finish();
                 startActivity(intent);
             }
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         return "ERROR!";
     }
 
-   public String post(String user, String pass)  {
+    public String post(String user, String pass)  {
         String temp = "test";
         RequestBody formBody = new FormBody.Builder()
                 .add("user", user)
@@ -124,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
             response = client.newCall(request).execute();
             return (getTokenFromJSON(response.body().string()));
         } catch (IOException exception) {
+            exception.printStackTrace();
+            System.err.println("ERROR! UNABLE TO CONNECT TO API");
+            exception.printStackTrace();
+            System.err.println("STACK TRACE DONE");
         }
         return temp;
     }
@@ -134,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         byte[] payload = Base64.decode(body, Base64.URL_SAFE);
 
         try {
-
             String json = new String(payload, "UTF-8");
             JSONObject jObj = new JSONObject(json);
             String role = jObj.getString("role");
@@ -148,11 +155,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-        MainActivity example = new MainActivity();
         String user = ucidLogin.getText().toString();
         String pass = passwordLogin.getText().toString();
-        String tokenString = example.post(user,pass);
-          if (!tokenString.equals("ERROR!")) {
+        String tokenString = post(user,pass);
+        System.out.println("--------------------------------------------------LOGIN--------------------------" + tokenString);
+        if (!tokenString.equals("ERROR!")) {
             if (findRole(tokenString).equals("student")) {
                 writeToken(tokenString);
                 Intent intent = new Intent(MainActivity.this, StudentProfile.class);
