@@ -225,6 +225,16 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                 }
             }, 250);
             drawer.closeDrawer(GravityCompat.START);
+        }else if (id == R.id.fac_edit_opp) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyProfile.this, EditOpportunity.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_contact) {
             new Handler().postDelayed(new Runnable() {
                 @Override

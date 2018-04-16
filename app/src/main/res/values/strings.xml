@@ -13,6 +13,7 @@
     <string name="email">Email</string>
     <string name="preferred_email">Preferred Email</string>
     <string name="edit_save">Edit Profile</string>
+    <string name="edit_save_opp">Edit Opportunity</string>
     <string name="title_activity_faculty_profile">Faculty Profile</string>
     <string name="faculty_last_name">Faculty Last Name</string>
     <string name="faculty_email">Faculty Email</string>
@@ -157,5 +158,7 @@
     <string name="student_college">Student College</string>
     <string name="decline">Decline</string>
     <string name="accept">Accept</string>
+    <string name="title_activity_edit_opportunity">editOpportunity</string>
+    <string name="title_activity_edit_specific_opp">EditSpecificOpp</string>
 
 </resources>

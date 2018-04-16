@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.resport.cid.njitresportandroidapplication">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,17 +26,15 @@
         <activity
             android:name=".StudentProfile"
             android:label="@string/title_activity_student_profile"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".FacultyProfile"
             android:label="@string/title_activity_faculty_profile"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".ContactUs"
             android:label="@string/title_activity_contact_us"
@@ -49,14 +50,14 @@
         <activity
             android:name=".CreateOpportunity"
             android:label="@string/title_activity_create_opportunity"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".FacultyViewApplicant"
             android:label="@string/title_activity_faculty_view_applicant"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".FacultyViewAppForParticularOpp"
             android:label="@string/title_activity_faculty_view_app_opp_list"
@@ -64,27 +65,36 @@
         <activity
             android:name=".FacultyViewListOfOpp"
             android:label="@string/title_activity_faculty_view_app_list"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".StudentOpportunitiesList"
             android:label="@string/title_activity_student_opportunities_list"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".StudentOpportunityView"
             android:label="@string/title_activity_student_opportunity_view"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".StudentApplicationsList"
             android:label="@string/title_activity_student_applications_list"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".StudentApplicationView"
             android:label="@string/title_activity_student_application_view"
-            android:theme="@style/AppTheme" android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditOpportunity"
+            android:label="@string/title_activity_edit_opportunity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditSpecificOpp"
+            android:label="@string/title_activity_edit_specific_opp"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

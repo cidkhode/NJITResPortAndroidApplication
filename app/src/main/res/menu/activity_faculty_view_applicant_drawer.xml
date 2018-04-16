@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_people_outline_black_24dp"
             android:title="Status" />
         <item
+            android:id="@+id/fac_edit_opp"
+            android:icon="@drawable/ic_create_black_24dp"
+            android:title="Edit Opportunity" />
+        <item
             android:id="@+id/fac_contact"
             android:icon="@drawable/ic_message_black_24dp"
             android:title="Contact Us" />
