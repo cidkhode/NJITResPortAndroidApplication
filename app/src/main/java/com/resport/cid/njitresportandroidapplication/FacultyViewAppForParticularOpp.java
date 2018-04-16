@@ -220,6 +220,16 @@ public class FacultyViewAppForParticularOpp extends AppCompatActivity
                 }
             }, 250);
             drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.fac_edit_opp) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FacultyViewAppForParticularOpp.this, EditOpportunity.class).addFlags(FLAG_ACTIVITY_NO_ANIMATION );
+                    startActivity(intent);
+                    finish();
+                }
+            }, 250);
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.fac_applicants) {
             new Handler().postDelayed(new Runnable() {
                 @Override
