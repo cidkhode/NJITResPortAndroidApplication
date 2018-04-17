@@ -106,6 +106,7 @@ public class EditOpportunity extends AppCompatActivity
                         .putExtra("minGPA", Double.toString(appItem.getMinGPA()))
                         .putExtra("clg", appItem.getCollege())
                         .putExtra("category", appItem.getCategory())
+                        .putExtra("expirationInt", appItem.getExpiryDate().toString())
                         .putExtra("Expiration", appItem.getExpiration()));
             }
         });
@@ -163,9 +164,7 @@ public class EditOpportunity extends AppCompatActivity
                     expirationDate = new SimpleDateFormat("MM/dd/yyyy")
                             .format(new Date(expirationDateInt * 1000L));
 
-                    editOpps.add(new EditOpp(id, oppName, description, position, maxStudents, hours, minGPA, clg, category, expirationDate));
-                System.out.println("==============================="+oppName+"======"+description+"======"+position+"======"+maxStudents+"======"+hours+"======"+minGPA+"======"+clg+"======"+category+"======"+expirationDate);
-
+                    editOpps.add(new EditOpp(id, oppName, description, position, maxStudents, hours, minGPA, clg, category, expirationDate, expirationDateInt));
                 }
             }
         }

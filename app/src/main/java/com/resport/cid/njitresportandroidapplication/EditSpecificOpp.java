@@ -70,6 +70,9 @@ public class EditSpecificOpp extends AppCompatActivity
     String expiration="";
     String info;
     Integer oppID;
+    String expiryDate;
+    String tempDate;
+    Integer eDate;
 
     DatePickerDialog datePickerDialog;
     static EditText createOpportunityName;
@@ -99,7 +102,6 @@ public class EditSpecificOpp extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        editMode = false;
         datePickerDialog = new DatePickerDialog(
                 this, EditSpecificOpp.this, Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
@@ -120,7 +122,6 @@ public class EditSpecificOpp extends AppCompatActivity
         createOpportunityJobTitle.setSelection(createOpportunityJobTitle.getText().length());
         createOpportunityNumberOfStudents.setSelection(createOpportunityNumberOfStudents.getText().length());
         createOpportunityExpectedHoursPerWeek.setSelection(createOpportunityExpectedHoursPerWeek.getText().length());
-        createOpportunityDescription.setSelection(createOpportunityDescription.getText().length());
         createOpportunityMinGPA.setSelection(createOpportunityMinGPA.getText().length());
 
         getIds();
@@ -146,8 +147,14 @@ public class EditSpecificOpp extends AppCompatActivity
         createOpportunityCategory.setSelection(intent.getIntExtra("category",0)-1);
         oppID = Integer.parseInt(intent.getStringExtra("Id"));
 
+        eDate = Integer.parseInt(intent.getStringExtra("expirationInt"));
+
         if(intent.getStringExtra("Expiration").contains("1969") || intent.getStringExtra("Expiration").contains("1970")){}
-        else{createOpportunityExpirationDate.setText(intent.getStringExtra("Expiration"));}
+        else{
+            tempDate = intent.getStringExtra("Expiration");
+            createOpportunityExpirationDate.setText(tempDate);}
+
+
 
 
         createOpportunityName.setEnabled(false);
@@ -200,7 +207,6 @@ public class EditSpecificOpp extends AppCompatActivity
         else
         {
             editMode = false;
-
             oppName = createOpportunityName.getText().toString();
             jobTitle = createOpportunityJobTitle.getText().toString();
             maxNum1 = createOpportunityNumberOfStudents.getText().toString();
@@ -209,7 +215,9 @@ public class EditSpecificOpp extends AppCompatActivity
             college1 = Long.toString(createOpportunityOppCollege.getSelectedItemId()+1);
             category1 = Long.toString(createOpportunityCategory.getSelectedItemId()+1);
             gpa1 = createOpportunityMinGPA.getText().toString();
-            //expiration = createOpportunityExpirationDate.getText().toString();
+            expiryDate = createOpportunityExpirationDate.getText().toString();
+
+            saveOpp(oppName,jobTitle,maxNum1,hours1,details,college1,category1,gpa1,expiryDate,eDate);
 
             submit.setText("Edit Opportunity");
             createOpportunityName.setEnabled(false);
@@ -233,18 +241,14 @@ public class EditSpecificOpp extends AppCompatActivity
             createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
             createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
 
-            saveOpp(oppName,jobTitle,maxNum1,hours1,details,college1,category1,gpa1);
-
-
-
         }
     }
 
-    public void saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA)
+    public void saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA, String expiry, Integer eDateInt)
     {
-            String temp = readToken();
+        String temp = readToken();
             RequestBody formBody = null;
-            if(createOpportunityExpirationDate.getText().toString().equals("Select Date...")) {
+            if(expiry.equals("Select Date...")) {
                 formBody = new FormBody.Builder()
                         .add("id", oppID.toString())
                         .add("name", name)
@@ -255,6 +259,21 @@ public class EditSpecificOpp extends AppCompatActivity
                         .add("college", colleges)
                         .add("category", categories)
                         .add("minGPA", minGPA)
+                        .build();
+            }
+            else if(expiry.equals(tempDate)) {
+
+                formBody = new FormBody.Builder()
+                        .add("id", oppID.toString())
+                        .add("name", name)
+                        .add("description", desc)
+                        .add("position", title)
+                        .add("maxStudents", maxStudents)
+                        .add("hoursWeekly", hoursWeekly)
+                        .add("college", colleges)
+                        .add("category", categories)
+                        .add("minGPA", minGPA)
+                        .add("deadline", eDateInt.toString())
                         .build();
             }
             else
@@ -283,16 +302,16 @@ public class EditSpecificOpp extends AppCompatActivity
                 Response response = null;
                 response = client.newCall(request).execute();
                 String res = (response.body().string());
-                try {
-                    JSONObject responseJSON = new JSONObject(res);
-                    String msg = responseJSON.getString("msg");
-                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                JSONObject response1 = new JSONObject(res);
+                String msg = response1.getString("msg");
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+
+
             } catch (IOException exception) {
                 exception.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
     }
 

@@ -7,7 +7,7 @@
     android:background="@color/backgroundWhite"
     android:layout_marginTop="?android:attr/actionBarSize"
     android:fillViewport="true"
-    tools:context=".CreateOpportunity">
+    tools:context=".EditSpecificOpp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
             android:onClick="updateOpp"
             android:background="@drawable/rounded_corner_button"
             android:text="@string/edit_save_opp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            tools:ignore="OnClick" />
 
         <TextView
             android:id="@+id/faculty_create_opportunity_name_text"
@@ -70,8 +71,7 @@
         <EditText
             android:id="@+id/createOpportunityDescription"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:gravity="top"
+            android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
             android:layout_alignLeft="@+id/faculty_create_opportunity_description_text"
@@ -81,7 +81,11 @@
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
             android:ems="10"
+            android:maxLines="4"
             android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
             android:hint="@string/description" />
 
         <TextView

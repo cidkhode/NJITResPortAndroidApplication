@@ -18,8 +18,9 @@ public class EditOpp {
     Integer clg;
     Integer category;
     String expiration;
+    Integer expiryDate;
 
-    public EditOpp(String id, String name, String description, String position, Integer num, Integer hours, Double minGPA, Integer clg, Integer category, String expiration)
+    public EditOpp(String id, String name, String description, String position, Integer num, Integer hours, Double minGPA, Integer clg, Integer category, String expiration, Integer expiryDate)
     {
         this.id = id;
         this.name = name;
@@ -31,6 +32,7 @@ public class EditOpp {
         this.clg = clg;
         this.category = category;
         this.expiration = expiration;
+        this.expiryDate = expiryDate;
     }
 
     public String getId() {return id;}
@@ -58,6 +60,8 @@ public class EditOpp {
     public String getExpiration() {
         return expiration;
     }
+
+    public Integer getExpiryDate() {return expiryDate;}
 
 
 }
