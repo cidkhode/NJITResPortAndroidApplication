@@ -90,11 +90,14 @@
         <activity
             android:name=".EditOpportunity"
             android:label="@string/title_activity_edit_opportunity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".EditSpecificOpp"
             android:label= "@string/title_activity_edit_specific_opp"
-            android:theme="@style/AppTheme"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -135,6 +136,18 @@ public class EditSpecificOpp extends AppCompatActivity
 
         createOpportunityOppCollege.setAdapter(adapterColleges);
         createOpportunityCategory.setAdapter(adapterCategories);
+
+        createOpportunityDescription.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                switch (event.getAction() & MotionEvent.ACTION_MASK){
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         Intent intent = getIntent();
         createOpportunityName.setText(intent.getStringExtra("Name"));
