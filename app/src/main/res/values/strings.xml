@@ -158,7 +158,7 @@
     <string name="student_college">Student College</string>
     <string name="decline">Decline</string>
     <string name="accept">Accept</string>
-    <string name="title_activity_edit_opportunity">editOpportunity</string>
-    <string name="title_activity_edit_specific_opp">EditSpecificOpp</string>
+    <string name="title_activity_edit_opportunity">Viewing Your Opportunities</string>
+    <string name="title_activity_edit_specific_opp">Edit Opportunity</string>
 
 </resources>

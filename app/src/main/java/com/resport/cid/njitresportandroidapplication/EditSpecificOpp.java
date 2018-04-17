@@ -69,6 +69,7 @@ public class EditSpecificOpp extends AppCompatActivity
     Button submit;
     String expiration="";
     String info;
+    Integer oppID;
 
     DatePickerDialog datePickerDialog;
     static EditText createOpportunityName;
@@ -98,7 +99,7 @@ public class EditSpecificOpp extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        editMode = false;
         datePickerDialog = new DatePickerDialog(
                 this, EditSpecificOpp.this, Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
@@ -138,9 +139,36 @@ public class EditSpecificOpp extends AppCompatActivity
         createOpportunityName.setText(intent.getStringExtra("Name"));
         createOpportunityDescription.setText(intent.getStringExtra("Description"));
         createOpportunityJobTitle.setText(intent.getStringExtra("Position"));
+        createOpportunityMinGPA.setText(intent.getStringExtra("minGPA"));
+        createOpportunityOppCollege.setSelection(intent.getIntExtra("clg",0)-1);
+        createOpportunityNumberOfStudents.setText(intent.getStringExtra("maxStudents"));
+        createOpportunityExpectedHoursPerWeek.setText(intent.getStringExtra("hours"));
+        createOpportunityCategory.setSelection(intent.getIntExtra("category",0)-1);
+        oppID = Integer.parseInt(intent.getStringExtra("Id"));
+
+        if(intent.getStringExtra("Expiration").contains("1969") || intent.getStringExtra("Expiration").contains("1970")){}
+        else{createOpportunityExpirationDate.setText(intent.getStringExtra("Expiration"));}
 
 
+        createOpportunityName.setEnabled(false);
+        createOpportunityMinGPA.setEnabled(false);
+        createOpportunityOppCollege.setEnabled(false);
+        createOpportunityJobTitle.setEnabled(false);
+        createOpportunityNumberOfStudents.setEnabled(false);
+        createOpportunityExpectedHoursPerWeek.setEnabled(false);
+        createOpportunityCategory.setEnabled(false);
+        createOpportunityDescription.setEnabled(false);
+        createOpportunityExpirationDate.setEnabled(false);
 
+        createOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
     }
 
     public void updateOpp(View view) {
@@ -156,7 +184,6 @@ public class EditSpecificOpp extends AppCompatActivity
             createOpportunityExpectedHoursPerWeek.setEnabled(true);
             createOpportunityCategory.setEnabled(true);
             createOpportunityDescription.setEnabled(true);
-            createOpportunityMinGPA.setEnabled(true);
             createOpportunityExpirationDate.setEnabled(true);
 
             createOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_shadows);
@@ -167,10 +194,7 @@ public class EditSpecificOpp extends AppCompatActivity
             createOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_shadows);
             createOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_shadows);
             createOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_shadows);
             createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_shadows);
         }
 
         else
@@ -185,7 +209,7 @@ public class EditSpecificOpp extends AppCompatActivity
             college1 = Long.toString(createOpportunityOppCollege.getSelectedItemId()+1);
             category1 = Long.toString(createOpportunityCategory.getSelectedItemId()+1);
             gpa1 = createOpportunityMinGPA.getText().toString();
-            expiration = createOpportunityMinGPA.getText().toString();
+            //expiration = createOpportunityExpirationDate.getText().toString();
 
             submit.setText("Edit Opportunity");
             createOpportunityName.setEnabled(false);
@@ -196,7 +220,6 @@ public class EditSpecificOpp extends AppCompatActivity
             createOpportunityExpectedHoursPerWeek.setEnabled(false);
             createOpportunityCategory.setEnabled(false);
             createOpportunityDescription.setEnabled(false);
-            createOpportunityMinGPA.setEnabled(false);
             createOpportunityExpirationDate.setEnabled(false);
 
             createOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
@@ -209,8 +232,6 @@ public class EditSpecificOpp extends AppCompatActivity
             createOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
             createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
             createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
 
             saveOpp(oppName,jobTitle,maxNum1,hours1,details,college1,category1,gpa1);
 
@@ -222,48 +243,57 @@ public class EditSpecificOpp extends AppCompatActivity
     public void saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA)
     {
             String temp = readToken();
-//            RequestBody formBody = null;
-//            if(createOpportunityExpirationDate.getText().toString().equals("Select Date...")) {
-//                formBody = new FormBody.Builder()
-//                        .add("name", name)
-//                        .add("description", desc)
-//                        .add("position", title)
-//                        .add("maxStudents", maxStudents)
-//                        .add("hoursWeekly", hoursWeekly)
-//                        .add("college", colleges)
-//                        .add("category", categories)
-//                        .add("minGPA", minGPA)
-//                        .build();
-//            }
-//            else
-//            {
-//                int date = (int) (expirationDate.getTime() / 1000);
-//                formBody = new FormBody.Builder()
-//                        .add("name", name)
-//                        .add("description", desc)
-//                        .add("position", title)
-//                        .add("maxStudents", maxStudents)
-//                        .add("hoursWeekly", hoursWeekly)
-//                        .add("college", colleges)
-//                        .add("category", categories)
-//                        .add("minGPA", minGPA)
-//                        .add("deadline", Integer.toString(date))
-//                        .build();
-//                createOpportunityExpirationDate.setText("Select Date...");
-//            }
-//            try {
-//                Request request = new Request.Builder()
-//                        .url("https://web.njit.edu/~db329/resport/api/v1/opportunity")
-//                        .header("Authorization", "Bearer " + temp)
-//                        .post(formBody)
-//                        .build();
-//                Response response = null;
-//                response = client.newCall(request).execute();
-//                return (response.body().string());
-//            } catch (IOException exception) {
-//                exception.printStackTrace();
-//                return "Error";
-//            }
+            RequestBody formBody = null;
+            if(createOpportunityExpirationDate.getText().toString().equals("Select Date...")) {
+                formBody = new FormBody.Builder()
+                        .add("id", oppID.toString())
+                        .add("name", name)
+                        .add("description", desc)
+                        .add("position", title)
+                        .add("maxStudents", maxStudents)
+                        .add("hoursWeekly", hoursWeekly)
+                        .add("college", colleges)
+                        .add("category", categories)
+                        .add("minGPA", minGPA)
+                        .build();
+            }
+            else
+            {
+                int date = (int) (expirationDate.getTime() / 1000);
+                formBody = new FormBody.Builder()
+                        .add("id", oppID.toString())
+                        .add("name", name)
+                        .add("description", desc)
+                        .add("position", title)
+                        .add("maxStudents", maxStudents)
+                        .add("hoursWeekly", hoursWeekly)
+                        .add("college", colleges)
+                        .add("category", categories)
+                        .add("minGPA", minGPA)
+                        .add("deadline", Integer.toString(date))
+                        .build();
+                createOpportunityExpirationDate.setText("Select Date...");
+            }
+            try {
+                Request request = new Request.Builder()
+                        .url("https://web.njit.edu/~db329/resport/api/v1/edit_opportunity")
+                        .header("Authorization", "Bearer " + temp)
+                        .post(formBody)
+                        .build();
+                Response response = null;
+                response = client.newCall(request).execute();
+                String res = (response.body().string());
+                try {
+                    JSONObject responseJSON = new JSONObject(res);
+                    String msg = responseJSON.getString("msg");
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
     }
 
     public void getIds() {

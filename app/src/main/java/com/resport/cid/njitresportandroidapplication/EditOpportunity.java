@@ -47,7 +47,7 @@ public class EditOpportunity extends AppCompatActivity
     JSONObject responseJSON ;
     String data;
     JSONObject dataJSON ;
-    Integer opportunities ;
+    JSONArray opportunities ;
     JSONArray applications;
     JSONObject arrayItems ;
     JSONObject info ;
@@ -55,8 +55,12 @@ public class EditOpportunity extends AppCompatActivity
     String oppName ;
     String description ;
     String position;
-    JSONArray applicants;
-    String name;
+    Integer maxStudents;
+    Integer hours;
+    Double minGPA;
+    Integer clg;
+    Integer category;
+
     int expirationDateInt;
     String expirationDate = "";
 
@@ -79,7 +83,7 @@ public class EditOpportunity extends AppCompatActivity
 
         edit_opp_list = (ListView) findViewById(R.id.edit_opp_list);
         editOpps = new ArrayList<>();
-        getInfo();
+        getOpp();
 
         if(editOpps.size() == 0) {
             Toast.makeText(EditOpportunity.this, "You have not created any opportunities yet!", Toast.LENGTH_LONG).show();
@@ -97,12 +101,14 @@ public class EditOpportunity extends AppCompatActivity
                         .putExtra("Id", appItem.getId())
                         .putExtra("Description", appItem.getDescription())
                         .putExtra("Position", appItem.getPosition())
+                        .putExtra("maxStudents", appItem.getNum().toString())
+                        .putExtra("hours", appItem.getHours().toString())
+                        .putExtra("minGPA", Double.toString(appItem.getMinGPA()))
+                        .putExtra("clg", appItem.getCollege())
+                        .putExtra("category", appItem.getCategory())
                         .putExtra("Expiration", appItem.getExpiration()));
             }
         });
-
-
-
 
     }
 
@@ -116,12 +122,12 @@ public class EditOpportunity extends AppCompatActivity
         }
     }
 
-    public void getInfo(){
+    public void getOpp(){
         String result = "";
         String temp = readToken();
         try {
             Request request = new Request.Builder()
-                    .url("https://web.njit.edu/~db329/resport/api/v1/applications")
+                    .url("https://web.njit.edu/~db329/resport/api/v1/opportunities")
                     .header("Authorization", "Bearer " + temp)
                     .build();
             Response response = client.newCall(request).execute();
@@ -140,22 +146,26 @@ public class EditOpportunity extends AppCompatActivity
             {
                 data = responseJSON.getString("data");
                 dataJSON = new JSONObject(data);
-                opportunities = dataJSON.getInt("opportunities");
-                applications = dataJSON.getJSONArray("applications");
-                for(int i=0;i<applications.length();i++)
+                opportunities = dataJSON.getJSONArray("opportunities");
+                for(int i=0;i<opportunities.length();i++)
                 {
-                    arrayItems = applications.getJSONObject(i);
-                    info = arrayItems.getJSONObject("info");
+                    info = opportunities.getJSONObject(i);
                     id = info.getString("id");
                     oppName = info.getString("name");
                     description = info.getString("description");
                     position = info.getString("position");
+                    maxStudents = info.getInt("maxStudents");
+                    hours = info.getInt("hoursWeekly");
+                    minGPA = info.getDouble("minGPA");
+                    clg = info.getInt("college");
+                    category = info.getInt("category");
                     expirationDateInt = Integer.parseInt(info.getString("deadline"));
                     expirationDate = new SimpleDateFormat("MM/dd/yyyy")
                             .format(new Date(expirationDateInt * 1000L));
-                    applicants = arrayItems.getJSONArray("applicants");
 
-                    editOpps.add(new EditOpp(id, oppName, description, position, expirationDate, applicants));
+                    editOpps.add(new EditOpp(id, oppName, description, position, maxStudents, hours, minGPA, clg, category, expirationDate));
+                System.out.println("==============================="+oppName+"======"+description+"======"+position+"======"+maxStudents+"======"+hours+"======"+minGPA+"======"+clg+"======"+category+"======"+expirationDate);
+
                 }
             }
         }

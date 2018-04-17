@@ -14,7 +14,7 @@
             android:title="Create" />
         <item
             android:id="@+id/fac_edit_opp"
-            android:icon="@drawable/ic_create_black_24dp"
+            android:icon="@drawable/ic_content_copy_black_24dp"
             android:title="Edit Opportunity" />
         <item
             android:id="@+id/fac_applicants"
