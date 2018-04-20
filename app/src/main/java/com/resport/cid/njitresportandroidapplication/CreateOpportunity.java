@@ -11,9 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,12 +29,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Dictionary;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -60,7 +60,8 @@ public class CreateOpportunity extends AppCompatActivity
     String category1;
     String gpa1;
     Date expirationDate = null;
-    HashMap<String, String> map = new HashMap<String, String>();
+    HashMap<String, String> completeDegrees = new HashMap<String, String>();
+    HashMap<String, String> selectedDegrees = new HashMap<String, String>();
 
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
@@ -144,6 +145,16 @@ public class CreateOpportunity extends AppCompatActivity
     }
 
     public void createOpp(View view) {
+        StringBuilder sbTemp = new StringBuilder();
+        for(String s: createOpportunityMajors.getSelectedStrings()) {
+            if(completeDegrees.containsValue(s)) {
+                for (String key : completeDegrees.keySet()) {
+                    if (completeDegrees.get(key).equals(s)) {
+                        selectedDegrees.put(key, s);
+                    }
+                }
+            }
+        }
         oppName = createOpportunityName.getText().toString();
         jobTitle = createOpportunityJobTitle.getText().toString();
         maxNum1 = createOpportunityNumberOfStudents.getText().toString();
@@ -152,14 +163,17 @@ public class CreateOpportunity extends AppCompatActivity
         college1 = Long.toString(createOpportunityOppCollege.getSelectedItemId()+1);
         category1 = Long.toString(createOpportunityCategory.getSelectedItemId()+1);
         gpa1 = createOpportunityMinGPA.getText().toString();
-        if(map.isEmpty()) {
+        if(completeDegrees.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Add at least 1 tag(s) please!", Toast.LENGTH_LONG).show();
         } else {
             StringBuilder sb = new StringBuilder();
-            for(int i=0;i<map.size();i++) {
-                sb.append(map.get(Integer.toString(i)) + ",");
+            Iterator it = selectedDegrees.entrySet().iterator();
+            while(it.hasNext()) {
+                Map.Entry key_values = (Map.Entry) it.next();
+                if(it.hasNext()) {
+                    sb.append(key_values.getKey() + ",");
+                } else sb.append(key_values.getKey());
             }
-            sb.deleteCharAt(sb.lastIndexOf(","));
             String tagString = sb.toString();
             String result = saveOpp(oppName, jobTitle, maxNum1, hours1, details, college1, category1, gpa1, tagString);
             try {
@@ -175,11 +189,6 @@ public class CreateOpportunity extends AppCompatActivity
                 createOpportunityMajors.setItems(opportunity_majors);
                 createOpportunityDescription.setText("");
                 createOpportunityMinGPA.setText("");
-
-                map.clear();
-                opportunity_categories.clear();
-                opportunity_colleges.clear();
-                opportunity_majors.clear();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -277,7 +286,7 @@ public class CreateOpportunity extends AppCompatActivity
 
                 JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
                 for(int i=0;i<majorsInfo.length();i++) {
-                    map.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
+                    completeDegrees.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
                     opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
                 }
             }
