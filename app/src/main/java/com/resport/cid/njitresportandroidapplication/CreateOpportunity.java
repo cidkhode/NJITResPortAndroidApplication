@@ -136,21 +136,22 @@ public class CreateOpportunity extends AppCompatActivity
         createOpportunityOppCollege.setAdapter(adapterColleges);
         createOpportunityCategory.setAdapter(adapterCategories);
         createOpportunityMajors.setAdapter(adapterMajors);
-/*
+
         createOpportunityMajors.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 System.out.println("----------------OPENED----------------");
                 MajorsAdapter mA = (MajorsAdapter) createOpportunityMajors.getAdapter();
                 for(int i=0;i<mA.getCount();i++) {
-                    if(majors.contains(mA.getItem(i).getTitle())) {
+                    if(mA.getCheckedList().contains(mA.getItem(i).getTitle())) {
                         mA.getItem(i).setSelected(true);
                     }
                 }
 
                 return false;
             }
-        });*/
+        });
+        /*
         createOpportunityMajors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -160,11 +161,12 @@ public class CreateOpportunity extends AppCompatActivity
                 majors.add(text);
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
     }
 
     public void createOpp(View view) {
