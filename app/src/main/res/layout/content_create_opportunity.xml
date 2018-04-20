@@ -233,11 +233,11 @@
             android:layout_alignLeft="@+id/createOpportunityOppCollege"
             android:layout_alignStart="@+id/createOpportunityOppCollege"
             android:layout_below="@+id/createOpportunityCategory"
-            android:text="Category"
+            android:text="Tags"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <Spinner
+        <com.resport.cid.njitresportandroidapplication.MultiSelectionSpinner
             android:id="@+id/createOpportunityMajors"
             android:layout_width="match_parent"
             android:layout_height="45dp"

@@ -60,10 +60,10 @@ public class CreateOpportunity extends AppCompatActivity
 
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
-    ArrayList<MultiSelectMajors> opportunity_majors = new ArrayList<MultiSelectMajors>();
+    ArrayList<String> opportunity_majors = new ArrayList<String>();
     ArrayAdapter<String> adapterColleges ;
     ArrayAdapter<String> adapterCategories;
-    MajorsAdapter adapterMajors;
+    ArrayAdapter<String> adapterMajors;
     Button submitButton;
     String expiration="";
 
@@ -75,7 +75,7 @@ public class CreateOpportunity extends AppCompatActivity
     static EditText createOpportunityExpectedHoursPerWeek;
     static EditText createOpportunityDescription;
     static Spinner createOpportunityCategory;
-    static Spinner createOpportunityMajors;
+    static MultiSelectionSpinner createOpportunityMajors;
     static EditText createOpportunityMinGPA;
     static Button createOpportunityExpirationDate;
 
@@ -110,7 +110,7 @@ public class CreateOpportunity extends AppCompatActivity
         createOpportunityCategory = (Spinner) findViewById(R.id.createOpportunityCategory);
         createOpportunityDescription = (EditText) findViewById(R.id.createOpportunityDescription);
         createOpportunityMinGPA = (EditText) findViewById(R.id.createOpportunityMinGPA);
-        createOpportunityMajors = (Spinner) findViewById(R.id.createOpportunityMajors);
+        createOpportunityMajors = (MultiSelectionSpinner) findViewById(R.id.createOpportunityMajors);
         createOpportunityExpirationDate = (Button) findViewById(R.id.createOpportunityExpirationDate);
 
         createOpportunityName.setSelection(createOpportunityName.getText().length());
@@ -129,44 +129,15 @@ public class CreateOpportunity extends AppCompatActivity
                 this, android.R.layout.simple_spinner_item, opportunity_categories);
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        adapterMajors = new MajorsAdapter(
-                this, 0, opportunity_majors);
-        //adapterMajors.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterMajors = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, opportunity_majors);
+        adapterMajors.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        
 
         createOpportunityOppCollege.setAdapter(adapterColleges);
         createOpportunityCategory.setAdapter(adapterCategories);
         createOpportunityMajors.setAdapter(adapterMajors);
 
-        createOpportunityMajors.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                System.out.println("----------------OPENED----------------");
-                MajorsAdapter mA = (MajorsAdapter) createOpportunityMajors.getAdapter();
-                for(int i=0;i<mA.getCount();i++) {
-                    if(mA.getCheckedList().contains(mA.getItem(i).getTitle())) {
-                        mA.getItem(i).setSelected(true);
-                    }
-                }
-
-                return false;
-            }
-        });
-        /*
-        createOpportunityMajors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String text = ((MultiSelectMajors) createOpportunityMajors.getSelectedItem()).getTitle();
-                ((MultiSelectMajors) createOpportunityMajors.getSelectedItem()).setSelected(true);
-                System.out.println("------HERE-----     " + text);
-                majors.add(text);
-            }
-
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
     }
 
     public void createOpp(View view) {
@@ -286,12 +257,9 @@ public class CreateOpportunity extends AppCompatActivity
                     opportunity_categories.add(categoriesInfo.getJSONObject(i).getString("category"));
                 }
 
-                JSONArray majorsInfo = dataJSON.getJSONArray("majors");
+                JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
                 for(int i=0;i<majorsInfo.length();i++) {
-                    MultiSelectMajors msm = new MultiSelectMajors();
-                    msm.setSelected(false);
-                    msm.setTitle(majorsInfo.getJSONObject(i).getString("major"));
-                    opportunity_majors.add(msm);
+                    opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
                 }
 
             }
