@@ -74,6 +74,10 @@
         <item>Unpaid and For Credit</item>
     </string-array>
 
+    <string-array name="opportunity_tags">
+        <item>Select Tags...</item>
+    </string-array>
+
     <string-array name="buildings">
         <item>Select Building...</item>
         <item>Campbell Hall</item>

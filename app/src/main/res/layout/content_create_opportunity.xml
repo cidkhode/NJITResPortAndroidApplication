@@ -227,12 +227,36 @@
             android:entries="@array/opportunity_categories" />
 
         <TextView
+            android:id="@+id/faculty_create_opportunity_tags_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/createOpportunityOppCollege"
+            android:layout_alignStart="@+id/createOpportunityOppCollege"
+            android:layout_below="@+id/createOpportunityCategory"
+            android:text="Category"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/createOpportunityMajors"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:layout_alignLeft="@+id/faculty_create_opportunity_tags_text"
+            android:layout_alignStart="@+id/faculty_create_opportunity_tags_text"
+            android:layout_below="@+id/faculty_create_opportunity_tags_text"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:entries="@array/opportunity_tags" />
+
+        <TextView
             android:id="@+id/faculty_create_opportunity_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/createOpportunityCategory"
             android:layout_alignStart="@+id/createOpportunityCategory"
-            android:layout_below="@+id/createOpportunityCategory"
+            android:layout_below="@+id/createOpportunityMajors"
             android:text="Expiration Date"
             android:textColor="@color/black"
             android:textSize="18sp" />

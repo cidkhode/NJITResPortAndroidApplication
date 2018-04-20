@@ -10,16 +10,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -58,10 +57,13 @@ public class CreateOpportunity extends AppCompatActivity
     String category1;
     String gpa1;
     Date expirationDate = null;
+
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
+    ArrayList<MultiSelectMajors> opportunity_majors = new ArrayList<MultiSelectMajors>();
     ArrayAdapter<String> adapterColleges ;
     ArrayAdapter<String> adapterCategories;
+    MajorsAdapter adapterMajors;
     Button submitButton;
     String expiration="";
 
@@ -73,8 +75,11 @@ public class CreateOpportunity extends AppCompatActivity
     static EditText createOpportunityExpectedHoursPerWeek;
     static EditText createOpportunityDescription;
     static Spinner createOpportunityCategory;
+    static Spinner createOpportunityMajors;
     static EditText createOpportunityMinGPA;
     static Button createOpportunityExpirationDate;
+
+    ArrayList<String> majors = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +110,7 @@ public class CreateOpportunity extends AppCompatActivity
         createOpportunityCategory = (Spinner) findViewById(R.id.createOpportunityCategory);
         createOpportunityDescription = (EditText) findViewById(R.id.createOpportunityDescription);
         createOpportunityMinGPA = (EditText) findViewById(R.id.createOpportunityMinGPA);
+        createOpportunityMajors = (Spinner) findViewById(R.id.createOpportunityMajors);
         createOpportunityExpirationDate = (Button) findViewById(R.id.createOpportunityExpirationDate);
 
         createOpportunityName.setSelection(createOpportunityName.getText().length());
@@ -123,12 +129,45 @@ public class CreateOpportunity extends AppCompatActivity
                 this, android.R.layout.simple_spinner_item, opportunity_categories);
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        adapterMajors = new MajorsAdapter(
+                this, 0, opportunity_majors);
+        //adapterMajors.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         createOpportunityOppCollege.setAdapter(adapterColleges);
         createOpportunityCategory.setAdapter(adapterCategories);
+        createOpportunityMajors.setAdapter(adapterMajors);
+/*
+        createOpportunityMajors.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                System.out.println("----------------OPENED----------------");
+                MajorsAdapter mA = (MajorsAdapter) createOpportunityMajors.getAdapter();
+                for(int i=0;i<mA.getCount();i++) {
+                    if(majors.contains(mA.getItem(i).getTitle())) {
+                        mA.getItem(i).setSelected(true);
+                    }
+                }
 
+                return false;
+            }
+        });*/
+        createOpportunityMajors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String text = ((MultiSelectMajors) createOpportunityMajors.getSelectedItem()).getTitle();
+                ((MultiSelectMajors) createOpportunityMajors.getSelectedItem()).setSelected(true);
+                System.out.println("------HERE-----     " + text);
+                majors.add(text);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
-    public void createOpp(View view){
 
+    public void createOpp(View view) {
         oppName = createOpportunityName.getText().toString();
         jobTitle = createOpportunityJobTitle.getText().toString();
         maxNum1 = createOpportunityNumberOfStudents.getText().toString();
@@ -153,6 +192,7 @@ public class CreateOpportunity extends AppCompatActivity
         createOpportunityNumberOfStudents.setText("");
         createOpportunityExpectedHoursPerWeek.setText("");
         createOpportunityCategory.setAdapter(adapterCategories);
+        createOpportunityMajors.setAdapter(adapterMajors);
         createOpportunityDescription.setText("");
         createOpportunityMinGPA.setText("");
 
@@ -226,8 +266,6 @@ public class CreateOpportunity extends AppCompatActivity
 
     public void parseVariableInformation(String response)
     {
-        System.out.println("------------------------response----------------------------------"+response);
-
         JSONObject responseJSON = null;
         try {
             responseJSON = new JSONObject(response);
@@ -244,6 +282,14 @@ public class CreateOpportunity extends AppCompatActivity
                 JSONArray categoriesInfo = dataJSON.getJSONArray("categories");
                 for(int i=0;i<categoriesInfo.length();i++) {
                     opportunity_categories.add(categoriesInfo.getJSONObject(i).getString("category"));
+                }
+
+                JSONArray majorsInfo = dataJSON.getJSONArray("majors");
+                for(int i=0;i<majorsInfo.length();i++) {
+                    MultiSelectMajors msm = new MultiSelectMajors();
+                    msm.setSelected(false);
+                    msm.setTitle(majorsInfo.getJSONObject(i).getString("major"));
+                    opportunity_majors.add(msm);
                 }
 
             }
