@@ -6,8 +6,8 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         OnMultiChoiceClickListener {
     String[] _items = null;
     boolean[] mSelection = null;
+    ArrayList<String> degrees;
 
     ArrayAdapter<String> simple_adapter;
 
@@ -55,14 +56,6 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         return true;
     }
 
-    /*
-    @Override
-    public void setAdapter(SpinnerAdapter adapter) {
-        throw new RuntimeException(
-                "setAdapter is not supported by MultiSelectSpinner.");
-    }
-    */
-
     public void setItems(String[] items) {
         _items = items;
         mSelection = new boolean[_items.length];
@@ -77,6 +70,10 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         simple_adapter.clear();
         simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
+    }
+
+    public String getDegrees() {
+        return Arrays.toString(_items);
     }
 
     public void setSelection(String[] selection) {
@@ -154,7 +151,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         return selection;
     }
 
-    private String buildSelectedItemString() {
+    public String buildSelectedItemString() {
         StringBuilder sb = new StringBuilder();
         boolean foundOne = false;
 
@@ -164,7 +161,6 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
                     sb.append(", ");
                 }
                 foundOne = true;
-
                 sb.append(_items[i]);
             }
         }

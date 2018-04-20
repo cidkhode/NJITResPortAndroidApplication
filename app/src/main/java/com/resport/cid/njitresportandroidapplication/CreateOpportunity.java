@@ -33,7 +33,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Dictionary;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -57,6 +60,7 @@ public class CreateOpportunity extends AppCompatActivity
     String category1;
     String gpa1;
     Date expirationDate = null;
+    HashMap<String, String> map = new HashMap<String, String>();
 
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
@@ -136,9 +140,7 @@ public class CreateOpportunity extends AppCompatActivity
 
         createOpportunityOppCollege.setAdapter(adapterColleges);
         createOpportunityCategory.setAdapter(adapterCategories);
-        //createOpportunityMajors.setAdapter(adapterMajors);
         createOpportunityMajors.setItems(opportunity_majors);
-
     }
 
     public void createOpp(View view) {
@@ -150,27 +152,39 @@ public class CreateOpportunity extends AppCompatActivity
         college1 = Long.toString(createOpportunityOppCollege.getSelectedItemId()+1);
         category1 = Long.toString(createOpportunityCategory.getSelectedItemId()+1);
         gpa1 = createOpportunityMinGPA.getText().toString();
+        if(map.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Add at least 1 tag(s) please!", Toast.LENGTH_LONG).show();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for(int i=0;i<map.size();i++) {
+                sb.append(map.get(Integer.toString(i)) + ",");
+            }
+            sb.deleteCharAt(sb.lastIndexOf(","));
+            String tagString = sb.toString();
+            String result = saveOpp(oppName, jobTitle, maxNum1, hours1, details, college1, category1, gpa1, tagString);
+            try {
+                JSONObject responseJSON = new JSONObject(result);
+                String msg = responseJSON.getString("msg");
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                createOpportunityName.setText("");
+                createOpportunityOppCollege.setAdapter(adapterColleges);
+                createOpportunityJobTitle.setText("");
+                createOpportunityNumberOfStudents.setText("");
+                createOpportunityExpectedHoursPerWeek.setText("");
+                createOpportunityCategory.setAdapter(adapterCategories);
+                createOpportunityMajors.setItems(opportunity_majors);
+                createOpportunityDescription.setText("");
+                createOpportunityMinGPA.setText("");
 
-        String result = saveOpp(oppName,jobTitle,maxNum1,hours1,details,college1,category1,gpa1);
-        try {
-            JSONObject responseJSON = new JSONObject(result);
-            String msg = responseJSON.getString("msg");
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                map.clear();
+                opportunity_categories.clear();
+                opportunity_colleges.clear();
+                opportunity_majors.clear();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-        createOpportunityName.setText("");
-        createOpportunityOppCollege.setAdapter(adapterColleges);
-        createOpportunityJobTitle.setText("");
-        createOpportunityNumberOfStudents.setText("");
-        createOpportunityExpectedHoursPerWeek.setText("");
-        createOpportunityCategory.setAdapter(adapterCategories);
-        //createOpportunityMajors.setAdapter(adapterMajors);
-        createOpportunityMajors.setItems(opportunity_majors);
-        createOpportunityDescription.setText("");
-        createOpportunityMinGPA.setText("");
-
     }
 
     public void showDatePickerDialog(View view)
@@ -178,7 +192,7 @@ public class CreateOpportunity extends AppCompatActivity
         datePickerDialog.show();
     }
 
-    public String saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA)
+    public String saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA, String tagString)
     {
         String temp = readToken();
         RequestBody formBody = null;
@@ -192,6 +206,7 @@ public class CreateOpportunity extends AppCompatActivity
                     .add("college", colleges)
                     .add("category", categories)
                     .add("minGPA", minGPA)
+                    .add("tags", tagString)
                     .build();
         }
         else
@@ -207,6 +222,7 @@ public class CreateOpportunity extends AppCompatActivity
                     .add("category", categories)
                     .add("minGPA", minGPA)
                     .add("deadline", Integer.toString(date))
+                    .add("tags", tagString)
                     .build();
             createOpportunityExpirationDate.setText("Select Date...");
         }
@@ -261,9 +277,9 @@ public class CreateOpportunity extends AppCompatActivity
 
                 JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
                 for(int i=0;i<majorsInfo.length();i++) {
+                    map.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
                     opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
                 }
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
