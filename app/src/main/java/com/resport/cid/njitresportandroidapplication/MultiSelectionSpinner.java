@@ -55,11 +55,13 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         return true;
     }
 
+    /*
     @Override
     public void setAdapter(SpinnerAdapter adapter) {
         throw new RuntimeException(
                 "setAdapter is not supported by MultiSelectSpinner.");
     }
+    */
 
     public void setItems(String[] items) {
         _items = items;

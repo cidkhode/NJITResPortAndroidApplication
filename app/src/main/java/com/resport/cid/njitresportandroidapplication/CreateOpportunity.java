@@ -136,7 +136,8 @@ public class CreateOpportunity extends AppCompatActivity
 
         createOpportunityOppCollege.setAdapter(adapterColleges);
         createOpportunityCategory.setAdapter(adapterCategories);
-        createOpportunityMajors.setAdapter(adapterMajors);
+        //createOpportunityMajors.setAdapter(adapterMajors);
+        createOpportunityMajors.setItems(opportunity_majors);
 
     }
 
@@ -165,7 +166,8 @@ public class CreateOpportunity extends AppCompatActivity
         createOpportunityNumberOfStudents.setText("");
         createOpportunityExpectedHoursPerWeek.setText("");
         createOpportunityCategory.setAdapter(adapterCategories);
-        createOpportunityMajors.setAdapter(adapterMajors);
+        //createOpportunityMajors.setAdapter(adapterMajors);
+        createOpportunityMajors.setItems(opportunity_majors);
         createOpportunityDescription.setText("");
         createOpportunityMinGPA.setText("");
 
