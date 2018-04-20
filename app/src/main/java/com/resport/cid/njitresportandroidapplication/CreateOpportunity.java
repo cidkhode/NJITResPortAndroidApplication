@@ -62,10 +62,10 @@ public class CreateOpportunity extends AppCompatActivity
     Date expirationDate = null;
     HashMap<String, String> completeDegrees = new HashMap<String, String>();
     HashMap<String, String> selectedDegrees = new HashMap<String, String>();
-
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
     ArrayList<String> opportunity_majors = new ArrayList<String>();
+
     ArrayAdapter<String> adapterColleges ;
     ArrayAdapter<String> adapterCategories;
     ArrayAdapter<String> adapterMajors;

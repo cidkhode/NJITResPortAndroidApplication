@@ -63,6 +63,7 @@ public class EditOpportunity extends AppCompatActivity
 
     int expirationDateInt;
     String expirationDate = "";
+    String[] tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,8 @@ public class EditOpportunity extends AppCompatActivity
                         .putExtra("clg", appItem.getCollege())
                         .putExtra("category", appItem.getCategory())
                         .putExtra("expirationInt", appItem.getExpiryDate().toString())
-                        .putExtra("Expiration", appItem.getExpiration()));
+                        .putExtra("Expiration", appItem.getExpiration())
+                        .putExtra("tags", appItem.getTags()));
             }
         });
 
@@ -163,8 +165,13 @@ public class EditOpportunity extends AppCompatActivity
                     expirationDateInt = Integer.parseInt(info.getString("deadline"));
                     expirationDate = new SimpleDateFormat("MM/dd/yyyy")
                             .format(new Date(expirationDateInt * 1000L));
+                    String[] tagsArray = new String[info.getJSONArray("tags").length()];
+                    for(int p=0;p<tagsArray.length;p++) {
+                        tagsArray[p] = info.getJSONArray("tags").getString(p);
+                    }
 
-                    editOpps.add(new EditOpp(id, oppName, description, position, maxStudents, hours, minGPA, clg, category, expirationDate, expirationDateInt));
+                    editOpps.add(new EditOpp(id, oppName, description, position, maxStudents,
+                            hours, minGPA, clg, category, expirationDate, expirationDateInt, tagsArray));
                 }
             }
         }

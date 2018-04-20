@@ -17,8 +17,8 @@
             android:id="@+id/editSaveOpp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityExpirationDate"
-            android:layout_alignStart="@+id/createOpportunityExpirationDate"
+            android:layout_alignLeft="@+id/editOpportunityExpirationDate"
+            android:layout_alignStart="@+id/editOpportunityExpirationDate"
             android:layout_marginBottom="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="20dp"
@@ -29,7 +29,7 @@
             tools:ignore="OnClick" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_name_text"
+            android:id="@+id/faculty_edit_opportunity_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -42,14 +42,14 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/createOpportunityName"
+            android:id="@+id/editOpportunityName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_name_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_name_text"
-            android:layout_below="@+id/faculty_create_opportunity_name_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_name_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_name_text"
+            android:layout_below="@+id/faculty_edit_opportunity_name_text"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
@@ -58,25 +58,26 @@
             android:hint="@string/opportunity_name" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_description_text"
+            android:id="@+id/faculty_edit_opportunity_description_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityName"
-            android:layout_alignStart="@+id/createOpportunityName"
-            android:layout_below="@+id/createOpportunityName"
+            android:layout_alignLeft="@+id/editOpportunityName"
+            android:layout_alignStart="@+id/editOpportunityName"
+            android:layout_below="@+id/editOpportunityName"
             android:text="@string/details_requirements"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/createOpportunityDescription"
+            android:id="@+id/editOpportunityDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
+            android:gravity="top"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_description_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_description_text"
-            android:layout_below="@+id/faculty_create_opportunity_description_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_description_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_description_text"
+            android:layout_below="@+id/faculty_edit_opportunity_description_text"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
@@ -89,25 +90,25 @@
             android:hint="@string/description" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_position_text"
+            android:id="@+id/faculty_edit_opportunity_position_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityDescription"
-            android:layout_alignStart="@+id/createOpportunityDescription"
-            android:layout_below="@+id/createOpportunityDescription"
+            android:layout_alignLeft="@+id/editOpportunityDescription"
+            android:layout_alignStart="@+id/editOpportunityDescription"
+            android:layout_below="@+id/editOpportunityDescription"
             android:text="@string/job_title"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/createOpportunityJobTitle"
+            android:id="@+id/editOpportunityJobTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_position_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_position_text"
-            android:layout_below="@+id/faculty_create_opportunity_position_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_position_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_position_text"
+            android:layout_below="@+id/faculty_edit_opportunity_position_text"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
@@ -116,25 +117,25 @@
             android:hint="@string/position" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_number_of_students_text"
+            android:id="@+id/faculty_edit_opportunity_number_of_students_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityJobTitle"
-            android:layout_alignStart="@+id/createOpportunityJobTitle"
-            android:layout_below="@+id/createOpportunityJobTitle"
+            android:layout_alignLeft="@+id/editOpportunityJobTitle"
+            android:layout_alignStart="@+id/editOpportunityJobTitle"
+            android:layout_below="@+id/editOpportunityJobTitle"
             android:text="@string/number_of_students_0_if_no_limit"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/createOpportunityNumberOfStudents"
+            android:id="@+id/editOpportunityNumberOfStudents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_number_of_students_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_number_of_students_text"
-            android:layout_below="@+id/faculty_create_opportunity_number_of_students_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_number_of_students_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_number_of_students_text"
+            android:layout_below="@+id/faculty_edit_opportunity_number_of_students_text"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
@@ -143,25 +144,25 @@
             android:hint="@string/number_of_students" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_hours_text"
+            android:id="@+id/faculty_edit_opportunity_hours_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityNumberOfStudents"
-            android:layout_alignStart="@+id/createOpportunityNumberOfStudents"
-            android:layout_below="@+id/createOpportunityNumberOfStudents"
+            android:layout_alignLeft="@+id/editOpportunityNumberOfStudents"
+            android:layout_alignStart="@+id/editOpportunityNumberOfStudents"
+            android:layout_below="@+id/editOpportunityNumberOfStudents"
             android:text="Approximate Hours Per Week"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/createOpportunityExpectedHoursPerWeek"
+            android:id="@+id/editOpportunityExpectedHoursPerWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_hours_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_hours_text"
-            android:layout_below="@+id/faculty_create_opportunity_hours_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_hours_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_hours_text"
+            android:layout_below="@+id/faculty_edit_opportunity_hours_text"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
@@ -170,25 +171,25 @@
             android:hint="@string/expected_hours_per_week" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_GPA_text"
+            android:id="@+id/faculty_edit_opportunity_GPA_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityExpectedHoursPerWeek"
-            android:layout_alignStart="@+id/createOpportunityExpectedHoursPerWeek"
-            android:layout_below="@+id/createOpportunityExpectedHoursPerWeek"
+            android:layout_alignLeft="@+id/editOpportunityExpectedHoursPerWeek"
+            android:layout_alignStart="@+id/editOpportunityExpectedHoursPerWeek"
+            android:layout_below="@+id/editOpportunityExpectedHoursPerWeek"
             android:text="@string/min_gpa"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/createOpportunityMinGPA"
+            android:id="@+id/editOpportunityMinGPA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox_faded_shadows"
             android:padding="10dp"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_GPA_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_GPA_text"
-            android:layout_below="@+id/faculty_create_opportunity_GPA_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_GPA_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_GPA_text"
+            android:layout_below="@+id/faculty_edit_opportunity_GPA_text"
             android:layout_marginTop="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
@@ -197,72 +198,96 @@
             android:hint="@string/gpa" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_college_text"
+            android:id="@+id/faculty_edit_opportunity_college_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityMinGPA"
-            android:layout_alignStart="@+id/createOpportunityMinGPA"
-            android:layout_below="@+id/createOpportunityMinGPA"
+            android:layout_alignLeft="@+id/editOpportunityMinGPA"
+            android:layout_alignStart="@+id/editOpportunityMinGPA"
+            android:layout_below="@+id/editOpportunityMinGPA"
             android:text="@string/college"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <Spinner
-            android:id="@+id/createOpportunityOppCollege"
+            android:id="@+id/editOpportunityOppCollege"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/rounded_textbox_faded_shadows"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_college_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_college_text"
-            android:layout_below="@+id/faculty_create_opportunity_college_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_college_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_college_text"
+            android:layout_below="@+id/faculty_edit_opportunity_college_text"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="13dp"
             android:layout_marginRight="25dp"
             android:entries="@array/opportunity_colleges" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_category_text"
+            android:id="@+id/faculty_edit_opportunity_category_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityOppCollege"
-            android:layout_alignStart="@+id/createOpportunityOppCollege"
-            android:layout_below="@+id/createOpportunityOppCollege"
+            android:layout_alignLeft="@+id/editOpportunityOppCollege"
+            android:layout_alignStart="@+id/editOpportunityOppCollege"
+            android:layout_below="@+id/editOpportunityOppCollege"
             android:text="Category"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <Spinner
-            android:id="@+id/createOpportunityCategory"
+            android:id="@+id/editOpportunityCategory"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/rounded_textbox_faded_shadows"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_category_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_category_text"
-            android:layout_below="@+id/faculty_create_opportunity_category_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_category_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_category_text"
+            android:layout_below="@+id/faculty_edit_opportunity_category_text"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="13dp"
             android:layout_marginRight="25dp"
             android:entries="@array/opportunity_categories" />
 
         <TextView
-            android:id="@+id/faculty_create_opportunity_date_text"
+            android:id="@+id/faculty_edit_opportunity_tags_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/createOpportunityCategory"
-            android:layout_alignStart="@+id/createOpportunityCategory"
-            android:layout_below="@+id/createOpportunityCategory"
+            android:layout_alignLeft="@+id/editOpportunityCategory"
+            android:layout_alignStart="@+id/editOpportunityCategory"
+            android:layout_below="@+id/editOpportunityCategory"
+            android:text="Tags"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <com.resport.cid.njitresportandroidapplication.MultiSelectionSpinner
+            android:id="@+id/editOpportunityMajors"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_textbox_faded_shadows"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_tags_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_tags_text"
+            android:layout_below="@+id/faculty_edit_opportunity_tags_text"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="25dp"
+            android:entries="@array/opportunity_tags" />
+
+        <TextView
+            android:id="@+id/faculty_edit_opportunity_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editOpportunityMajors"
+            android:layout_alignStart="@+id/editOpportunityMajors"
+            android:layout_below="@+id/editOpportunityMajors"
             android:text="Expiration Date"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/createOpportunityExpirationDate"
+            android:id="@+id/editOpportunityExpirationDate"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:datePickerMode="spinner"
-            android:layout_alignLeft="@+id/faculty_create_opportunity_date_text"
-            android:layout_alignStart="@+id/faculty_create_opportunity_date_text"
-            android:layout_below="@+id/faculty_create_opportunity_date_text"
+            android:layout_alignLeft="@+id/faculty_edit_opportunity_date_text"
+            android:layout_alignStart="@+id/faculty_edit_opportunity_date_text"
+            android:layout_below="@+id/faculty_edit_opportunity_date_text"
             android:text="Select Date..."
             android:onClick="showDatePickerDialog"
             android:background="@drawable/rounded_corner_button_red_outline"

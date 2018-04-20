@@ -4,9 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -34,13 +31,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -65,8 +65,13 @@ public class EditSpecificOpp extends AppCompatActivity
     Date expirationDate = null;
     ArrayList<String> opportunity_colleges = new ArrayList<String>();
     ArrayList<String> opportunity_categories = new ArrayList<String>();
+    ArrayList<String> opportunity_majors = new ArrayList<String>();
+    List<String> selectedKeys;
+    List<String> selectedValues;
+
     ArrayAdapter<String> adapterColleges ;
     ArrayAdapter<String> adapterCategories;
+
     Button submit;
     String expiration="";
     String info;
@@ -76,16 +81,21 @@ public class EditSpecificOpp extends AppCompatActivity
     Integer eDate;
 
     DatePickerDialog datePickerDialog;
-    static EditText createOpportunityName;
-    static Spinner createOpportunityOppCollege;
-    static EditText createOpportunityJobTitle;
-    static EditText createOpportunityNumberOfStudents;
-    static EditText createOpportunityExpectedHoursPerWeek;
-    static EditText createOpportunityDescription;
-    static Spinner createOpportunityCategory;
-    static EditText createOpportunityMinGPA;
-    static Button createOpportunityExpirationDate;
+    static EditText editOpportunityName;
+    static Spinner editOpportunityOppCollege;
+    static EditText editOpportunityJobTitle;
+    static EditText editOpportunityNumberOfStudents;
+    static EditText editOpportunityExpectedHoursPerWeek;
+    static EditText editOpportunityDescription;
+    static Spinner editOpportunityCategory;
+    static MultiSelectionSpinner editOpportunityMajors;
+    static EditText editOpportunityMinGPA;
+    static Button editOpportunityExpirationDate;
 
+    String tags[];
+
+    HashMap<String, String> completeDegrees = new HashMap<String, String>();
+    HashMap<String, String> selectedDegrees = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,21 +119,22 @@ public class EditSpecificOpp extends AppCompatActivity
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
         submit = (Button) findViewById(R.id.editSaveOpp);
-        createOpportunityName = (EditText) findViewById(R.id.createOpportunityName);
-        createOpportunityOppCollege = (Spinner) findViewById(R.id.createOpportunityOppCollege);
-        createOpportunityJobTitle = (EditText) findViewById(R.id.createOpportunityJobTitle);
-        createOpportunityNumberOfStudents = (EditText) findViewById(R.id.createOpportunityNumberOfStudents);
-        createOpportunityExpectedHoursPerWeek = (EditText) findViewById(R.id.createOpportunityExpectedHoursPerWeek);
-        createOpportunityCategory = (Spinner) findViewById(R.id.createOpportunityCategory);
-        createOpportunityDescription = (EditText) findViewById(R.id.createOpportunityDescription);
-        createOpportunityMinGPA = (EditText) findViewById(R.id.createOpportunityMinGPA);
-        createOpportunityExpirationDate = (Button) findViewById(R.id.createOpportunityExpirationDate);
+        editOpportunityName = (EditText) findViewById(R.id.editOpportunityName);
+        editOpportunityOppCollege = (Spinner) findViewById(R.id.editOpportunityOppCollege);
+        editOpportunityJobTitle = (EditText) findViewById(R.id.editOpportunityJobTitle);
+        editOpportunityNumberOfStudents = (EditText) findViewById(R.id.editOpportunityNumberOfStudents);
+        editOpportunityExpectedHoursPerWeek = (EditText) findViewById(R.id.editOpportunityExpectedHoursPerWeek);
+        editOpportunityCategory = (Spinner) findViewById(R.id.editOpportunityCategory);
+        editOpportunityDescription = (EditText) findViewById(R.id.editOpportunityDescription);
+        editOpportunityMinGPA = (EditText) findViewById(R.id.editOpportunityMinGPA);
+        editOpportunityExpirationDate = (Button) findViewById(R.id.editOpportunityExpirationDate);
+        editOpportunityMajors = (MultiSelectionSpinner) findViewById(R.id.editOpportunityMajors);
 
-        createOpportunityName.setSelection(createOpportunityName.getText().length());
-        createOpportunityJobTitle.setSelection(createOpportunityJobTitle.getText().length());
-        createOpportunityNumberOfStudents.setSelection(createOpportunityNumberOfStudents.getText().length());
-        createOpportunityExpectedHoursPerWeek.setSelection(createOpportunityExpectedHoursPerWeek.getText().length());
-        createOpportunityMinGPA.setSelection(createOpportunityMinGPA.getText().length());
+        editOpportunityName.setSelection(editOpportunityName.getText().length());
+        editOpportunityJobTitle.setSelection(editOpportunityJobTitle.getText().length());
+        editOpportunityNumberOfStudents.setSelection(editOpportunityNumberOfStudents.getText().length());
+        editOpportunityExpectedHoursPerWeek.setSelection(editOpportunityExpectedHoursPerWeek.getText().length());
+        editOpportunityMinGPA.setSelection(editOpportunityMinGPA.getText().length());
 
         getIds();
         adapterColleges = new ArrayAdapter<String>(
@@ -134,10 +145,11 @@ public class EditSpecificOpp extends AppCompatActivity
                 this, android.R.layout.simple_spinner_item, opportunity_categories);
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        createOpportunityOppCollege.setAdapter(adapterColleges);
-        createOpportunityCategory.setAdapter(adapterCategories);
+        editOpportunityOppCollege.setAdapter(adapterColleges);
+        editOpportunityCategory.setAdapter(adapterCategories);
+        editOpportunityMajors.setItems(opportunity_majors);
 
-        createOpportunityDescription.setOnTouchListener(new View.OnTouchListener() {
+        editOpportunityDescription.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 switch (event.getAction() & MotionEvent.ACTION_MASK){
@@ -150,45 +162,56 @@ public class EditSpecificOpp extends AppCompatActivity
         });
 
         Intent intent = getIntent();
-        createOpportunityName.setText(intent.getStringExtra("Name"));
-        createOpportunityDescription.setText(intent.getStringExtra("Description"));
-        createOpportunityJobTitle.setText(intent.getStringExtra("Position"));
-        createOpportunityMinGPA.setText(intent.getStringExtra("minGPA"));
-        createOpportunityOppCollege.setSelection(intent.getIntExtra("clg",0)-1);
-        createOpportunityNumberOfStudents.setText(intent.getStringExtra("maxStudents"));
-        createOpportunityExpectedHoursPerWeek.setText(intent.getStringExtra("hours"));
-        createOpportunityCategory.setSelection(intent.getIntExtra("category",0)-1);
+        editOpportunityName.setText(intent.getStringExtra("Name"));
+        editOpportunityDescription.setText(intent.getStringExtra("Description"));
+        editOpportunityJobTitle.setText(intent.getStringExtra("Position"));
+        editOpportunityMinGPA.setText(intent.getStringExtra("minGPA"));
+        editOpportunityOppCollege.setSelection(intent.getIntExtra("clg",0)-1);
+        editOpportunityNumberOfStudents.setText(intent.getStringExtra("maxStudents"));
+        editOpportunityExpectedHoursPerWeek.setText(intent.getStringExtra("hours"));
+        editOpportunityCategory.setSelection(intent.getIntExtra("category",0)-1);
         oppID = Integer.parseInt(intent.getStringExtra("Id"));
-
         eDate = Integer.parseInt(intent.getStringExtra("expirationInt"));
+        tags = intent.getStringArrayExtra("tags");
 
-        if(intent.getStringExtra("Expiration").contains("1969") || intent.getStringExtra("Expiration").contains("1970")){}
-        else{
+        selectedKeys = Arrays.asList(tags);
+        selectedValues = new ArrayList<String>();
+        Iterator<String> keyIterator = selectedKeys.iterator();
+        while(keyIterator.hasNext()) {
+            String key = keyIterator.next();
+            String value = completeDegrees.get(key);
+            selectedValues.add(value);
+        }
+        editOpportunityMajors.setSelection(selectedValues);
+
+        if(intent.getStringExtra("Expiration").contains("1969") || intent.getStringExtra("Expiration").contains("1970")){
+
+        }
+        else {
             tempDate = intent.getStringExtra("Expiration");
-            createOpportunityExpirationDate.setText(tempDate);}
+            editOpportunityExpirationDate.setText(tempDate);
+        }
+        editOpportunityName.setEnabled(false);
+        editOpportunityMinGPA.setEnabled(false);
+        editOpportunityOppCollege.setEnabled(false);
+        editOpportunityJobTitle.setEnabled(false);
+        editOpportunityNumberOfStudents.setEnabled(false);
+        editOpportunityExpectedHoursPerWeek.setEnabled(false);
+        editOpportunityCategory.setEnabled(false);
+        editOpportunityDescription.setEnabled(false);
+        editOpportunityExpirationDate.setEnabled(false);
+        editOpportunityMajors.setEnabled(false);
 
-
-
-
-        createOpportunityName.setEnabled(false);
-        createOpportunityMinGPA.setEnabled(false);
-        createOpportunityOppCollege.setEnabled(false);
-        createOpportunityJobTitle.setEnabled(false);
-        createOpportunityNumberOfStudents.setEnabled(false);
-        createOpportunityExpectedHoursPerWeek.setEnabled(false);
-        createOpportunityCategory.setEnabled(false);
-        createOpportunityDescription.setEnabled(false);
-        createOpportunityExpirationDate.setEnabled(false);
-
-        createOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-        createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+        editOpportunityMajors.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
     }
 
     public void updateOpp(View view) {
@@ -196,68 +219,94 @@ public class EditSpecificOpp extends AppCompatActivity
             editMode = true;
             submit.setText("Save Opportunity");
 
-            createOpportunityName.setEnabled(true);
-            createOpportunityMinGPA.setEnabled(true);
-            createOpportunityOppCollege.setEnabled(true);
-            createOpportunityJobTitle.setEnabled(true);
-            createOpportunityNumberOfStudents.setEnabled(true);
-            createOpportunityExpectedHoursPerWeek.setEnabled(true);
-            createOpportunityCategory.setEnabled(true);
-            createOpportunityDescription.setEnabled(true);
-            createOpportunityExpirationDate.setEnabled(true);
+            editOpportunityName.setEnabled(true);
+            editOpportunityMinGPA.setEnabled(true);
+            editOpportunityOppCollege.setEnabled(true);
+            editOpportunityJobTitle.setEnabled(true);
+            editOpportunityNumberOfStudents.setEnabled(true);
+            editOpportunityExpectedHoursPerWeek.setEnabled(true);
+            editOpportunityCategory.setEnabled(true);
+            editOpportunityMajors.setEnabled(true);
+            editOpportunityDescription.setEnabled(true);
+            editOpportunityExpirationDate.setEnabled(true);
 
-            createOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_shadows);
-            createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityMajors.setBackgroundResource(R.drawable.rounded_textbox_shadows);
+            editOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_shadows);
         }
 
         else
         {
             editMode = false;
-            oppName = createOpportunityName.getText().toString();
-            jobTitle = createOpportunityJobTitle.getText().toString();
-            maxNum1 = createOpportunityNumberOfStudents.getText().toString();
-            hours1 = createOpportunityExpectedHoursPerWeek.getText().toString();
-            details = createOpportunityDescription.getText().toString();
-            college1 = Long.toString(createOpportunityOppCollege.getSelectedItemId()+1);
-            category1 = Long.toString(createOpportunityCategory.getSelectedItemId()+1);
-            gpa1 = createOpportunityMinGPA.getText().toString();
-            expiryDate = createOpportunityExpirationDate.getText().toString();
+            oppName = editOpportunityName.getText().toString();
+            jobTitle = editOpportunityJobTitle.getText().toString();
+            maxNum1 = editOpportunityNumberOfStudents.getText().toString();
+            hours1 = editOpportunityExpectedHoursPerWeek.getText().toString();
+            details = editOpportunityDescription.getText().toString();
+            college1 = Long.toString(editOpportunityOppCollege.getSelectedItemId()+1);
+            category1 = Long.toString(editOpportunityCategory.getSelectedItemId()+1);
+            gpa1 = editOpportunityMinGPA.getText().toString();
+            expiryDate = editOpportunityExpirationDate.getText().toString();
 
-            saveOpp(oppName,jobTitle,maxNum1,hours1,details,college1,category1,gpa1,expiryDate,eDate);
+            StringBuilder sbTemp = new StringBuilder();
+            for(String s: editOpportunityMajors.getSelectedStrings()) {
+                if(completeDegrees.containsValue(s)) {
+                    for (String key : completeDegrees.keySet()) {
+                        if (completeDegrees.get(key).equals(s)) {
+                            selectedDegrees.put(key, s);
+                        }
+                    }
+                }
+            }
+            if(completeDegrees.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Add at least 1 tag(s) please!", Toast.LENGTH_LONG).show();
+            } else {
+                StringBuilder sb = new StringBuilder();
+                Iterator it = selectedDegrees.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry key_values = (Map.Entry) it.next();
+                    if (it.hasNext()) {
+                        sb.append(key_values.getKey() + ",");
+                    } else sb.append(key_values.getKey());
+                }
+                String tagString = sb.toString();
+                saveOpp(oppName, jobTitle, maxNum1, hours1, details, college1, category1, gpa1, expiryDate, eDate, tagString);
 
-            submit.setText("Edit Opportunity");
-            createOpportunityName.setEnabled(false);
-            createOpportunityMinGPA.setEnabled(false);
-            createOpportunityOppCollege.setEnabled(false);
-            createOpportunityJobTitle.setEnabled(false);
-            createOpportunityNumberOfStudents.setEnabled(false);
-            createOpportunityExpectedHoursPerWeek.setEnabled(false);
-            createOpportunityCategory.setEnabled(false);
-            createOpportunityDescription.setEnabled(false);
-            createOpportunityExpirationDate.setEnabled(false);
+                submit.setText("Edit Opportunity");
+                editOpportunityName.setEnabled(false);
+                editOpportunityMinGPA.setEnabled(false);
+                editOpportunityOppCollege.setEnabled(false);
+                editOpportunityJobTitle.setEnabled(false);
+                editOpportunityNumberOfStudents.setEnabled(false);
+                editOpportunityExpectedHoursPerWeek.setEnabled(false);
+                editOpportunityCategory.setEnabled(false);
+                editOpportunityDescription.setEnabled(false);
+                editOpportunityMajors.setEnabled(false);
+                editOpportunityExpirationDate.setEnabled(false);
 
-            createOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-            createOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
-
+                editOpportunityName.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityOppCollege.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityJobTitle.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityNumberOfStudents.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityExpectedHoursPerWeek.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityCategory.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityDescription.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityMinGPA.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityExpirationDate.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+                editOpportunityMajors.setBackgroundResource(R.drawable.rounded_textbox_faded_shadows);
+            }
         }
     }
 
-    public void saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA, String expiry, Integer eDateInt)
+    public void saveOpp(String name, String title, String maxStudents, String hoursWeekly, String desc, String colleges, String categories, String minGPA, String expiry, Integer eDateInt, String tagString)
     {
         String temp = readToken();
             RequestBody formBody = null;
@@ -272,6 +321,7 @@ public class EditSpecificOpp extends AppCompatActivity
                         .add("college", colleges)
                         .add("category", categories)
                         .add("minGPA", minGPA)
+                        .add("tags", tagString)
                         .build();
             }
             else if(expiry.equals(tempDate)) {
@@ -287,6 +337,7 @@ public class EditSpecificOpp extends AppCompatActivity
                         .add("category", categories)
                         .add("minGPA", minGPA)
                         .add("deadline", eDateInt.toString())
+                        .add("tags", tagString)
                         .build();
             }
             else
@@ -303,8 +354,9 @@ public class EditSpecificOpp extends AppCompatActivity
                         .add("category", categories)
                         .add("minGPA", minGPA)
                         .add("deadline", Integer.toString(date))
+                        .add("tags", tagString)
                         .build();
-                createOpportunityExpirationDate.setText("Select Date...");
+                editOpportunityExpirationDate.setText("Select Date...");
             }
             try {
                 Request request = new Request.Builder()
@@ -361,6 +413,11 @@ public class EditSpecificOpp extends AppCompatActivity
                     opportunity_categories.add(categoriesInfo.getJSONObject(i).getString("category"));
                 }
 
+                JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
+                for(int i=0;i<majorsInfo.length();i++) {
+                    completeDegrees.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
+                    opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -375,7 +432,7 @@ public class EditSpecificOpp extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         expiration = Integer.toString(i1+1) + "/" + Integer.toString(i2) + "/" + Integer.toString(i);
-        createOpportunityExpirationDate.setText(expiration);
+        editOpportunityExpirationDate.setText(expiration);
         expirationDate = new GregorianCalendar(i, i1, i2).getTime();
     }
 
