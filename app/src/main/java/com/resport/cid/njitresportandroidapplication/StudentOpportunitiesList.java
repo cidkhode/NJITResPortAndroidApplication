@@ -176,8 +176,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
         selectedDegrees.clear();
         enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
         enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeSpinner.getSelectedItemId());
-        System.out.println("enteredCollege: " + enteredCollege);
-        System.out.println("enteredFacUCID: " + enteredFacUCID);
 
         for(String s: createOpportunityMajors.getSelectedStrings()) {
             if(completeDegrees.containsValue(s)) {
@@ -188,7 +186,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 }
             }
         }
-        System.out.println("hashMap Size: " + selectedDegrees.size());
 
         boolean checkingFacUcid = true;
         boolean checkingCollege = true;
@@ -286,7 +283,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
                     listView.setAdapter(customAdapter);
                 }
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
