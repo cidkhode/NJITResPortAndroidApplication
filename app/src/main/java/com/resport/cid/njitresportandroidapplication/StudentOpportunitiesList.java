@@ -28,8 +28,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -137,7 +140,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     String[] tagsArray = new String[info.getJSONArray("tags").length()];
                     for(int p=0;p<tagsArray.length;p++) {
                         tagsArray[p] = info.getJSONArray("tags").getString(p);
-                        System.out.println("Tag found + " + tagsArray[p] + " opp #: " + i + " id " + id);
                     }
                     opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate, tagsArray));
                 }
@@ -185,10 +187,95 @@ public class StudentOpportunitiesList extends AppCompatActivity
             }
         }
 
-        if (enteredFacUCID.equals("") && enteredCollege.equals("0") && selectedDegrees.size() == 0) {
-            Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
+        boolean checkingFacUcid = true;
+        boolean checkingCollege = true;
+        boolean checkingTags = true;
+        boolean matchesFilters = true;
+
+        if (enteredFacUCID.equals("")) {
+            checkingFacUcid = false;
         }
 
+        if (enteredCollege.equals("0")) {
+            checkingCollege = false;
+        }
+
+        if (selectedDegrees.size() == 0) {
+            checkingTags = false;
+        }
+
+        try {
+            for (int i = 0; i < opportunities.length(); i++) {
+                matchesFilters = true;
+                opp = opportunities.getJSONObject(i);
+                id = opp.getString("id");
+                info = opp.getJSONObject("info");
+                name = info.getString("name");
+                desc = info.getString("desc");
+                position = info.getString("position");
+                category = info.getString("category");
+                categoryName = student_categories.get(Integer.parseInt(category) - 1);
+                college = info.getString("college");
+                collegeName = student_colleges.get(Integer.parseInt(college) - 1);
+                limit = info.getString("limit");
+                hours = info.getString("hours");
+                minGPA = info.getString("minGPA");
+                expirationDateInt = Integer.parseInt(info.getString("deadline"));
+                expirationDate = new SimpleDateFormat("MM/dd/yyyy")
+                        .format(new Date(expirationDateInt * 1000L));
+                faculty = opp.getJSONObject("faculty");
+                facultyName = faculty.getString("name");
+                email = faculty.getString("email");
+                facUCID = faculty.getString("ucid");
+                String[] tagsArray = new String[info.getJSONArray("tags").length()];
+                for(int p=0;p<tagsArray.length;p++) {
+                    tagsArray[p] = info.getJSONArray("tags").getString(p);
+                }
+
+                if (checkingFacUcid) {
+                    if (!facUCID.equals(enteredFacUCID)) {
+                        matchesFilters = false;
+                    }
+                }
+                if (checkingCollege) {
+                    if (!college.equals(enteredCollege)) {
+                        matchesFilters = false;
+                    }
+                }
+
+                if (checkingTags) {
+                    if (tagsArray.length != 0) {
+                        matchesFilters = false;
+                        Iterator it = selectedDegrees.entrySet().iterator();
+                        String curID;
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry) it.next();
+                            curID = pair.getKey().toString();
+                            if (Arrays.asList(tagsArray).contains(curID)) {
+                                matchesFilters = true;
+                            }
+                        }
+                    }
+                    else {
+                        matchesFilters = false;
+                    }
+                }
+
+                if (matchesFilters) {
+                    opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate, tagsArray));
+                }
+            }
+
+            if(opps.size() == 0) {
+                Toast.makeText(StudentOpportunitiesList.this, "No opportunities match the filter!", Toast.LENGTH_LONG).show();
+            } else {
+                OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+                listView.setAdapter(customAdapter);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /*public void filter(View view) {
