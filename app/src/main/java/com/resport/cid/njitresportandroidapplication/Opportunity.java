@@ -17,6 +17,7 @@ public class Opportunity {
     String emailAddress;
     String category;
     String expiration;
+    String tags[];
 
     public Opportunity(String oppId, String oppName, String oppCollege, String candidateTitle,
                        int numStudents, int weeklyHours, String description, String facultyName,
@@ -33,6 +34,25 @@ public class Opportunity {
         this.emailAddress = emailAddress;
         this.category = category;
         this.expiration = expiration;
+        this.tags = null;
+    }
+
+    public Opportunity(String oppId, String oppName, String oppCollege, String candidateTitle,
+                       int numStudents, int weeklyHours, String description, String facultyName,
+                       String facultyUCID, String emailAddress, String category, String expiration, String tags[]) {
+        this.oppId = oppId;
+        this.oppName = oppName;
+        this.oppCollege = oppCollege;
+        this.candidateTitle = candidateTitle;
+        this.numStudents = numStudents;
+        this.weeklyHours = weeklyHours;
+        this.description = description;
+        this.facultyName = facultyName;
+        this.facultyUCID = facultyUCID;
+        this.emailAddress = emailAddress;
+        this.category = category;
+        this.expiration = expiration;
+        this.tags = tags;
     }
 
     public String getOppId() {

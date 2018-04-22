@@ -3,6 +3,7 @@ package com.resport.cid.njitresportandroidapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +29,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,6 +45,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
     ArrayList<Opportunity> opps;
     ArrayList<String> student_colleges = new ArrayList<String>();
     ArrayList<String> student_categories = new ArrayList<String>();
+    ArrayList<String> opportunity_majors = new ArrayList<String>();
     JSONObject opp=null;
     String id ="";
     JSONObject info =null ;
@@ -67,7 +70,9 @@ public class StudentOpportunitiesList extends AppCompatActivity
     String enteredFacUCID;
     String enteredCollege;
     ArrayAdapter<String> adapterColleges;
-
+    static MultiSelectionSpinner createOpportunityMajors;
+    HashMap<String, String> completeDegrees = new HashMap<String, String>();
+    HashMap<String, String> selectedDegrees = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
         listView = (ListView) findViewById(R.id.listView);
 
+        createOpportunityMajors =  findViewById(R.id.studentOpportunitiesListTagSpinner);
         studentOpportunitiesListFacultyUCIDEditText = findViewById(R.id.studentOpportunitiesListFacultyUCIDEditText);
         studentOpportunitiesListFacultyCollegeSpinner = findViewById(R.id.studentOpportunitiesListFacultyCollegeSpinner);
         adapterColleges = new ArrayAdapter<String>(
@@ -100,6 +106,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
             JSONObject responseJSON = null;
             try {
                 getIds();
+                createOpportunityMajors.setItems(opportunity_majors);
                 responseJSON = new JSONObject(responseData);
                 String data;
                 data = responseJSON.getString("data");
@@ -127,7 +134,12 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     facultyName = faculty.getString("name");
                     email = faculty.getString("email");
                     facUCID = faculty.getString("ucid");
-                    opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate));
+                    String[] tagsArray = new String[info.getJSONArray("tags").length()];
+                    for(int p=0;p<tagsArray.length;p++) {
+                        tagsArray[p] = info.getJSONArray("tags").getString(p);
+                        System.out.println("Tag found + " + tagsArray[p] + " opp #: " + i + " id " + id);
+                    }
+                    opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate, tagsArray));
                 }
 
             } catch (JSONException e) {
@@ -160,10 +172,40 @@ public class StudentOpportunitiesList extends AppCompatActivity
 
     public void filter(View view) {
         opps.removeAll(opps);
+        enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
+        enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeSpinner.getSelectedItemId());
+
+        for(String s: createOpportunityMajors.getSelectedStrings()) {
+            if(completeDegrees.containsValue(s)) {
+                for (String key : completeDegrees.keySet()) {
+                    if (completeDegrees.get(key).equals(s)) {
+                        selectedDegrees.put(key, s);
+                    }
+                }
+            }
+        }
+
+        if (enteredFacUCID.equals("") && enteredCollege.equals("0") && selectedDegrees.size() == 0) {
+            Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    /*public void filter(View view) {
+        opps.removeAll(opps);
 
         enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
         enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeSpinner.getSelectedItemId());
 
+        for(String s: createOpportunityMajors.getSelectedStrings()) {
+            if(completeDegrees.containsValue(s)) {
+                for (String key : completeDegrees.keySet()) {
+                    if (completeDegrees.get(key).equals(s)) {
+                        selectedDegrees.put(key, s);
+                    }
+                }
+            }
+        }
         if (enteredFacUCID.equals("") && enteredCollege.equals("0")) {
             Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
         }
@@ -215,11 +257,13 @@ public class StudentOpportunitiesList extends AppCompatActivity
             }
         }
     }
+    */
 
     public void clear(View view) {
         opps.removeAll(opps);
         studentOpportunitiesListFacultyCollegeSpinner.setSelection(0);
         studentOpportunitiesListFacultyUCIDEditText.setText("");
+        createOpportunityMajors.clear();
         try{
             for (int i = 0; i < opportunities.length(); i++) {
                 opp = opportunities.getJSONObject(i);
@@ -311,7 +355,11 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     for(int i=0;i<categoriesInfo.length();i++) {
                         student_categories.add(categoriesInfo.getJSONObject(i).getString("category"));
                     }
-
+                    JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
+                    for(int i=0;i<majorsInfo.length();i++) {
+                        opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
+                        completeDegrees.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

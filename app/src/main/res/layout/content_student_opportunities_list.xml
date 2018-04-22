@@ -21,13 +21,26 @@
         android:inputType="textPersonName"
         android:paddingHorizontal="10dp" />
 
-    <Spinner
-        android:id="@+id/studentOpportunitiesListFacultyCollegeSpinner"
+    <com.resport.cid.njitresportandroidapplication.MultiSelectionSpinner
+        android:id="@+id/studentOpportunitiesListTagSpinner"
         android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_alignLeft="@+id/studentOpportunitiesListFacultyUCIDEditText"
         android:layout_alignStart="@+id/studentOpportunitiesListFacultyUCIDEditText"
         android:layout_below="@+id/studentOpportunitiesListFacultyUCIDEditText"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:background="@drawable/rounded_textbox_shadows"
+        android:entries="@array/opportunity_colleges"
+        />
+
+    <Spinner
+        android:id="@+id/studentOpportunitiesListFacultyCollegeSpinner"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/studentOpportunitiesListTagSpinner"
+        android:layout_alignStart="@+id/studentOpportunitiesListTagSpinner"
+        android:layout_below="@+id/studentOpportunitiesListTagSpinner"
         android:layout_marginTop="18dp"
         android:gravity="center"
         android:background="@drawable/rounded_textbox_shadows"
