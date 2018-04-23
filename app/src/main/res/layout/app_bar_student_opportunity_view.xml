@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.resport.cid.njitresportandroidapplication.StudentOpportunityView">
+    tools:context="com.research.njit.njitresportandroidapplication.StudentOpportunityView">
 
     <RelativeLayout
         android:layout_width="match_parent"

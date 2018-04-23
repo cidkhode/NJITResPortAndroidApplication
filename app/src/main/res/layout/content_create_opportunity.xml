@@ -237,7 +237,7 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <com.resport.cid.njitresportandroidapplication.MultiSelectionSpinner
+        <com.research.njit.njitresportandroidapplication.MultiSelectionSpinner
             android:id="@+id/createOpportunityMajors"
             android:layout_width="match_parent"
             android:layout_height="45dp"

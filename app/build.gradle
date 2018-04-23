@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.resport.cid.njitresportandroidapplication"
-        minSdkVersion 15
+        applicationId "com.research.njit.njitresportandroidapplication"
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

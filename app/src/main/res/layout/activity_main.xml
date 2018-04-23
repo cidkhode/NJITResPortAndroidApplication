@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fillViewport="true"
-    tools:context="com.resport.cid.njitresportandroidapplication.MainActivity" >
+    tools:context="com.research.njit.njitresportandroidapplication.MainActivity" >
 
     <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

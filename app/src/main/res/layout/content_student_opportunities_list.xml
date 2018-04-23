@@ -21,7 +21,7 @@
         android:inputType="textPersonName"
         android:paddingHorizontal="10dp" />
 
-    <com.resport.cid.njitresportandroidapplication.MultiSelectionSpinner
+    <com.research.njit.njitresportandroidapplication.MultiSelectionSpinner
         android:id="@+id/studentOpportunitiesListTagSpinner"
         android:layout_width="230dp"
         android:layout_height="40dp"
