@@ -96,4 +96,8 @@ public class Opportunity {
     }
 
     public String getExpiration() { return expiration; }
+
+    public String[] getTags() {
+        return tags;
+    }
 }

@@ -164,5 +164,6 @@
     <string name="accept">Accept</string>
     <string name="title_activity_edit_opportunity">Viewing Your Opportunities</string>
     <string name="title_activity_edit_specific_opp">Edit Opportunity</string>
+    <string name="example_tag">Example Tag</string>
 
 </resources>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -46,6 +49,10 @@ public class StudentOpportunityView extends AppCompatActivity
     TextView oppFacultyUCID;
     Button showInterest;
     String oppId;
+    ListView tagsList;
+    TagAdapter tagAdapter;
+
+    ArrayList<String> tagsArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +77,7 @@ public class StudentOpportunityView extends AppCompatActivity
         oppDescription = (TextView) findViewById(R.id.view_opportunity_description);
         oppFacultyName = (TextView) findViewById(R.id.view_opportunity_faculty_name);
         oppFacultyUCID = (TextView) findViewById(R.id.view_opportunity_faculty_ucid);
+        tagsList = (ListView) findViewById(R.id.tagsList);
 
         oppDescription.setMovementMethod(new ScrollingMovementMethod());
 
@@ -92,6 +100,19 @@ public class StudentOpportunityView extends AppCompatActivity
         String description = intent.getStringExtra("Description");
         String facultyName = intent.getStringExtra("FacultyName");
         String facultyUCID = intent.getStringExtra("FacultyUCID");
+        tagsArrayList = intent.getStringArrayListExtra("Tags");
+
+        if(tagsArrayList.size() > 0) {
+            tagAdapter = new TagAdapter(this, R.layout.layout_tags, tagsArrayList);
+            tagsList.setAdapter(tagAdapter);
+        }
+        else {
+            String message = "No tags available";
+            ArrayList<String> noTags = new ArrayList<String>();
+            noTags.add(message);
+            tagAdapter = new TagAdapter(this, R.layout.layout_tags, noTags);
+            tagsList.setAdapter(tagAdapter);
+        }
 
         oppName.setText(name);
         oppCollege.setText(college);

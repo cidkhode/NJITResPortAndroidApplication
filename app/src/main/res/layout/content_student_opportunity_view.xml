@@ -191,13 +191,24 @@
             android:padding="10dp"
             android:textSize="18sp" />
 
+        <ListView
+            android:id="@+id/tagsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/view_opportunity_faculty_ucid"
+            android:layout_alignStart="@+id/view_opportunity_faculty_ucid"
+            android:layout_below="@+id/view_opportunity_faculty_ucid"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:layout_centerHorizontal="true" />
+
         <Button
             android:id="@+id/showInterest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/view_opportunity_faculty_ucid"
             android:layout_alignStart="@+id/view_opportunity_faculty_ucid"
-            android:layout_below="@+id/view_opportunity_faculty_ucid"
+            android:layout_below="@+id/tagsList"
             android:layout_marginBottom="13dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="13dp"
