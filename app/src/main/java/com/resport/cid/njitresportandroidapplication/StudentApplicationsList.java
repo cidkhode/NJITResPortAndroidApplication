@@ -46,8 +46,6 @@ public class StudentApplicationsList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     OkHttpClient client = new OkHttpClient();
     ArrayList<Application> applied_opps;
-    EditText studentApplicationsListFacultyUCIDEditText;
-    Spinner studentApplicationListFacultyCollegeSpinner;
     ListView studentsListView;
     ArrayList<String> student_applied_colleges = new ArrayList<String>();
     ArrayList<String> student_applied_categories = new ArrayList<String>();
@@ -68,13 +66,7 @@ public class StudentApplicationsList extends AppCompatActivity
     String college = "";
     String facUCID = "";
     String status = "";
-    String enteredFacUCID = "";
-    String enteredCollege = "";
     String collegeName = "";
-    static MultiSelectionSpinner createOpportunityMajors;
-    HashMap<String, String> completeDegrees = new HashMap<String, String>();
-    HashMap<String, String> selectedDegrees = new HashMap<String, String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +85,6 @@ public class StudentApplicationsList extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         studentsListView = (ListView) findViewById(R.id.studentsListView);
-        studentApplicationsListFacultyUCIDEditText = (EditText) findViewById(R.id.studentApplicationsListFacultyUCIDEditText);
-        studentApplicationListFacultyCollegeSpinner = (Spinner) findViewById(R.id.studentApplicationListFacultyCollegeSpinner);
-        createOpportunityMajors =  findViewById(R.id.studentApplicationsListTagSpinner);
         adapterApplicationColleges = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, student_applied_colleges);
         applied_opps = new ArrayList<>();
@@ -106,7 +95,6 @@ public class StudentApplicationsList extends AppCompatActivity
             JSONObject responseJSON = null;
             try {
                 getIds();
-                createOpportunityMajors.setItems(opportunity_majors);
                 responseJSON = new JSONObject(responseData);
                 String data;
                 data = responseJSON.getString("data");
@@ -161,210 +149,6 @@ public class StudentApplicationsList extends AppCompatActivity
 
     }
 
-    public void filter(View view) {
-        selectedDegrees.clear();
-        enteredFacUCID = studentApplicationsListFacultyUCIDEditText.getText().toString();
-        enteredCollege = Long.toString(studentApplicationListFacultyCollegeSpinner.getSelectedItemId());
-
-        for(String s: createOpportunityMajors.getSelectedStrings()) {
-            if(completeDegrees.containsValue(s)) {
-                for (String key : completeDegrees.keySet()) {
-                    if (completeDegrees.get(key).equals(s)) {
-                        selectedDegrees.put(key, s);
-                    }
-                }
-            }
-        }
-
-        boolean checkingFacUcid = true;
-        boolean checkingCollege = true;
-        boolean checkingTags = false;
-        boolean matchesFilters;
-
-        if (enteredFacUCID.equals("")) {
-            checkingFacUcid = false;
-        }
-
-        if (enteredCollege.equals("0")) {
-            checkingCollege = false;
-        }
-
-       /* if (selectedDegrees.size() == 0) {
-            checkingTags = false;
-        }
-*/
-        if (!checkingCollege && !checkingCollege && !checkingTags) {
-            Toast.makeText(StudentApplicationsList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            applied_opps.removeAll(applied_opps);
-            try {
-                for (int i = 0; i < applications.length(); i++) {
-                    matchesFilters = true;
-                    app = applications.getJSONObject(i);
-                    id = app.getString("id");
-                    //info = app.getJSONObject("info");
-                    name = app.getString("name");
-                    description = app.getString("description");
-                    position = app.getString("position");
-                    category = app.getString("category");
-                    categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
-                    facultyName = app.getString("name");
-                    email = app.getString("email");
-                    timestamp = app.getString("timestamp");
-                    status = app.getString("status");
-                    college = app.getString("college");
-                    facUCID = app.getString("facultyUCID");
-                    collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
-
-                    /*
-                    String[] tagsArray = new String[info.getJSONArray("tags").length()];
-                    for (int p = 0; p < tagsArray.length; p++) {
-                        tagsArray[p] = info.getJSONArray("tags").getString(p);
-                    }
-                    */
-
-
-                    /*
-                    if (checkingTags) {
-                        if (tagsArray.length != 0) {
-                            boolean tagFound = false;
-                            Iterator it = selectedDegrees.entrySet().iterator();
-                            String curID;
-                            while (it.hasNext()) {
-                                Map.Entry pair = (Map.Entry) it.next();
-                                curID = pair.getKey().toString();
-                                if (Arrays.asList(tagsArray).contains(curID)) {
-                                    tagFound = true;
-                                }
-                            }
-                            if (!tagFound) {
-                                matchesFilters = false;
-                            }
-                        } else {
-                            System.out.println("Tag match failed.");
-                            matchesFilters = false;
-                        }
-                    }
-                    */
-
-                    if (checkingFacUcid) {
-                        if (!facUCID.equals(enteredFacUCID)) {
-                            matchesFilters = false;
-                            System.out.println("UCID match failed.");
-                        }
-                    }
-                    if (checkingCollege) {
-                        if (!college.equals(enteredCollege)) {
-                            matchesFilters = false;
-                            System.out.println("College match failed.");
-                        }
-                    }
-
-                    if (matchesFilters) {
-                        applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
-                    }
-                }
-
-                if (applied_opps.size() == 0) {
-                    Toast.makeText(StudentApplicationsList.this, "No opportunities match the filter!", Toast.LENGTH_LONG).show();
-                } else {
-                    ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
-                    studentsListView.setAdapter(customAdapter);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    /*
-    public void filter(View view) {
-        applied_opps.removeAll(applied_opps);
-
-        enteredFacUCID = studentApplicationsListFacultyUCIDEditText.getText().toString();
-        enteredCollege = Long.toString(studentApplicationListFacultyCollegeSpinner.getSelectedItemId());
-
-        if (enteredFacUCID.equals("") && enteredCollege.equals("0")) {
-            Toast.makeText(StudentApplicationsList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            try {
-                for (int i = 0; i < applications.length(); i++) {
-                    app = applications.getJSONObject(i);
-                    id = app.getString("id");
-                    name = app.getString("name");
-                    description = app.getString("description");
-                    position = app.getString("position");
-                    category = app.getString("category");
-                    categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
-                    facultyName = app.getString("name");
-                    email = app.getString("email");
-                    timestamp = app.getString("timestamp");
-                    status = app.getString("status");
-                    college = app.getString("college");
-                    facUCID = app.getString("facultyUCID");
-                    collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
-
-                    if (enteredFacUCID.equals("") && !enteredCollege.equals("0")) {
-                        if (college.equals(enteredCollege)) {
-                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
-                        }
-                    } else if (!enteredFacUCID.equals("") && enteredCollege.equals("0")) {
-                        if (facUCID.equals(enteredFacUCID)) {
-                            applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
-                        }
-                    } else if (facUCID.equals(enteredFacUCID) && college.equals(enteredCollege)) {
-                        applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if(applied_opps.size() == 0) {
-                Toast.makeText(StudentApplicationsList.this, "No shown interest opportunities with this filter!", Toast.LENGTH_LONG).show();
-            } else {
-                ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
-                studentsListView.setAdapter(customAdapter);
-            }
-        }
-    }
-    */
-
-    public void clear(View view) {
-        applied_opps.removeAll(applied_opps);
-        studentApplicationListFacultyCollegeSpinner.setSelection(0);
-        studentApplicationsListFacultyUCIDEditText.setText("");
-        createOpportunityMajors.clear();
-        try{
-            for (int i = 0; i < applications.length(); i++) {
-                app = applications.getJSONObject(i);
-                id = app.getString("id");
-                name = app.getString("name");
-                description = app.getString("description");
-                position = app.getString("position");
-                category = app.getString("category");
-                categoryName = student_applied_categories.get(Integer.parseInt(category) -1);
-                facultyName = app.getString("name");
-                email = app.getString("email");
-                timestamp = app.getString("timestamp");
-                status = app.getString("status");
-                college = app.getString("college");
-                facUCID = app.getString("facultyUCID");
-                collegeName = student_applied_colleges.get(Integer.parseInt(college)-1);
-                applied_opps.add(new Application(id, name, description, position, facultyName, email, Long.parseLong(timestamp), Integer.parseInt(status), collegeName, facUCID, categoryName));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (applied_opps.size() == 0) {
-            Toast.makeText(StudentApplicationsList.this, "You have not showed interest to any opportunity yet!", Toast.LENGTH_LONG).show();
-        } else {
-            ApplicationAdapter customAdapter = new ApplicationAdapter(this, R.layout.layout_applications, applied_opps);
-            studentsListView.setAdapter(customAdapter);
-        }
-    }
-
     public String loadAppliedOpportunities()
     {
         String temp = readToken();
@@ -412,7 +196,6 @@ public class StudentApplicationsList extends AppCompatActivity
                     JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
                     for(int i=0;i<majorsInfo.length();i++) {
                         opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
-                        completeDegrees.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
                     }
                 }
             } catch (JSONException e) {
