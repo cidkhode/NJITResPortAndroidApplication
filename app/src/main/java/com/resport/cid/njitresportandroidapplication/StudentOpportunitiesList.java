@@ -158,16 +158,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Opportunity oppItem = (Opportunity) listView.getAdapter().getItem(i);
-
-                    //Get tags:
-                    ArrayList<String> tagNumbers = new ArrayList<>(Arrays.asList(oppItem.getTags()));
-                    ArrayList<String> tags = new ArrayList<String>();
-                    for(String key: completeDegrees.keySet()) {
-                        String value = completeDegrees.get(key);
-                        tags.add(value);
-                        System.out.println("-------------------VALUE------------- " + value);
-                    }
-
                     //Name: Example Opportunity \n\nCollege: NCE \n\nNumber of Students: 10 \n\nDescription: This is an example research opportunity just to demonstrate the idea.\n\nFaculty: Prof X\n\nFaculty UCID: profx
                     startActivity(new Intent(StudentOpportunitiesList.this, StudentOpportunityView.class)
                             .putExtra("oppId", oppItem.getOppId())
@@ -176,8 +166,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                             .putExtra("Number", oppItem.getNumStudents())
                             .putExtra("Description", oppItem.getDescription())
                             .putExtra("FacultyName", oppItem.getFacultyName())
-                            .putExtra("FacultyUCID", oppItem.getFacultyUCID())
-                            .putExtra("Tags", tags));
+                            .putExtra("FacultyUCID", oppItem.getFacultyUCID()));
             }
         });
     }

@@ -50,9 +50,7 @@ public class StudentOpportunityView extends AppCompatActivity
     Button showInterest;
     String oppId;
     ListView tagsList;
-    TagAdapter tagAdapter;
 
-    ArrayList<String> tagsArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,19 +98,6 @@ public class StudentOpportunityView extends AppCompatActivity
         String description = intent.getStringExtra("Description");
         String facultyName = intent.getStringExtra("FacultyName");
         String facultyUCID = intent.getStringExtra("FacultyUCID");
-        tagsArrayList = intent.getStringArrayListExtra("Tags");
-
-        if(tagsArrayList.size() > 0) {
-            tagAdapter = new TagAdapter(this, R.layout.layout_tags, tagsArrayList);
-            tagsList.setAdapter(tagAdapter);
-        }
-        else {
-            String message = "No tags available";
-            ArrayList<String> noTags = new ArrayList<String>();
-            noTags.add(message);
-            tagAdapter = new TagAdapter(this, R.layout.layout_tags, noTags);
-            tagsList.setAdapter(tagAdapter);
-        }
 
         oppName.setText(name);
         oppCollege.setText(college);
