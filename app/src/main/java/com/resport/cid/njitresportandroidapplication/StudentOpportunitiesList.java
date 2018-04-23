@@ -177,6 +177,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
         enteredFacUCID = studentOpportunitiesListFacultyUCIDEditText.getText().toString();
         enteredCollege = Long.toString(studentOpportunitiesListFacultyCollegeSpinner.getSelectedItemId());
 
+
         for(String s: createOpportunityMajors.getSelectedStrings()) {
             if(completeDegrees.containsValue(s)) {
                 for (String key : completeDegrees.keySet()) {
@@ -208,7 +209,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
             Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
         }
         else {
-            opps.removeAll(opps);
+            ArrayList<Opportunity> tempOpps = new ArrayList<>();
             try {
                 for (int i = 0; i < opportunities.length(); i++) {
                     matchesFilters = true;
@@ -236,8 +237,6 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     for (int p = 0; p < tagsArray.length; p++) {
                         tagsArray[p] = info.getJSONArray("tags").getString(p);
                     }
-
-
                     if (checkingTags) {
                         if (tagsArray.length != 0) {
                             boolean tagFound = false;
@@ -273,14 +272,15 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     }
 
                     if (matchesFilters) {
-                        opps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate, tagsArray));
+                        tempOpps.add(new Opportunity(id, name, collegeName, position, Integer.parseInt(limit), Integer.parseInt(hours), desc, facultyName, facUCID, email, categoryName, expirationDate, tagsArray));
                     }
                 }
 
                 if (opps.size() == 0) {
                     Toast.makeText(StudentOpportunitiesList.this, "No opportunities match the filter!", Toast.LENGTH_LONG).show();
                 } else {
-                    OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
+                    opps.removeAll(opps);
+                    OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, tempOpps);
                     listView.setAdapter(customAdapter);
                 }
 
@@ -387,6 +387,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                         student_categories.add(categoriesInfo.getJSONObject(i).getString("category"));
                     }
                     JSONArray majorsInfo = dataJSON.getJSONArray("degrees");
+                    //opportunity_majors.add("Select Tags");
                     for(int i=0;i<majorsInfo.length();i++) {
                         opportunity_majors.add(majorsInfo.getJSONObject(i).getString("degree"));
                         completeDegrees.put(majorsInfo.getJSONObject(i).getString("id"), majorsInfo.getJSONObject(i).getString("degree"));
