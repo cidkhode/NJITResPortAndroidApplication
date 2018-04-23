@@ -204,7 +204,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
             checkingTags = false;
         }
 
-        if (!checkingCollege && !checkingCollege && !checkingTags) {
+        if (!checkingFacUcid && !checkingCollege && !checkingTags) {
             Toast.makeText(StudentOpportunitiesList.this, "Please enter a filter!", Toast.LENGTH_LONG).show();
         }
         else {
