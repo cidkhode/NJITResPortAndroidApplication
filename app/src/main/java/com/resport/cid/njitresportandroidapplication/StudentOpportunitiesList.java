@@ -280,7 +280,8 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     Toast.makeText(StudentOpportunitiesList.this, "No opportunities match the filter!", Toast.LENGTH_LONG).show();
                 } else {
                     opps.removeAll(opps);
-                    OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, tempOpps);
+                    opps = tempOpps;
+                    OpportunityAdapter customAdapter = new OpportunityAdapter(this, R.layout.layout_opportunities, opps);
                     listView.setAdapter(customAdapter);
                 }
 
