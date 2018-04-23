@@ -75,7 +75,6 @@ public class StudentOpportunityView extends AppCompatActivity
         oppDescription = (TextView) findViewById(R.id.view_opportunity_description);
         oppFacultyName = (TextView) findViewById(R.id.view_opportunity_faculty_name);
         oppFacultyUCID = (TextView) findViewById(R.id.view_opportunity_faculty_ucid);
-        tagsList = (ListView) findViewById(R.id.tagsList);
 
         oppDescription.setMovementMethod(new ScrollingMovementMethod());
 
