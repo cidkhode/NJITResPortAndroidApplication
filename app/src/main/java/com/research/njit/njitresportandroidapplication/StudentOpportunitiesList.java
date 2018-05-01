@@ -275,7 +275,7 @@ public class StudentOpportunitiesList extends AppCompatActivity
                     }
                 }
 
-                if (opps.size() == 0) {
+                if (tempOpps.size() == 0) {
                     Toast.makeText(StudentOpportunitiesList.this, "No opportunities match the filter!", Toast.LENGTH_LONG).show();
                 } else {
                     opps.removeAll(opps);
