@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NJITResPort.iml" filepath="$PROJECT_DIR$/NJITResPort.iml" />
       <module fileurl="file://$PROJECT_DIR$/NJITResPortAndroidApplication.iml" filepath="$PROJECT_DIR$/NJITResPortAndroidApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NJITResPortAndroidApplication.iml" filepath="$PROJECT_DIR$/NJITResPortAndroidApplication.iml" />
+      <module fileurl="file://$USER_HOME$/AndroidStudioProjects/NJITResPort/NJITResPortAndroidApplication.iml" filepath="$USER_HOME$/AndroidStudioProjects/NJITResPort/NJITResPortAndroidApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/NJITResPortAndroidApplication.iml" filepath="$PROJECT_DIR$/.idea/NJITResPortAndroidApplication.iml" />
       <module fileurl="file://D:/../watson/Documents/ResPort/NJITResPortAndroidApplication/NJITResPortAndroidApplication.iml" filepath="D:/../watson/Documents/ResPort/NJITResPortAndroidApplication/NJITResPortAndroidApplication.iml" />
-      <module fileurl="file://$USER_HOME$/AndroidStudioProjects/NJITResPort/NJITResPortAndroidApplication.iml" filepath="$USER_HOME$/AndroidStudioProjects/NJITResPort/NJITResPortAndroidApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:/../watson/Documents/ResPort/NJITResPortAndroidApplication/app/app.iml" filepath="D:/../watson/Documents/ResPort/NJITResPortAndroidApplication/app/app.iml" />
     </modules>
