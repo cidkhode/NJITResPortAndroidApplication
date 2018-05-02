@@ -141,7 +141,7 @@
                 android:layout_alignLeft="@+id/facultyField"
                 android:layout_alignStart="@+id/facultyField"
                 android:layout_below="@+id/facultyField"
-                android:text="@string/years_experience"
+                android:text="@string/experience"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -158,8 +158,8 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="13dp"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="@string/faculty_field_of_expertise" />
+                android:inputType="text"
+                android:hint="Faculty Experience" />
 
             <TextView
                 android:id="@+id/faculty_office_text"
