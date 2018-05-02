@@ -179,8 +179,9 @@ public class FacultyProfile extends AppCompatActivity implements NavigationView.
                     .build();
             Response response = null;
             response = client.newCall(request).execute();
+            Toast.makeText(this, "Save successful!", Toast.LENGTH_LONG).show();
         } catch (IOException exception) {
-
+            Toast.makeText(this, "Save failed.", Toast.LENGTH_LONG).show();
         }
     }
 
